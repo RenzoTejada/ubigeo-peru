@@ -3,8 +3,8 @@
 Plugin Name: Ubigeo de Per&uacute; para Woocommerce
 Plugin URI: https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/
 Description: Ubigeo de Per&uacute; para woocommerce - Plugin contiene los departamentos - provincias y distritos del Per&uacute;
-Version: 1.0.0
-Author: Renzo Tejada
+Version: 1.0.3
+Author: Renzo Teada
 Author URI: https://renzotejada.com/
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -2369,7 +2369,6 @@ function cargaDatosDistritosVeinticuatro()
     dbDelta($sql);
 }
 
-
 register_activation_hook(__FILE__,'ubigeo_install');
 
 function ubigeo_uninstall()
@@ -2390,12 +2389,45 @@ function delete_tabla($tabla)
 
 register_deactivation_hook(__FILE__,'ubigeo_uninstall');
 
+add_action('admin_menu', 'ubigeo_menu');
+
+function ubigeo_panel()
+{
+  include('panel.php');
+}
+
+function ubigeo_menu()
+{
+  // Extraemos el directorio en el que estamos para ir us�ndolo luego
+	$pluginDir = pathinfo( __FILE__ );
+	$pluginDir = $pluginDir['dirname'];
+	// titulo de la nueva sección:
+	$page_title = "Ubigeo Perú";
+	// titulo en el menú
+	$menu_title = "Ubigeo Perú";
+	// nivel necesario para poder ver el menú (admin:10, editores:8)
+	// + info en: http://codex.wordpress.org/User_Levels
+	$access_level = "edit_posts";
+	// la página que se cargaré al clickar en el menú
+	$content_file = $pluginDir . '/panel.php';
+	// Función para cargar dentro de la página incluida para generar el menú
+	// Si no se indica, se asume que al incluir el fichero ya se ha generado todo el
+	// contenido necesario.
+	$content_function = null;
+	// url del icono para el menú
+	$menu_icon_url = null;
+	add_menu_page($page_title, $menu_title, $access_level, $content_file, $content_function, $menu_icon_url);
+  // Declaramos también como primer submenú la misma página con los mismos datos
+	add_submenu_page($content_file,$page_title, $menu_title, $access_level, $content_file, 'ubigeo_panel');
+
+}
+
 function add_checkout_script() { ?>
 
 <script type="text/javascript">
 (function($) {
     var country = $("select[name*='deptoCode']");
-    var state = $("select[name*='provCode']");
+    var state = $("select[name*='billing_city']");
 
     if (country.length) {
         country.change(function() {
@@ -2407,14 +2439,14 @@ function add_checkout_script() { ?>
                 var len = obj.length;
                 var $stateValues = '';
 
-                $("select[name*='provCode']").empty();
+                $("select[name*='billing_city']").empty();
                 $("select[name*='distCode']").empty();
                 for (i = 0; i < len; i++) {
                     var mystate = obj[i];
-                    $stateValues += '<option value="' + mystate.idProv + '">' + mystate.provincia +
+                    $stateValues += '<option value="' + mystate.idProv +'-'+mystate.provincia+'">' + mystate.provincia +
                         '</option>';
                 }
-                $("select[name*='provCode']").append($stateValues);
+                $("select[name*='billing_city']").append($stateValues);
 
             });
             /* JSON populate Region/State Listbox */
@@ -2489,21 +2521,12 @@ add_action('wp_ajax_nopriv_get_cities_call', 'get_cities_call');
 
 
 add_filter( 'woocommerce_checkout_fields', 'rt_remove_fields', 9999 );
-function rt_remove_fields( $woo_checkout_fields_array ) {
-    $allowed = get_store_allowed_countries();
-    foreach( $allowed as $allowd ){
-        if($allowd == 'Peru'){
-            unset( $woo_checkout_fields_array['billing']['billing_city'] );
-            unset( $woo_checkout_fields_array['billing']['billing_state'] ); // remove state field
-            unset( $woo_checkout_fields_array['billing']['billing_postcode'] ); // remove zip code field
-            return $woo_checkout_fields_array;
-        }
-    }
-}
 
-function get_store_allowed_countries()
-{
-return array_merge( WC()->countries->get_allowed_countries(), WC()->countries->get_shipping_countries() );
+function rt_remove_fields( $woo_checkout_fields_array ) {
+    unset( $woo_checkout_fields_array['billing']['billing_city'] );
+    unset( $woo_checkout_fields_array['billing']['billing_state'] ); // remove state field
+    unset( $woo_checkout_fields_array['billing']['billing_postcode'] ); // remove zip code field
+    return $woo_checkout_fields_array;
 }
 
 add_action( 'woocommerce_after_checkout_billing_form', 'rt_select_field_deptoCode' );
@@ -2511,23 +2534,23 @@ function rt_select_field_deptoCode( $checkout ){
 	woocommerce_form_field( 'deptoCode', array(
 		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
 		'required'	=> true, // actually this parameter just adds "*" to the field
-		'class'         => array('misha-field', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'class'         => array('rt-field', 'form-row-wide'), // array only, read more about classes and styling in the previous step
 		'label'         => 'Departamento',
-		'label_class'   => 'misha-label', // sometimes you need to customize labels, both string and arrays are supported
+		'label_class'   => 'rt-label', // sometimes you need to customize labels, both string and arrays are supported
 		'options'	=> departamento_select()
 		), $checkout->get_value( 'deptoCode' ) );
 }
 
-add_action( 'woocommerce_after_checkout_billing_form', 'rt_select_field_provCode' );
-function rt_select_field_provCode( $checkout ){
-	woocommerce_form_field( 'provCode', array(
+add_action( 'woocommerce_after_checkout_billing_form', 'rt_select_field_billing_city' );
+function rt_select_field_billing_city( $checkout ){
+	woocommerce_form_field( 'billing_city', array(
 		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
 		'required'	=> true, // actually this parameter just adds "*" to the field
-		'class'         => array('provCode', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'class'         => array('billing_city', 'form-row-wide'), // array only, read more about classes and styling in the previous step
 		'label'         => 'Provincia',
-		'label_class'   => 'misha-label', // sometimes you need to customize labels, both string and arrays are supported
+		'label_class'   => 'rt-label', // sometimes you need to customize labels, both string and arrays are supported
 		'options'	=> array(''=> 'Provincia')
-		), $checkout->get_value( 'provCode' ) );
+		), $checkout->get_value( 'billing_city' ) );
 }
 
 add_action( 'woocommerce_after_checkout_billing_form', 'rt_select_field_distCode' );
@@ -2537,7 +2560,7 @@ function rt_select_field_distCode( $checkout ){
 		'required'	=> true, // actually this parameter just adds "*" to the field
 		'class'         => array('distCode', 'form-row-wide'), // array only, read more about classes and styling in the previous step
 		'label'         => 'Distrito',
-		'label_class'   => 'misha-label', // sometimes you need to customize labels, both string and arrays are supported
+		'label_class'   => 'rt-label', // sometimes you need to customize labels, both string and arrays are supported
 		'options'	=> array(''=> 'Distrito')
 		), $checkout->get_value( 'distCode' ) );
 }
@@ -2553,8 +2576,10 @@ function save_ubigeo_peru( $order_id ){
         update_post_meta( $order_id, 'departamento', sanitize_text_field( $dto ) );
     }
 
-	if( !empty( $_POST['provCode'] ) ){
-        $prov = getProvinciaByidProv($_POST['provCode']);
+	if( !empty( $_POST['billing_city'] ) ){
+        $codes = explode('-', $_POST['billing_city']);
+        $city_code = $codes[0];
+        $prov = getProvinciaByidProv( $city_code);
         update_post_meta( $order_id, 'provincia', sanitize_text_field( $prov ) );
     }
 
@@ -2571,7 +2596,7 @@ function check_if_selected() {
 	if ( empty( $_POST['deptoCode'] ) )
 		wc_add_notice( 'Por favor selecciona un Departamento.', 'error');
 
-	if ( empty( $_POST['provCode'] ) )
+	if ( empty( $_POST['billing_city'] ) )
 		wc_add_notice( 'Por favor selecciona un Provincia.', 'error');
 
 	if ( empty( $_POST['distCode'] ) )
@@ -2604,7 +2629,7 @@ add_action('woocommerce_view_order','show_custom_fields_thankyou', 20);
 /**
 * Mostrar los valores de los campos personalizados adicionales en los correos electrónicos
 */
-function show_custom_fields_emails($order, $sent_to_admin, $order){
+function show_custom_fields_emails($orden, $sent_to_admin, $order){
     echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order->id, 'departamento', true ) . '</p>';
     echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order->id, 'provincia', true ) . '</p>';
     echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order->id, 'distrito', true ) . '</p>';
@@ -2637,5 +2662,14 @@ function rearrange_checkout_fields($fields){
     return $fields;
 }
 add_filter('woocommerce_checkout_fields','rearrange_checkout_fields');
+
+
+add_filter( 'woocommerce_default_address_fields' , 'rename_city', 9999 );
+ 
+function rename_city( $fields ) {
+    $fields['city']['label'] = 'Provincia';
+    return $fields;
+}
+
 
 include('functions.php');

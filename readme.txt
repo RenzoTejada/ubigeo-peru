@@ -1,5 +1,9 @@
 === Ubigeo de Perú para Woocommerce ===
 Contributors: Renzo Tejada
+Plugin Name: Ubigeo de Per&uacute; para Woocommerce
+Plugin URI: https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/
+Author URI: https://renzotejada.com/
+Author: Renzo Tejada
 Donate link: https://renzotejada.com/donar
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2.4
@@ -50,6 +54,12 @@ La información se obtuvo de los siguientes url's:
 1. Documentación de Ubigeo de Perú para Woocommerce
 
 == Changelog ==
+
+= 0.1.3 =
+Agregando iconos y Screenshots del plugin woocommerce
+
+= 0.1.2 =
+Corrección de seteo de valor de city en woocommerce
 
 = 0.1.1 =
 Corrección de método deprecado
