@@ -3,8 +3,8 @@
 Plugin Name: Ubigeo de Per&uacute; para Woocommerce
 Plugin URI: https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/
 Description: Ubigeo de Per&uacute; para woocommerce - Plugin contiene los departamentos - provincias y distritos del Per&uacute;
-Version: 1.0.3
-Author: Renzo Teada
+Version: 1.0.6
+Author: Renzo Tejada
 Author URI: https://renzotejada.com/
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -26,23 +26,23 @@ function ubigeo_install()
 
 function crearDepartamento()
 {
-  global $wpdb;
-  $table_name = $wpdb->prefix . "ubigeo_departamento";
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_departamento";
 
-  $sql = " CREATE TABLE $table_name (
+    $sql = " CREATE TABLE $table_name (
   idDepa int(5) NOT NULL DEFAULT '0',
   departamento varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idDepa`)
   )ENGINE=MyISAM DEFAULT CHARSET=utf8; ";
 
-  require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-  dbDelta($sql);
-  cargaDatosDepartamentos();
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+    cargaDatosDepartamentos();
 }
 
 function cargaDatosDepartamentos()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
     $sql = " INSERT INTO $table_name (`idDepa`, `departamento`) VALUES
               (1, 'AMAZONAS'),
@@ -76,27 +76,27 @@ function cargaDatosDepartamentos()
 
 function crearProvincia()
 {
-  global $wpdb;
-  $table_name = $wpdb->prefix . "ubigeo_provincia";
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_provincia";
 
-  $sql = " CREATE TABLE $table_name (
+    $sql = " CREATE TABLE $table_name (
           `idProv` int(5) NOT NULL DEFAULT '0',
           `provincia` varchar(50) DEFAULT NULL,
           `idDepa` int(5) DEFAULT NULL,
           PRIMARY KEY (`idProv`)
           )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
-  require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-  dbDelta($sql);
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
 
-  cargaDatosProvinciasUno();
-  cargaDatosProvinciasDos();
-  cargaDatosProvinciasTres();
+    cargaDatosProvinciasUno();
+    cargaDatosProvinciasDos();
+    cargaDatosProvinciasTres();
 }
 
 function cargaDatosProvinciasUno()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
     $sql = " INSERT INTO $table_name (`idProv`, `provincia`, `idDepa`) VALUES
               (1, 'CHACHAPOYAS ', 1),
@@ -160,7 +160,8 @@ function cargaDatosProvinciasUno()
               (60, 'HUALGAYOC', 6),
               (61, 'JAEN', 6),
               (62, 'SAN IGNACIO', 6),
-              (63, 'SAN MARCOS', 6),(64, 'SAN PABLO', 6),
+              (63, 'SAN MARCOS', 6),
+              (64, 'SAN PABLO', 6),
               (65, 'SANTA CRUZ', 6),
               (66, 'CALLAO', 7),
               (67, 'CUSCO', 8),
@@ -183,7 +184,7 @@ function cargaDatosProvinciasUno()
 
 function cargaDatosProvinciasDos()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
     $sql = " INSERT INTO $table_name (`idProv`, `provincia`, `idDepa`) VALUES
               (81, 'ACOBAMBA', 9),
@@ -272,7 +273,7 @@ function cargaDatosProvinciasDos()
 
 function cargaDatosProvinciasTres()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
     $sql = " INSERT INTO $table_name (`idProv`, `provincia`, `idDepa`) VALUES
               (161, 'AZANGARO', 21),
@@ -314,46 +315,46 @@ function cargaDatosProvinciasTres()
 
 function crearDistrito()
 {
-  global $wpdb;
-  $table_name = $wpdb->prefix . "ubigeo_distrito";
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
 
-  $sql = " CREATE TABLE $table_name (
+    $sql = " CREATE TABLE $table_name (
 `idDist` int(5) NOT NULL DEFAULT '0',
 `distrito` varchar(50) DEFAULT NULL,
 `idProv` int(5) DEFAULT NULL,
 PRIMARY KEY (`idDist`))";
 
-  require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-  dbDelta($sql);
-  cargaDatosDistritosUno();
-  cargaDatosDistritosDos();
-  cargaDatosDistritosTres();
-  cargaDatosDistritosCuatro();
-  cargaDatosDistritosCinco();
-  cargaDatosDistritosSeis();
-  cargaDatosDistritosSiete();
-  cargaDatosDistritosOcho();
-  cargaDatosDistritosNueve();
-  cargaDatosDistritosDiez();
-  cargaDatosDistritosOnce();
-  cargaDatosDistritosDoce();
-  cargaDatosDistritosTrece();
-  cargaDatosDistritosCatorce();
-  cargaDatosDistritosQuince();
-  cargaDatosDistritosDieciseis();
-  cargaDatosDistritosDiecisiete();
-  cargaDatosDistritosDieciocho();
-  cargaDatosDistritosDiecinueve();
-  cargaDatosDistritosViente();
-  cargaDatosDistritosVeintiuno();
-  cargaDatosDistritosVeintidos();
-  cargaDatosDistritosVeintitres();
-  cargaDatosDistritosVeinticuatro();
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+    cargaDatosDistritosUno();
+    cargaDatosDistritosDos();
+    cargaDatosDistritosTres();
+    cargaDatosDistritosCuatro();
+    cargaDatosDistritosCinco();
+    cargaDatosDistritosSeis();
+    cargaDatosDistritosSiete();
+    cargaDatosDistritosOcho();
+    cargaDatosDistritosNueve();
+    cargaDatosDistritosDiez();
+    cargaDatosDistritosOnce();
+    cargaDatosDistritosDoce();
+    cargaDatosDistritosTrece();
+    cargaDatosDistritosCatorce();
+    cargaDatosDistritosQuince();
+    cargaDatosDistritosDieciseis();
+    cargaDatosDistritosDiecisiete();
+    cargaDatosDistritosDieciocho();
+    cargaDatosDistritosDiecinueve();
+    cargaDatosDistritosViente();
+    cargaDatosDistritosVeintiuno();
+    cargaDatosDistritosVeintidos();
+    cargaDatosDistritosVeintitres();
+    cargaDatosDistritosVeinticuatro();
 }
 
 function cargaDatosDistritosUno()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
                 (1, 'CHACHAPOYAS', 1),
@@ -441,7 +442,7 @@ function cargaDatosDistritosUno()
 
 function cargaDatosDistritosDos()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
                 (81, 'JAMALCA', 7),
@@ -530,7 +531,7 @@ function cargaDatosDistritosDos()
 
 function cargaDatosDistritosTres()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
                 (161, 'RAPAYAN', 17),
@@ -617,7 +618,7 @@ function cargaDatosDistritosTres()
 
 function cargaDatosDistritosCuatro()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
                 (241, 'SICSIBAMBA', 26),
@@ -705,7 +706,7 @@ function cargaDatosDistritosCuatro()
 
 function cargaDatosDistritosCinco()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
                 (321, 'MICAELA BASTIDAS', 34),
@@ -793,7 +794,7 @@ function cargaDatosDistritosCinco()
 
 function cargaDatosDistritosSeis()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (401, 'HUANCA', 39),
@@ -880,7 +881,7 @@ function cargaDatosDistritosSeis()
 
 function cargaDatosDistritosSiete()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (481, 'AUCARA', 48),
@@ -968,7 +969,7 @@ function cargaDatosDistritosSiete()
 
 function cargaDatosDistritosOcho()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (561, 'NAMORA', 54),
@@ -1056,7 +1057,24 @@ function cargaDatosDistritosOcho()
 
 function cargaDatosDistritosNueve()
 {
-	global $wpdb;
+    /*
+     * (650, 'SAN MIGUEL', 64),
+
+(651, 'SAN MIGUEL', 64),
+(652, 'BOLIVAR', 64),
+(653, 'CALQUIS', 64),
+(654, 'CATILLUC', 64),
+(655, 'EL PRADO', 64),
+(656, 'LA FLORIDA', 64),
+(657, 'LLAPA', 64),
+(658, 'NANCHOC', 64),
+(659, 'NIEPOS', 64),
+(660, 'SAN GREGORIO', 64),
+(661, 'SAN SILVESTRE DE COCHAN', 64),
+(662, 'TONGOD', 64),
+(663, 'UNION AGUA BLANCA', 64),
+     */
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (641, 'SAN JOSE DE LOURDES', 62),
@@ -1068,40 +1086,31 @@ function cargaDatosDistritosNueve()
 (647, 'ICHOCAN', 63),
 (648, 'JOSE MANUEL QUIROZ', 63),
 (649, 'JOSE SABOGAL', 63),
-(650, 'SAN MIGUEL', 64),
-(651, 'SAN MIGUEL', 64),
-(652, 'BOLIVAR', 64),
-(653, 'CALQUIS', 64),(654, 'CATILLUC', 64),
-(655, 'EL PRADO', 64),
-(656, 'LA FLORIDA', 64),
-(657, 'LLAPA', 64),
-(658, 'NANCHOC', 64),
-(659, 'NIEPOS', 64),
-(660, 'SAN GREGORIO', 64),
-(661, 'SAN SILVESTRE DE COCHAN', 64),
-(662, 'TONGOD', 64),
-(663, 'UNION AGUA BLANCA', 64),
-(664, 'SAN PABLO', 65),
-(665, 'SAN BERNARDINO', 65),
-(666, 'SAN LUIS', 65),
-(667, 'TUMBADEN', 65),
-(668, 'SANTA CRUZ', 66),
-(669, 'ANDABAMBA', 66),
-(670, 'CATACHE', 66),
-(671, 'CHANCAYBAÑOS', 66),
-(672, 'LA ESPERANZA', 66),
-(673, 'NINABAMBA', 66),
-(674, 'PULAN', 66),
-(675, 'SAUCEPAMPA', 66),
-(676, 'SEXI', 66),
-(677, 'UTICYACU', 66),
-(678, 'YAUYUCAN', 66),
-(679, 'CALLAO', 67),
-(680, 'BELLAVISTA', 67),
-(681, 'CARMEN DE LA LEGUA REYNOSO', 67),
-(682, 'LA PERLA', 67),
-(683, 'LA PUNTA', 67),
-(684, 'VENTANILLA', 67),
+
+
+
+(664, 'SAN PABLO', 64),
+(665, 'SAN BERNARDINO', 64),
+(666, 'SAN LUIS', 64),
+(667, 'TUMBADEN', 64),
+
+(668, 'SANTA CRUZ', 65),
+(669, 'ANDABAMBA', 65),
+(670, 'CATACHE', 65),
+(671, 'CHANCAYBAÑOS', 65),
+(672, 'LA ESPERANZA', 65),
+(673, 'NINABAMBA', 65),
+(674, 'PULAN', 65),
+(675, 'SAUCEPAMPA', 65),
+(676, 'SEXI', 65),
+(677, 'UTICYACU', 65),
+(678, 'YAUYUCAN', 65),
+(679, 'CALLAO', 66),
+(680, 'BELLAVISTA', 66),
+(681, 'CARMEN DE LA LEGUA REYNOSO', 66),
+(682, 'LA PERLA', 66),
+(683, 'LA PUNTA', 66),
+(684, 'VENTANILLA', 66),
 (685, 'CUSCO', 67),
 (686, 'CCORCA', 67),
 (687, 'POROY', 67),
@@ -1143,7 +1152,7 @@ function cargaDatosDistritosNueve()
 
 function cargaDatosDistritosDiez()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (721, 'LAYO', 71),
@@ -1231,7 +1240,7 @@ function cargaDatosDistritosDiez()
 
 function cargaDatosDistritosOnce()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (801, 'LARIA', 80),
@@ -1319,7 +1328,7 @@ function cargaDatosDistritosOnce()
 
 function cargaDatosDistritosDoce()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (881, 'QUISHUAR', 86),
@@ -1406,7 +1415,7 @@ function cargaDatosDistritosDoce()
 
 function cargaDatosDistritosTrece()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (961, 'PAMPAMARCA', 97),
@@ -1494,7 +1503,7 @@ function cargaDatosDistritosTrece()
 
 function cargaDatosDistritosCatorce()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1041, 'MANZANARES', 104),
@@ -1582,7 +1591,7 @@ function cargaDatosDistritosCatorce()
 
 function cargaDatosDistritosQuince()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1121, 'AHUAC', 111),
@@ -1669,7 +1678,7 @@ function cargaDatosDistritosQuince()
 
 function cargaDatosDistritosDieciseis()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1201, 'MOLLEPATA', 121),
@@ -1757,7 +1766,7 @@ function cargaDatosDistritosDieciseis()
 
 function cargaDatosDistritosDiecisiete()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1281, 'SAN ISIDRO', 127),
@@ -1845,7 +1854,7 @@ function cargaDatosDistritosDiecisiete()
 
 function cargaDatosDistritosDieciocho()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1361, 'SAN MATEO DE OTAO', 133),
@@ -1913,7 +1922,7 @@ function cargaDatosDistritosDieciocho()
 
 function cargaDatosDistritosDiecinueve()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1421, 'VITIS', 136),
@@ -2000,7 +2009,7 @@ function cargaDatosDistritosDiecinueve()
 
 function cargaDatosDistritosViente()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1501, 'PACOCHA', 148),
@@ -2088,7 +2097,7 @@ function cargaDatosDistritosViente()
 
 function cargaDatosDistritosVeintiuno()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1581, 'SALITRAL', 157),
@@ -2156,7 +2165,7 @@ function cargaDatosDistritosVeintiuno()
 
 function cargaDatosDistritosVeintidos()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1641, 'ILAVE', 164),
@@ -2244,7 +2253,7 @@ function cargaDatosDistritosVeintidos()
 
 function cargaDatosDistritosVeintitres()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1721, 'EL ESLABON', 176),
@@ -2331,7 +2340,7 @@ function cargaDatosDistritosVeintitres()
 
 function cargaDatosDistritosVeinticuatro()
 {
-	global $wpdb;
+    global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $sql = " INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES
     (1801, 'ESTIQUE-PAMPA', 186),
@@ -2373,18 +2382,18 @@ register_activation_hook(__FILE__,'ubigeo_install');
 
 function ubigeo_uninstall()
 {
-  delete_tabla("ubigeo_departamento");
-  delete_tabla("ubigeo_provincia");
-  delete_tabla("ubigeo_distrito");
+    delete_tabla("ubigeo_departamento");
+    delete_tabla("ubigeo_provincia");
+    delete_tabla("ubigeo_distrito");
 }
 
 function delete_tabla($tabla)
 {
-  global $wpdb;
-	$table_name = $wpdb->prefix . $tabla;
+    global $wpdb;
+    $table_name = $wpdb->prefix . $tabla;
 
-	$sql = "DROP TABLE $table_name";
-	$wpdb->query($sql);
+    $sql = "DROP TABLE $table_name";
+    $wpdb->query($sql);
 }
 
 register_deactivation_hook(__FILE__,'ubigeo_uninstall');
@@ -2393,32 +2402,32 @@ add_action('admin_menu', 'ubigeo_menu');
 
 function ubigeo_panel()
 {
-  include('panel.php');
+    include('panel.php');
 }
 
 function ubigeo_menu()
 {
-  // Extraemos el directorio en el que estamos para ir us�ndolo luego
-	$pluginDir = pathinfo( __FILE__ );
-	$pluginDir = $pluginDir['dirname'];
-	// titulo de la nueva sección:
-	$page_title = "Ubigeo Perú";
-	// titulo en el menú
-	$menu_title = "Ubigeo Perú";
-	// nivel necesario para poder ver el menú (admin:10, editores:8)
-	// + info en: http://codex.wordpress.org/User_Levels
-	$access_level = "edit_posts";
-	// la página que se cargaré al clickar en el menú
-	$content_file = $pluginDir . '/panel.php';
-	// Función para cargar dentro de la página incluida para generar el menú
-	// Si no se indica, se asume que al incluir el fichero ya se ha generado todo el
-	// contenido necesario.
-	$content_function = null;
-	// url del icono para el menú
-	$menu_icon_url = null;
-	add_menu_page($page_title, $menu_title, $access_level, $content_file, $content_function, $menu_icon_url);
-  // Declaramos también como primer submenú la misma página con los mismos datos
-	add_submenu_page($content_file,$page_title, $menu_title, $access_level, $content_file, 'ubigeo_panel');
+    // Extraemos el directorio en el que estamos para ir us�ndolo luego
+    $pluginDir = pathinfo( __FILE__ );
+    $pluginDir = $pluginDir['dirname'];
+    // titulo de la nueva sección:
+    $page_title = "Ubigeo Perú";
+    // titulo en el menú
+    $menu_title = "Ubigeo Perú";
+    // nivel necesario para poder ver el menú (admin:10, editores:8)
+    // + info en: http://codex.wordpress.org/User_Levels
+    $access_level = "edit_posts";
+    // la página que se cargaré al clickar en el menú
+    $content_file = $pluginDir . '/panel.php';
+    // Función para cargar dentro de la página incluida para generar el menú
+    // Si no se indica, se asume que al incluir el fichero ya se ha generado todo el
+    // contenido necesario.
+    $content_function = null;
+    // url del icono para el menú
+    $menu_icon_url = null;
+    add_menu_page($page_title, $menu_title, $access_level, $content_file, $content_function, $menu_icon_url);
+    // Declaramos también como primer submenú la misma página con los mismos datos
+    add_submenu_page($content_file,$page_title, $menu_title, $access_level, $content_file, 'ubigeo_panel');
 
 }
 

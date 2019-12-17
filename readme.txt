@@ -8,16 +8,19 @@ Donate link: https://renzotejada.com/donar
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2.4
 Tested up to: 5.2.4
-Stable tag: 1.1
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Este plugin agrega a la DB las tablas _departamento, _provincia, _distrito con respecto a Perú.
-Funciones definidas para obtener dicha data.
+Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
+Agrega en la pagina del checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito
+
+Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra pagina web https://renzotejada.com/
+
 
 == Description ==
 
-Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
+> Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
 Agrega en la pagina del checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito
 
 Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra pagina web https://renzotejada.com/
@@ -54,6 +57,15 @@ La información se obtuvo de los siguientes url's:
 1. Documentación de Ubigeo de Perú para Woocommerce
 
 == Changelog ==
+
+= 0.1.6 =
+Agregando imágenes del plugin woocommerce
+
+= 0.1.5 =
+delete files de plugin woocommerce
+
+= 0.1.4 =
+Agregando Screenshots 2 del plugin woocommerce
 
 = 0.1.3 =
 Agregando iconos y Screenshots del plugin woocommerce
