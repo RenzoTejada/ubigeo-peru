@@ -6,9 +6,9 @@ Author URI: https://renzotejada.com/
 Author: Renzo Tejada
 Donate link: https://renzotejada.com/donar
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
-Requires at least: 5.2.4
-Tested up to: 5.2.4
-Stable tag: 1.0.6
+Requires at least: 5.3.2
+Tested up to: 5.3.2
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,9 @@ La información se obtuvo de los siguientes url's:
 1. Documentación de Ubigeo de Perú para Woocommerce
 
 == Changelog ==
+
+= 0.1.7 =
+Agregando ubigeo para el shipping para woocommerce
 
 = 0.1.6 =
 Agregando imágenes del plugin woocommerce

@@ -3,7 +3,7 @@
 Plugin Name: Ubigeo de Per&uacute; para Woocommerce
 Plugin URI: https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/
 Description: Ubigeo de Per&uacute; para woocommerce - Plugin contiene los departamentos - provincias y distritos del Per&uacute;
-Version: 1.0.6
+Version: 1.0.7
 Author: Renzo Tejada
 Author URI: https://renzotejada.com/
 License: GNU General Public License v3.0
@@ -2392,7 +2392,7 @@ function delete_tabla($tabla)
     global $wpdb;
     $table_name = $wpdb->prefix . $tabla;
 
-    $sql = "DROP TABLE $table_name";
+    $sql = "DROP TABLE IF EXISTS $table_name";
     $wpdb->query($sql);
 }
 
@@ -2437,6 +2437,8 @@ function add_checkout_script() { ?>
 (function($) {
     var country = $("select[name*='deptoCode']");
     var state = $("select[name*='billing_city']");
+    var shipping_country = $("select[name*='shippingDeptoCode']");
+    var shipping_state = $("select[name*='shipping_city']");
 
     if (country.length) {
         country.change(function() {
@@ -2504,6 +2506,73 @@ function add_checkout_script() { ?>
             callback(response);
         });
     }
+
+    if (shipping_country.length) {
+        shipping_country.change(function() {
+
+            var $this = $(this);
+            get_states($(this).val(), function(response) {
+
+                var obj = JSON.parse(response);
+                var len = obj.length;
+                var $stateValues = '';
+
+                $("select[name*='shipping_city']").empty();
+                $("select[name*='shippingDistCode']").empty();
+                for (i = 0; i < len; i++) {
+                    var mystate = obj[i];
+                    $stateValues += '<option value="' + mystate.idProv +'-'+mystate.provincia+'">' + mystate.provincia +
+                        '</option>';
+                }
+                $("select[name*='shipping_city']").append($stateValues);
+
+            });
+            /* JSON populate Region/State Listbox */
+        });
+    }
+
+    if (shipping_state.length) {
+        shipping_state.change(function() {
+
+            var $this = $(this);
+            get_cities($(this).val(), function(response) {
+                var obj = JSON.parse(response);
+                var len = obj.length;
+                var $cityValues = '';
+
+                $("select[name*='shippingDistCode']").empty();
+                for (i = 0; i < len; i++) {
+                    var mycity = obj[i];
+                    $cityValues += '<option value="' + mycity.id + '">' + mycity.city_name +
+                        '</option>';
+                }
+                $("select[name*='shippingDistCode']").append($cityValues);
+
+            });
+
+        });
+        /* JSON populate Cities Listbox */
+    }
+
+    function get_states(deptoCode, callback) {
+        var data = {
+            action: 'get_states_call',
+            country_code: deptoCode
+        };
+        $.post(ajaxurl, data, function(response) {
+            callback(response);
+        });
+    }
+
+    function get_cities(rowCODE, callback) {
+        var data = {
+            action: 'get_cities_call',
+            row_code: rowCODE
+        };
+        $.post(ajaxurl, data, function(response) {
+            callback(response);
+        });
+    }
 })(jQuery);
 </script>
 <?php       
@@ -2528,13 +2597,14 @@ add_action('wp_ajax_get_cities_call', 'get_cities_call');
 add_action('wp_ajax_nopriv_get_cities_call', 'get_cities_call');
 
 
-
 add_filter( 'woocommerce_checkout_fields', 'rt_remove_fields', 9999 );
-
 function rt_remove_fields( $woo_checkout_fields_array ) {
     unset( $woo_checkout_fields_array['billing']['billing_city'] );
     unset( $woo_checkout_fields_array['billing']['billing_state'] ); // remove state field
     unset( $woo_checkout_fields_array['billing']['billing_postcode'] ); // remove zip code field
+    unset( $woo_checkout_fields_array['shipping']['shipping_city'] );
+    unset( $woo_checkout_fields_array['shipping']['shipping_state'] );
+    unset( $woo_checkout_fields_array['shipping']['shipping_postcode'] );
     return $woo_checkout_fields_array;
 }
 
@@ -2550,6 +2620,18 @@ function rt_select_field_deptoCode( $checkout ){
 		), $checkout->get_value( 'deptoCode' ) );
 }
 
+add_action( 'woocommerce_after_checkout_shipping_form', 'rt_select_field_shippingDeptoCode' );
+function rt_select_field_shippingDeptoCode( $checkout ){
+	woocommerce_form_field( 'shippingDeptoCode', array(
+		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
+		'required'	=> true, // actually this parameter just adds "*" to the field
+		'class'         => array('rt-field-shipping', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'label'         => 'Departamento',
+		'label_class'   => 'rt-label-shipping', // sometimes you need to customize labels, both string and arrays are supported
+		'options'	=> departamento_select()
+		), $checkout->get_value( 'shippingDeptoCode' ) );
+}
+
 add_action( 'woocommerce_after_checkout_billing_form', 'rt_select_field_billing_city' );
 function rt_select_field_billing_city( $checkout ){
 	woocommerce_form_field( 'billing_city', array(
@@ -2562,6 +2644,18 @@ function rt_select_field_billing_city( $checkout ){
 		), $checkout->get_value( 'billing_city' ) );
 }
 
+add_action( 'woocommerce_after_checkout_shipping_form', 'rt_select_field_shipping_city' );
+function rt_select_field_shipping_city( $checkout ){
+	woocommerce_form_field( 'shipping_city', array(
+		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
+		'required'	=> true, // actually this parameter just adds "*" to the field
+		'class'         => array('shipping_city', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'label'         => 'Provincia',
+		'label_class'   => 'rt-label-shipping', // sometimes you need to customize labels, both string and arrays are supported
+		'options'	=> array(''=> 'Provincia')
+		), $checkout->get_value( 'shipping_city' ) );
+}
+
 add_action( 'woocommerce_after_checkout_billing_form', 'rt_select_field_distCode' );
 function rt_select_field_distCode( $checkout ){
 	woocommerce_form_field( 'distCode', array(
@@ -2572,6 +2666,18 @@ function rt_select_field_distCode( $checkout ){
 		'label_class'   => 'rt-label', // sometimes you need to customize labels, both string and arrays are supported
 		'options'	=> array(''=> 'Distrito')
 		), $checkout->get_value( 'distCode' ) );
+}
+
+add_action( 'woocommerce_after_checkout_shipping_form', 'rt_select_field_shippingDistCode' );
+function rt_select_field_shippingDistCode( $checkout ){
+	woocommerce_form_field( 'shippingDistCode', array(
+		'type'          => 'select', // text, textarea, select, radio, checkbox, password, about custom validation a little later
+		'required'	=> true, // actually this parameter just adds "*" to the field
+		'class'         => array('shippingDistCode', 'form-row-wide'), // array only, read more about classes and styling in the previous step
+		'label'         => 'Distrito',
+		'label_class'   => 'rt-label-shipping', // sometimes you need to customize labels, both string and arrays are supported
+		'options'	=> array(''=> 'Distrito')
+		), $checkout->get_value( 'shippingDistCode' ) );
 }
 
 // save fields to order meta
@@ -2596,6 +2702,25 @@ function save_ubigeo_peru( $order_id ){
         $dist = getDistritoByidDist($_POST['distCode']);
         update_post_meta( $order_id, 'distrito', sanitize_text_field( $dist ) );
     }
+
+
+
+    if( !empty( $_POST['shippingDeptoCode'] ) ){
+        $dto=getDepartamentoByidDepa($_POST['shippingDeptoCode']);
+        update_post_meta( $order_id, 'shipping_departamento', sanitize_text_field( $dto ) );
+    }
+
+	if( !empty( $_POST['shipping_city'] ) ){
+        $codes = explode('-', $_POST['shipping_city']);
+        $city_code = $codes[0];
+        $prov = getProvinciaByidProv( $city_code);
+        update_post_meta( $order_id, 'shipping_provincia', sanitize_text_field( $prov ) );
+    }
+
+    if( !empty( $_POST['shippingDistCode'] ) ){
+        $dist = getDistritoByidDist($_POST['shippingDistCode']);
+        update_post_meta( $order_id, 'shipping_distrito', sanitize_text_field( $dist ) );
+    }
 }
 
 add_action('woocommerce_checkout_process', 'check_if_selected');
@@ -2609,6 +2734,15 @@ function check_if_selected() {
 		wc_add_notice( 'Por favor selecciona un Provincia.', 'error');
 
 	if ( empty( $_POST['distCode'] ) )
+        wc_add_notice( 'Por favor selecciona un Distrito.', 'error');
+        
+    if ( empty( $_POST['shippingDeptoCode'] ) )
+		wc_add_notice( 'Por favor selecciona un Departamento.', 'error');
+
+	if ( empty( $_POST['shipping_city'] ) )
+		wc_add_notice( 'Por favor selecciona un Provincia.', 'error');
+
+	if ( empty( $_POST['shippingDistCode'] ) )
 		wc_add_notice( 'Por favor selecciona un Distrito.', 'error');
  
 }
@@ -2616,13 +2750,19 @@ function check_if_selected() {
 /**
 * Mostrar los valores de los campos personalizados adicionales en la vista de la orden en el administrador
 */
-function show_custom_fields_order($order){
+function show_custom_fields_order_billing($order){
     echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order->id, 'departamento', true ) . '</p>';
     echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order->id, 'provincia', true ) . '</p>';
     echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order->id, 'distrito', true ) . '</p>';
 }
-add_action('woocommerce_admin_order_data_after_billing_address','show_custom_fields_order');
-add_action('woocommerce_admin_order_data_after_shipping_address','show_custom_fields_order');
+add_action('woocommerce_admin_order_data_after_billing_address','show_custom_fields_order_billing');
+
+function show_custom_fields_order_shipping($order){
+    echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order->id, 'shipping_departamento', true ) . '</p>';
+    echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order->id, 'shipping_provincia', true ) . '</p>';
+    echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order->id, 'shipping_distrito', true ) . '</p>';
+}
+add_action('woocommerce_admin_order_data_after_shipping_address','show_custom_fields_order_shipping');
 
 /**
 * Mostrar los valores de los campos personalizados adicionales en la vista de la orden en la página de gracias y en la página de Orden en la página "Mi cuenta" del usuario
@@ -2631,6 +2771,9 @@ function show_custom_fields_thankyou($order){
     echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order, 'departamento', true ) . '</p>';
     echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order, 'provincia', true ) . '</p>';
     echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order, 'distrito', true ) . '</p>';
+    echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order, 'shipping_departamento', true ) . '</p>';
+    echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order, 'shipping_provincia', true ) . '</p>';
+    echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order, 'shipping_distrito', true ) . '</p>';
 }
 add_action('woocommerce_thankyou','show_custom_fields_thankyou', 20);
 add_action('woocommerce_view_order','show_custom_fields_thankyou', 20);
@@ -2642,6 +2785,9 @@ function show_custom_fields_emails($orden, $sent_to_admin, $order){
     echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order->id, 'departamento', true ) . '</p>';
     echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order->id, 'provincia', true ) . '</p>';
     echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order->id, 'distrito', true ) . '</p>';
+    echo '<p><strong>'.__('Departamento').':</strong> ' . get_post_meta( $order->id, 'shipping_departamento', true ) . '</p>';
+    echo '<p><strong>'.__('Provincia').':</strong> ' . get_post_meta( $order->id, 'shipping_provincia', true ) . '</p>';
+    echo '<p><strong>'.__('Distrito').':</strong> ' . get_post_meta( $order->id, 'shipping_distrito', true ) . '</p>';
 }
 add_action('woocommerce_email_order_meta_fields','show_custom_fields_emails', 10, 3);
 
