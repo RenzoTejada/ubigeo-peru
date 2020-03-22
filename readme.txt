@@ -6,9 +6,9 @@ Author URI: https://renzotejada.com/
 Author: Renzo Tejada
 Donate link: https://renzotejada.com/donar
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
-Requires at least: 5.2.4 
+Requires at least: 5.3.2
 Tested up to: 5.3.2
-Stable tag: 2.0.0
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,41 +28,35 @@ Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra
 == Installation ==
 
 Instalación automática
-1. Panel de administración plugin y añadir nueva opción.
-2. Buscar en el cuadro de texto-región-provincia común.
-3. Colocado en la descripción de este plugin y seleccione instalar.
-4. Activar el plugin desde el panel de administración de WordPress.
+1.- Panel de administración plugin y añadir nueva opción.
+2.- Buscar en el cuadro de texto-región-provincia común.
+3.- Colocado en la descripción de este plugin y seleccione instalar.
+4.- Activar el plugin desde el panel de administración de WordPress.
 
 Archivos ZIP Manual de instalación
-1. Descargar el archivo ZIP desde esta pantalla.
-2. Seleccione la opción agregar plugin desde el panel de administración.
-3. Seleccione la opción de alta carga y seleccione el archivo descargado.
-4. Confirmar Instalación y plugin de activación desde el panel de administración.
+1.- Descargar el archivo ZIP desde esta pantalla.
+2.- Seleccione la opción agregar plugin desde el panel de administración.
+3.- Seleccione la opción de alta carga y seleccione el archivo descargado.
+4.- Confirmar Instalación y plugin de activación desde el panel de administración.
 
 Instalación manual de FTP
-1. Descargue el archivo ZIP de esta pantalla y descomprimir.
-2. Ingrese a su carpeta FTP en su servidor web.
-3. Copie el directorio ubigeo dentro de la siguiente direccion  wp-content/plugins/
-4. Activar el plugin desde el panel de administración de WordPress.
+1.- Descargue el archivo ZIP de esta pantalla y descomprimir.
+2.- Ingrese a su carpeta FTP en su servidor web.
+3.- Copie el directorio ubigeo dentro de la siguiente direccion  wp-content/plugins/
+4.- Activar el plugin desde el panel de administración de WordPress.
 
 == Frequently Asked Questions ==
 
 = ¿De donde obtuvo la data de los departamentos, provincias y distritos? =
 La información se obtuvo de los siguientes url's:
-  a. http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
-  b. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
+  a.- http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
+  b.- http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
 
 == Screenshots ==
 
 1. Documentación de Ubigeo de Perú para Woocommerce
 
 == Changelog ==
-
-= 0.2.0 =
-Corrigiendo la version que soporta plugin
-
-= 0.1.9 =
-Nueva estructura de ubigeo para woocommerce
 
 = 0.1.8 =
 fix ubigeo para el shipping para woocommerce - error al validar ubigeo
