@@ -1,5 +1,22 @@
-<div id="id=" dashboard-widgets-wrap"">
-    <h2 class="hndle ui-sortable-handle">Documentación de Ubigeo de Perú para Woocommerce</h2>
+<?php
+/**
+ * Provide a admin area view for the plugin
+ *
+ * This file is used to markup the admin-facing aspects of the plugin.
+ *
+ * @link       https://renzotejada.com/
+ * @since      2.0.0
+ *
+ * @package    Ubigeo_Peru
+ * @subpackage Ubigeo_Peru/includes
+ */
+?>
+<div class="wrap">
+    <h2><?php _e('Ubigeo Perú', 'ubigeo-peru-title'); ?></h2>
+    <p> Documentación de Ubigeo de Perú para Woocommerce</p>
+
+</div>
+<div id="dashboard-widgets-wrap">
     <div id="normal-sortables" class="meta-box-sortables ui-sortable">
         <div id="dashboard_right_now" class="postbox">
             <h3 class="main">Funciones de Ubigeo de Perú para Woocommerce</h3>
