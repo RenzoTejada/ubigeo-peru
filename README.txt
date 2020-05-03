@@ -8,7 +8,7 @@ Donate link: https://renzotejada.com/donar
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2.4 
 Tested up to: 5.3.2
-Stable tag: 2.0.0
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,9 @@ La información se obtuvo de los siguientes url's:
 1. Documentación de Ubigeo de Perú para Woocommerce
 
 == Changelog ==
+
+= 0.2.1 =
+Corrigiendo de ajax de distrito  y actualizando nombre de distrito
 
 = 0.2.0 =
 Corrigiendo la version que soporta plugin

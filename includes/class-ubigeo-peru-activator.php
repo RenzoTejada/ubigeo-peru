@@ -37,6 +37,19 @@ class Ubigeo_Peru_Activator {
         $ubigeo->crearProvincia();
         //crear distrito
         $ubigeo->crearDistrito();
+        //update distrito
+        $ubigeo->updateNameDistritoPuebloLibre();
+    }
+    
+    // update a nombre de distrito pueblo libre
+    function updateNameDistritoPuebloLibre() {
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        $ubigeo = new Ubigeo_Peru_Activator();
+        global $wpdb;
+        $table_name = $wpdb->prefix . "ubigeo_distrito";
+        $idDist = 1271;
+        $sql = "UPDATE $table_name SET distrito='PUEBLO LIBRE' WHERE idDist= $idDist";
+        dbDelta($sql);
     }
 
     function crearDepartamento() {
@@ -1728,7 +1741,7 @@ class Ubigeo_Peru_Activator {
             (1268, 'LURIGANCHO', 127),
             (1269, 'LURIN', 127),
             (1270, 'MAGDALENA DEL MAR', 127),
-            (1271, 'MAGDALENA VIEJA', 127),
+            (1271, 'PUEBLO LIBRE', 127),
             (1272, 'MIRAFLORES', 127),
             (1273, 'PACHACAMAC', 127),
             (1274, 'PUCUSANA', 127),

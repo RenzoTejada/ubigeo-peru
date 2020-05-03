@@ -63,13 +63,13 @@ class Ubigeo_Peru {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    2.0.0
+	 * @since    2.0.2
 	 */
 	public function __construct() {
 		if ( defined( 'UBIGEO_PERU_VERSION' ) ) {
 			$this->version = UBIGEO_PERU_VERSION;
 		} else {
-			$this->version = '2.0.0';
+			$this->version = '2.0.2';
 		}
 		$this->ubigeo_peru = 'ubigeo-peru';
 

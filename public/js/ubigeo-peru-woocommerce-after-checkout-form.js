@@ -19,6 +19,7 @@
                 var obj = JSON.parse(response);
                 var len = obj.length;
                 var $stateValues = '';
+                var $distValues = '';
 
                 $("select[name*='billing_city']").empty();
                 $("select[name*='distCode']").empty();
@@ -27,7 +28,9 @@
                     $stateValues += '<option value="' + mystate.idProv + '-' + mystate.provincia + '">' + mystate.provincia +
                             '</option>';
                 }
+                $distValues = '<option value="">Distrito</option>';
                 $("select[name*='billing_city']").append($stateValues);
+                $("select[name*='distCode']").append($distValues);
 
             });
             /* JSON populate Region/State Listbox */

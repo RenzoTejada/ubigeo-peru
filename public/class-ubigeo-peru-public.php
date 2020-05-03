@@ -185,6 +185,7 @@ class Ubigeo_Peru_Public {
             'label_class' => 'rt-label', // sometimes you need to customize labels, both string and arrays are supported
             'options' => departamento_select()
                 ), $checkout->get_value('deptoCode'));
+        
     }
 
     public function rt_select_field_shippingDeptoCode($checkout) {
