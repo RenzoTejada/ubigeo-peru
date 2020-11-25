@@ -77,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.3.0 =
+Fix de reload page con combos ubigeo checkout y cambios de texto a español.
+
 = 0.2.9 =
 Re-Ordenando la prioridad de los campos del checkout como email y phone
 

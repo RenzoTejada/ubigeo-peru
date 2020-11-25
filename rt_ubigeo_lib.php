@@ -2,8 +2,8 @@
 
 function rt_ubigeo_get_departamentos_for_select()
 {
-    $dptos = [
-        '' => 'Seleccionar Departamento'
+   $dptos = [
+        '0' => 'Seleccionar Departamento'
     ];
 
     if (!rt_plugin_ubigeo_costo_enabled()) {
@@ -15,7 +15,6 @@ function rt_ubigeo_get_departamentos_for_select()
     foreach ($departamentoList as $dpto) {
         $dptos[$dpto['idDepa']] = $dpto['departamento'];
     }
-
 
     return $dptos;
 }
@@ -42,7 +41,9 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_front', 'rt_ubigeo_load_pro
 
 function rt_ubigeo_load_provincias_front()
 {
+    session_start();
     $idDepa = isset($_POST['idDepa']) ? $_POST['idDepa'] : null;
+    $_SESSION["idDepa"] = $idDepa;
     $response = [];
     if (is_numeric($idDepa)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
@@ -98,7 +99,9 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_front', 'rt_ubigeo_load_dist
 
 function rt_ubigeo_load_distritos_front()
 {
+    session_start();
     $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
+    $_SESSION["idProv"] = $idProv;
     $response = [];
     if (is_numeric($idProv)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
@@ -172,4 +175,37 @@ function rt_ubigeo_get_distrito_por_id($idDep)
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $request = "SELECT distrito FROM ". $table_name ." where idDist=" . $idDep;
     return $wpdb->get_row($request, ARRAY_A);
+}
+
+function rt_ubigeo_load_provincias_front_session($idDepa)
+{
+    $response = [];
+    if (is_numeric($idDepa)) {
+        if (!rt_plugin_ubigeo_costo_enabled()) {
+            $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
+        } else {
+            $provincias = rt_ubigeo_get_provincia_by_idDepa_display($idDepa);
+        }
+
+        foreach ($provincias as $provincia) {
+            $response[$provincia['idProv']] = $provincia['provincia'];
+        }
+    }
+   return $response;
+}
+
+function rt_ubigeo_load_distritos_front_session($idProv)
+{
+    $response = [];
+    if (is_numeric($idProv)) {
+        if (!rt_plugin_ubigeo_costo_enabled()) {
+            $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
+        } else {
+            $distritos = rt_ubigeo_get_distrito_by_idProv_display($idProv);
+        }
+        foreach ($distritos as $distrito) {
+            $response[$distrito['idDist']] = $distrito['distrito'];
+        }
+    }
+     return $response;
 }
