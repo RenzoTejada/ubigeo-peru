@@ -78,6 +78,9 @@ La información se obtuvo de los siguientes url's:
 
 == Changelog ==
 
+= 0.3.2 =
+Ocultando span de select2 de los campos ubigeo pata temas Pawsitive
+
 = 0.3.1 =
 Cambiando texto a español.
 

@@ -211,6 +211,17 @@ function is_theme_avada()
     return $rpt;
 }
 
+
+function is_theme_pawsitive()
+{
+    $rpt = false;
+    $theme = wp_get_theme();
+    if ('Pawsitive' == $theme->name || 'Pawsitive' == $theme->parent_theme) {
+       $rpt = true;
+    }
+    return $rpt;
+}
+
 add_action('woocommerce_after_checkout_form', 'rt_ubigeo_custom_jscript_checkout');
 
 function rt_ubigeo_custom_jscript_checkout()
@@ -218,6 +229,13 @@ function rt_ubigeo_custom_jscript_checkout()
     wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
     wp_enqueue_script('select2-js');
     ?>
+    <?php if(is_theme_pawsitive()) { ?>
+    <style>
+    .select2-container {
+        display : none;
+    }
+    </style>
+    <?php } ?>
     <script>
         jQuery(document).ready(function () {
            
@@ -327,7 +345,6 @@ function rt_ubigeo_custom_jscript_checkout()
                 jQuery('#billing_provincia').val('').trigger('change');
                 jQuery('#billing_distrito').val('').trigger('change');
             });
-            
             
         });
        
