@@ -197,6 +197,7 @@ add_action('woocommerce_after_checkout_form', 'rt_ubigeo_custom_jscript_checkout
 
 function rt_ubigeo_custom_jscript_checkout()
 {
+    wp_enqueue_script( 'select2-js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js', array(), '0.0.1', true );
     ?>
     <script>
         jQuery(document).ready(function () {

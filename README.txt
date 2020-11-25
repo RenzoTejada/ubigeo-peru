@@ -79,6 +79,9 @@ La información se obtuvo de los siguientes url's:
 
 == Changelog ==
 = 0.2.1 =
+Agregando la lib de select2 para sitio que no incluyen dicha libreria
+
+= 0.2.1 =
 Cambio de estructura de programación a nivel back, front misma funcionalidad y agregando validacion de funcion premium
 
 = 0.2.1 =
