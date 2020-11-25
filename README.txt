@@ -2,7 +2,7 @@
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 5.5.1
+Tested up to: 5.5.3
 Stable tag: trunk
 Requires PHP: 7.1
 License: GPLv2 or later
@@ -77,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+
+= 0.3.3 =
+Agregando traducciones para el plugin
 
 = 0.3.2 =
 Ocultando span de select2 de los campos ubigeo pata temas Pawsitive

@@ -3,23 +3,30 @@
 /**
  *
  * @link              https://renzotejada.com/
- * @package           Ubigeo de Per&uacute;
+ * @package           Ubigeo de Perú
  *
  * @wordpress-plugin
- * Plugin Name:       Ubigeo de Per&uacute; para WooCommerce
+ * Plugin Name:       Ubigeo de Perú para WooCommerce
  * Plugin URI:        https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/
- * Description:       Ubigeo de Per&uacute; para WooCommerce - Plugin contiene los departamentos - provincias y distritos del Per&uacute;
- * Version:           3.1.4
+ * Description:       Peru's Ubigeo for WooCommerce - Plugin contains the departments - provinces and districts of Peru
+ * Version:           3.1.5
  * Author:            Renzo Tejada
  * Author URI:        https://renzotejada.com/
  * License:           GNU General Public License v3.0
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       ubigeo-peru
- * Domain Path:       /languages
+ * Domain Path:       /language
  */
 if (!defined('ABSPATH')) {
     exit;
 }
+
+function ubigeo_load_textdomain()
+{
+    load_plugin_textdomain('ubigeo-peru', false, basename(dirname(__FILE__)) . '/languages/');
+}
+
+add_action('init', 'ubigeo_load_textdomain');
 
 // Agrega la página de settings en plugins
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'rt_add_plugin_page_settings_link');

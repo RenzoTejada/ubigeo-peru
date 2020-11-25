@@ -277,7 +277,7 @@ function rt_ubigeo_custom_jscript_checkout()
                         <?php } ?>
                         if (response) {
                             for (var r in response) {
-                                jQuery('#' + selectType + '_provincia').append('<option value=' + r + '>' + response[r] + '</option>');
+                                jQuery('#' + selectType + '_provincia').append('<option value=' + response[r].idProv + '>' + response[r].provincia + '</option>');
                             }
                         }
                     },
@@ -313,7 +313,7 @@ function rt_ubigeo_custom_jscript_checkout()
                         <?php } ?>
                         if (response) {
                             for (var r in response) {
-                                jQuery('#' + selectType + '_distrito').append('<option value=' + r + '>' + response[r] + '</option>')
+                                jQuery('#' + selectType + '_distrito').append('<option value=' + response[r].idDist + '>' + response[r].distrito + '</option>')
                             }
                         }
                     },
@@ -374,26 +374,26 @@ function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
 {
     if ('PE' === $fields['billing_country']) {
         if ('' === $fields['billing_departamento']) {
-            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(__('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Departamento') . '</strong>'), 'Billing Departamento'));
+            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Departamento') . '</strong>'), 'Billing Departamento'));
         }
         if ('' === $fields['billing_provincia']) {
-            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(__('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Provincia') . '</strong>'), 'Billing Provincia'));
+            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Provincia') . '</strong>'), 'Billing Provincia'));
         }
         if ('' === $fields['billing_distrito']) {
-            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(__('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Distrito') . '</strong>'), 'Billing Distrito'));
+            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Distrito') . '</strong>'), 'Billing Distrito'));
         }
     }
 
     if (1 == $fields['ship_to_different_address']) {
         if ('PE' === $fields['shipping_country']) {
             if ('' === $fields['shipping_departamento']) {
-                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(__('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Departamento') . '</strong>'), 'Shipping Departamento'));
+                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Departamento') . '</strong>'), 'Shipping Departamento'));
             }
             if ('' === $fields['shipping_provincia']) {
-                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(__('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Provincia') . '</strong>'), 'Shipping Provincia'));
+                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Provincia') . '</strong>'), 'Shipping Provincia'));
             }
             if ('' === $fields['shipping_distrito']) {
-                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(__('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Distrito') . '</strong>'), 'Shipping Distrito'));
+                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Distrito') . '</strong>'), 'Shipping Distrito'));
             }
         }
     }
@@ -446,10 +446,10 @@ function rt_show_custom_fields_order_billing($order)
     $ubigeo_billing = get_name_ubigeo_billing($order->get_id(), 'value');
     if ($ubigeo_billing) {
         echo '<div class="ubigeo_data_column">';
-        echo '<h3>Facturación Ubigeo Perú</h3>';
-        echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo_billing['departamento'] . '</p>';
-        echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo_billing['provincia'] . '</p>';
-        echo '<p><strong>' . __('Distrito') . ':</strong> ' . $ubigeo_billing['distrito'] . '</p>';
+        echo '<h3>'._e('Billing Ubigeo Peru', 'ubigeo-peru').'</h3>';
+        echo '<p><strong>' . _e('Departamento') . ':</strong> ' . $ubigeo_billing['departamento'] . '</p>';
+        echo '<p><strong>' . _e('Provincia') . ':</strong> ' . $ubigeo_billing['provincia'] . '</p>';
+        echo '<p><strong>' . _e('Distrito') . ':</strong> ' . $ubigeo_billing['distrito'] . '</p>';
         echo '</div>';
     }
 }
@@ -461,10 +461,10 @@ function rt_show_custom_fields_order_shipping($order)
     
     if ($ubigeo_shipping) {
         echo '<div class="ubigeo_data_column">';
-        echo '<h3>Envío Ubigeo Perú</h3>';
-        echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
-        echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
-        echo '<p><strong>' . __('Distrito') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
+        echo '<h3>'._e('Shipping Ubigeo Peru', 'ubigeo-peru').'</h3>';
+        echo '<p><strong>' . _e('Departamento') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
+        echo '<p><strong>' . _e('Provincia') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
+        echo '<p><strong>' . _e('Distrito') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
         echo '</div>';
     }
 }
@@ -477,20 +477,20 @@ function rt_show_custom_fields_thankyou($order)
     $ubigeo = get_name_ubigeo_billing($order,'value');
     if ($ubigeo) {
         echo '<div class="woocommerce-column woocommerce-column--1 woocommerce-column--billing-address col-1">';
-        echo '<h2 class="woocommerce-column__title">Facturación Ubigeo Perú</h2>';
-        echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
-        echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
-        echo '<p><strong>' . __('Distrito') . ':</strong> ' . $ubigeo['distrito'] . '</p>';
+        echo '<h2 class="woocommerce-column__title">'._e('Billing Ubigeo Peru', 'ubigeo-peru').'</h2>';
+        echo '<p><strong>' . _e('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+        echo '<p><strong>' . _e('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+        echo '<p><strong>' . _e('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo['distrito'] . '</p>';
         echo '</div>';
     }
 
     $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
     if ($ubigeo_shipping['departamento']) {
         echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-1">';
-        echo '<h2 class="woocommerce-column__title">Envío Ubigeo Perú</h2>';
-        echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
-        echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
-        echo '<p><strong>' . __('Distrito') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
+        echo '<h2 class="woocommerce-column__title">'._e('Shipping Ubigeo Peru', 'ubigeo-peru').'</h2>';
+        echo '<p><strong>' . _e('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
+        echo '<p><strong>' . _e('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
+        echo '<p><strong>' . _e('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
         echo '</div>';
     }
     echo '</section>';
@@ -502,16 +502,10 @@ add_action( 'woocommerce_view_order', 'rt_show_custom_fields_thankyou', 20 );
 function rt_show_custom_fields_emails($orden, $sent_to_admin, $order) 
 {
     $ubigeo = get_name_ubigeo_billing($order,'object');
-    echo '<h2 class="woocommerce-order-details__title">Ubigeo Perú</h2>';
-    echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
-    echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
-    echo '<p><strong>' . __('Distrito') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
-//    if (get_post_meta($order->id, 'shipping_departamento', true)) {
-//        echo '<h2 class="woocommerce-order-details__title">Shipping Address</h2>';
-//        echo '<p><strong>' . __('Departamento') . ':</strong> ' . get_post_meta($order->id, 'shipping_departamento', true) . '</p>';
-//        echo '<p><strong>' . __('Provincia') . ':</strong> ' . get_post_meta($order->id, 'shipping_provincia', true) . '</p>';
-//        echo '<p><strong>' . __('Distrito') . ':</strong> ' . get_post_meta($order->id, 'shipping_distrito', true) . '</p>';
-//    }
+    echo '<h2 class="woocommerce-order-details__title">'._e('Ubigeo Peru', 'ubigeo-peru').'</h2>';
+    echo '<p><strong>' . _e('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+    echo '<p><strong>' . _e('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+    echo '<p><strong>' . _e('District', 'ubigeo-peru') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
 }
 add_action( 'woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10 , 3 );
 

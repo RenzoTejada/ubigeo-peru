@@ -45,18 +45,15 @@ function rt_ubigeo_load_provincias_front()
     $idDepa = isset($_POST['idDepa']) ? $_POST['idDepa'] : null;
     $_SESSION["idDepa"] = $idDepa;
     $response = [];
+
     if (is_numeric($idDepa)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
             $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
         } else {
             $provincias = rt_ubigeo_get_provincia_by_idDepa_display($idDepa);
         }
-
-        foreach ($provincias as $provincia) {
-            $response[$provincia['idProv']] = $provincia['provincia'];
-        }
     }
-    echo json_encode($response);
+    echo json_encode($provincias);
     wp_die();
 }
 
@@ -64,23 +61,23 @@ function rt_ubigeo_get_provincia_by_idDepa($idDepa = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT * FROM $table_name where idDepa = $idDepa";
+    $request = "SELECT idProv, provincia FROM $table_name where idDepa = $idDepa order by provincia asc";
     return $wpdb->get_results($request, ARRAY_A);
 }
 
 function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $table_ubigeo_costo = $wpdb->prefix . "ubigeo_costo";
+    $table_costo_ubigeo = $wpdb->prefix . "ubigeo_costo_ubigeo";
+    $table_ubigeo_provincia = $wpdb->prefix . "ubigeo_provincia";
     $tipo = get_tipo_costo_ubigeo_by_idDepa($idDepa);
 
     if ($tipo['tipo'] == 1) {
         $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
     } else {
-        $request = "SELECT prov.idProv, prov.provincia FROM $table_name  as prov  
-        inner join $table_ubigeo_costo as cos on cos.idProv = prov.idProv
-        where prov.idDepa=$idDepa group by prov.idProv";
+        $request = "SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
+        inner join $table_ubigeo_provincia as up on up.idProv=ucu.idProv
+        where ucu.idDepa=$idDepa group by up.idProv order by up.provincia";
         $result = $wpdb->get_results($request, ARRAY_A);
     }
     return $result;
@@ -109,11 +106,8 @@ function rt_ubigeo_load_distritos_front()
         } else {
             $distritos = rt_ubigeo_get_distrito_by_idProv_display($idProv);
         }
-        foreach ($distritos as $distrito) {
-            $response[$distrito['idDist']] = $distrito['distrito'];
-        }
     }
-    echo json_encode($response);
+    echo json_encode($distritos);
     wp_die();
 }
 
@@ -121,24 +115,23 @@ function rt_ubigeo_get_distrito_by_idProv($idProv = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $request = "SELECT * FROM $table_name where idProv = $idProv";
+    $request = "SELECT * FROM $table_name where idProv = $idProv order by distrito asc";
     return $wpdb->get_results($request, ARRAY_A);
 }
 
 function rt_ubigeo_get_distrito_by_idProv_display($idProv = 0)
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $table_ubigeo_costo = $wpdb->prefix . "ubigeo_costo";
-
+    $table_costo_ubigeo = $wpdb->prefix . "ubigeo_costo_ubigeo";
+    $table_ubigeo_distrito = $wpdb->prefix . "ubigeo_distrito";
     $tipo = get_tipo_costo_ubigeo_by_idProv($idProv);
 
     if ($tipo['tipo'] == 1) {
         $result = rt_ubigeo_get_distrito_by_idProv($idProv);
     } else {
-        $request = "SELECT dist.idDist, dist.distrito FROM $table_name  as dist 
-        inner join $table_ubigeo_costo as cos on cos.idDist = dist.idDist
-        where cos.idProv=$idProv group by dist.idDist;";
+        $request = "SELECT dist.idDist, dist.distrito  FROM $table_costo_ubigeo  as ucu  
+        inner join $table_ubigeo_distrito as dist on dist.idDist=ucu.idDist
+        where ucu.idProv=$idProv group by dist.idDist";
         $result = $wpdb->get_results($request, ARRAY_A);
     }
     return $result;
@@ -186,9 +179,10 @@ function rt_ubigeo_load_provincias_front_session($idDepa)
         } else {
             $provincias = rt_ubigeo_get_provincia_by_idDepa_display($idDepa);
         }
-
-        foreach ($provincias as $provincia) {
-            $response[$provincia['idProv']] = $provincia['provincia'];
+        if ($provincias) {
+            foreach ($provincias as $provincia) {
+                $response[$provincia['idProv']] = $provincia['provincia'];
+            }
         }
     }
    return $response;

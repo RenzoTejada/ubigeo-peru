@@ -17,48 +17,39 @@ function rt_ubigeo_submenu_settings_callback()
     if (isset($_REQUEST["settings-updated"]) && sanitize_text_field($_REQUEST["settings-updated"] == true)) {
         echo "<script>alert('Se han guardado la nuevas opciones.');</script>";
     }
-    //script
-    //wp_register_script('rt_ubigeo_script_admin', plugins_url('js/rt_ubigeo_admin.js', __FILE__));
     wp_enqueue_script('rt_ubigeo_script_admin'); ?>
-    <style>
-        input[type=text], select {
-            width: 400px;
-            margin: 0;
-            padding: 6px !important;
-            box-sizing: border-box;
-            vertical-align: top;
-            height: auto;
-            line-height: 2;
-            min-height: 30px;
-        }
-    </style>
+    
     <div class="wrap woocommerce" id="facto-conf">
         <div style="background-color:#87b43e;">
         </div>
-        <h1>Ubigeo de Per&uacute; para Woocommerce | Integración del Ubigeo del Perú a tu Woocommerce</h1>
+        <h1><?php _e("Ubigeo from Peru for Woocommerce | Integration of Ubigeo from Peru to your Woocommerce", 'ubigeo-peru') ?></h1>
         <hr>
         <h2 class="nav-tab-wrapper">
             <a href="?page=rt_ubigeo_settings&tab=docs" class="nav-tab <?php
             if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "docs")) {
                 print " nav-tab-active";
-            } ?>">Docs</a>
+            } ?>"><?php echo     _e('Docs', 'ubigeo-peru') ?></a>
                <?php
                if (rt_costo_ubigeo_plugin_enabled()) {
                    ?>
                 <a href="?page=rt_ubigeo_settings&tab=cost" class="nav-tab <?php
                 if ($_REQUEST['tab'] == "cost") {
                     print " nav-tab-active";
-                } ?>">Ubigeo</a>
+                } ?>"><?php _e('Ubigeo', 'ubigeo-peru') ?></a>
+                <a href="?page=rt_ubigeo_settings&tab=import" class="nav-tab <?php
+                if ($_REQUEST['tab'] == "import") {
+                    print " nav-tab-active";
+                } ?>"><?php _e('Import', 'ubigeo-peru') ?></a>
                 <a href="?page=rt_ubigeo_settings&tab=license" class="nav-tab <?php
                 if ($_REQUEST['tab'] == "license") {
                     print " nav-tab-active";
-                } ?>">Licencia</a>
+                } ?>"><?php _e('License', 'ubigeo-peru') ?></a>
                <?php
                } ?>
             <a href="?page=rt_ubigeo_settings&tab=help" class="nav-tab <?php
                if ($_REQUEST['tab'] == "help") {
                    print " nav-tab-active";
-               } ?>">Ayuda</a>
+               } ?>"><?php _e('Help', 'ubigeo-peru') ?></a>
 
         </h2>
         <?php
@@ -66,8 +57,6 @@ function rt_ubigeo_submenu_settings_callback()
             rt_ubigeo_submenu_settings_docs();
         } elseif ($_REQUEST['tab'] == "cost") {
             if (rt_costo_ubigeo_plugin_enabled()) {
-                ?>
-                <?php
                 if (isset($_REQUEST['section']) == "ubigeo") {
                     if (isset($_REQUEST['list_cost']) == "new") {
                         rt_ubigeo_submenu_settings_cost_new();
@@ -80,6 +69,8 @@ function rt_ubigeo_submenu_settings_callback()
                     rt_ubigeo_submenu_settings_cost();
                 }
             }
+        } elseif ($_REQUEST['tab'] == "import") {
+            rt_ubigeo_submenu_settings_import();
         } elseif ($_REQUEST['tab'] == "license") {
             rt_ubigeo_submenu_settings_license();
         } elseif ($_REQUEST['tab'] == "help") {
@@ -119,10 +110,8 @@ function rt_ubigeo_register_settings()
         add_action('admin_notices', 'rt_ubigeo_errortabledist');
     }
 
-
     //para cada mp obtenemos su configuraci&oacute;n
     if (class_exists('woocommerce')) {
-//        $mp_arr = WC()->payment_gateways->get_available_payment_gateways();
         if(!mercado_pago_plugin_enabled()){
             $mp_arr = WC()->payment_gateways->get_available_payment_gateways();
         } else {
@@ -146,57 +135,75 @@ function mercado_pago_plugin_enabled()
 function rt_ubigeo_submenu_settings_docs()
 {
     ?>
-    <h1>Documentación del Ubigeo de Perú para Woocommerce </h1>
+    <h1><?php _e("Peru Ubigeo Documentation for Woocommerce", 'ubigeo-peru'); ?></h1>
     <div>
         <div>
-            <h3>Descripción</h3>
+            <h3><?php _e("Description", 'ubigeo-peru'); ?></h3>
         </div>
         <div>
-            <p>Permite seleccionar departamentos, provincias y distritos del Perú</p>
+            <p><?php _e('Allows you to select departments, provinces and districts of Peru', 'ubigeo-peru'); ?></p>
         </div>
     </div>
     <div>
         <div>
-            <h3>Atributos</h3>
+            <h3><?php _e('Attributes', 'ubigeo-peru'); ?></h3>
         </div>
         <div>
             <ul>
-                <li>Agrega los Departamentos del Perú</li>
-                <li>Agrega las Provincias del Perú</li>
-                <li>Agrega los Distritos del Perú</li>
+                <li><?php _e('Add the Departments of Peru', 'ubigeo-peru'); ?></li>
+                <li><?php _e('Add the Provinces of Peru', 'ubigeo-peru'); ?></li>
+                <li><?php _e('Add the Districts of Peru', 'ubigeo-peru'); ?></li>
             </ul>
         </div>
     </div>
+    <?php if (rt_costo_ubigeo_plugin_enabled()) { ?>
+    <div>
+        <div>
+            <h3><?php _e("Activate shipping ubigeo", 'ubigeo-peru'); ?></h3>
+        </div>
+        <div>
+            <p><?php _e('You can go to the following link', 'ubigeo-peru'); ?> <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=shipping&section=costo_ubigeo_peru_shipping_method') ?>" ><?php _e('Shipping Ubigeo ', 'ubigeo-peru'); ?></a>.</p>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h3><?php _e("Link Docs Ubigeo", 'ubigeo-peru'); ?></h3>
+        </div>
+        <div>
+            <p><?php _e('You can read the documentation in the ', 'ubigeo-peru'); ?> <a href="https://renzotejada.com/documentacion/docs-costo-de-envio-de-ubigeo-de-peru-para-woocommerce/?url=dashboard-wodpress" target="_blank" ><?php  _e('Docs ', 'ubigeo-peru'); ?></a>.</p>
+        </div>
+    </div>
     <?php
+    }
 }
 
 function rt_ubigeo_submenu_settings_help()
 {
     ?>
-    <h2>Ayuda</h2>
+    <h2><?php _e('Help', 'ubigeo-peru'); ?></h2>
 
-    <h3>¿Qué hace este módulo?</h3>
+    <h3><?php _e('What does this module do?', 'ubigeo-peru'); ?></h3>
 
-    <p>Te permite integrar tu Woocommerce a Ubigeo de Perú para pedir a los clientes sus información en el checkout.</p>
+    <p><?php _e('It allows you to integrate your Woocommerce to Ubigeo from Peru to ask customers for their information at checkout.', 'ubigeo-peru'); ?></p>
 
-    <h3>¿Cuál es el costo del modulo?</h3>
+    <h3><?php _e('What is the cost of the module?', 'ubigeo-peru'); ?></h3>
 
-    <p>Es totalmente gratis este plugin.</p>
+    <p><?php _e('This plugin is totally free.', 'ubigeo-peru'); ?></p>
 
-    <h3>¿Como agrego el costo de envio o configuro los costos?</h3>
+    <h3><?php _e('How do I add the shipping cost or configure the costs?', 'ubigeo-peru'); ?></h3>
+    
+    <p><?php _e('This plugin only adds the ubigeo in the woocommerce checkout, it does not have the shipping cost functionality', 'ubigeo-peru'); ?></p>
 
-    <p>Este plugin solo agrega el ubigeo en el checkout de woocommerce, no tiene la funcionalidad de costo de envio</p>
+    <h3><?php _e('How to configure the shipping cost to the module?', 'ubigeo-peru'); ?></h3>
 
-    <h3>¿Cómo configuro el costo de envio al módulo?</h3>
+    <p><?php _e('Said functional functionality is in a PREMIUM version.', 'ubigeo-peru'); ?></p>
 
-    <p>Dicha funcionada funcionada se encuentra en una versión PREMIUM.</p>
+    <h3><?php _e('What is the PREMIUM version?', 'ubigeo-peru'); ?></h3>
 
-    <h3>¿Cual es la versión PREMIUM?</h3>
+    <p><?php _e('The PREMIUM version is in the following ', 'ubigeo-peru'); ?><a href="https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/" target="_blank"><?php _e('LINK', 'ubigeo-peru'); ?></a>.</p>
 
-    <p>La versión PREMIUM se encuentra en el siguiente <a href="https://renzotejada.com/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/" target="_blank">LINK</a>.</p>
+    <h3><?php _e('I have other questions', 'ubigeo-peru'); ?></h3>
 
-    <h3>Tengo otras preguntas</h3>
-
-    <p>Ingresa a <a href="https://renzotejada.com/contacto?url=dashboard-wodpress" target="_blank">RT - Contacto</a> </p>
+    <p><?php _e('Go to', 'ubigeo-peru'); ?> <a href="https://renzotejada.com/contacto?url=dashboard-wodpress" target="_blank"><?php _e('RT - Contact', 'ubigeo-peru'); ?></a></p>
     <?php
 }

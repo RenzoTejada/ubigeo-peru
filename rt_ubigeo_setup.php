@@ -4,7 +4,7 @@ function rt_ubigeo_errortabledep()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para WooCommerce: Error al crear tabla departamento de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
+        <p><?php _e("Peru's Ubigeo for WooCommerce: Error creating ubigeo department table. Please check that the database user you are using can create tables and reinstall the module.", 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
@@ -13,7 +13,7 @@ function rt_ubigeo_errortableprov()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para WooCommerce: Error al crear tabla provincia de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
+        <p><?php _e("Peru's Ubigeo for WooCommerce: Error creating ubigeo province table. Please check that the database user you are using can create tables and reinstall the module.", 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
@@ -22,7 +22,7 @@ function rt_ubigeo_errortabledist()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para WooCommerce: Error al crear tabla distrito de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
+        <p><?php _e("Peru's Ubigeo for WooCommerce: Error creating ubigeo district table. Please check that the database user you are using can create tables and reinstall the module.", 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
@@ -31,7 +31,7 @@ function rt_ubigeo_errornowoocommerce()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para WooCommerce : El módulo necesita tener instalado WooCommerce para operar correctamente.', 'ubigeo-peru'); ?></p>
+        <p><?php _e("Peru's Ubigeo for WooCommerce: The module needs to have WooCommerce installed to operate correctly.", 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
