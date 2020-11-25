@@ -81,6 +81,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 0.3.6 =
+Agregando sessión de shipping ubigeo.
+
 = 0.3.5 =
 Agregando Ubigeo a direcciones de mi cuenta.
 

@@ -398,12 +398,21 @@ add_action('woocommerce_checkout_update_order_review', 'rt_ubigeo_checkout_updat
 function rt_ubigeo_checkout_update_refresh_shipping_methods($post_data)
 {
     parse_str($post_data, $data);
-    
-    if($data['billing_distrito']){
-        session_start();
-        $_SESSION["idDist"] = $data['billing_distrito'];
+
+    if ($data['ship_to_different_address']) {
+        
+        if ($data['shipping_distrito']) {
+            session_start();
+            $_SESSION["idDist"] = $data['shipping_distrito'];
+        }
+    } else {
+        if ($data['billing_distrito']) {
+            session_start();
+            $_SESSION["idDist"] = $data['billing_distrito'];
+        }
     }
     $packages = WC()->cart->get_shipping_packages();
+
     foreach ($packages as $package_key => $package) {
         WC()->session->set('shipping_for_package_' . $package_key, false); // Or true
     }
