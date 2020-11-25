@@ -441,6 +441,7 @@ add_action( 'woocommerce_admin_order_data_after_billing_address', 'rt_show_custo
 function rt_show_custom_fields_order_shipping($order)
 {
     $ubigeo_shipping = get_name_ubigeo_shipping($order->get_id(), 'value');
+    
     if ($ubigeo_shipping) {
         echo '<div class="ubigeo_data_column">';
         echo '<h3>Envío Ubigeo Perú</h3>';
@@ -467,7 +468,7 @@ function rt_show_custom_fields_thankyou($order)
     }
 
     $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
-    if ($ubigeo_shipping) {
+    if ($ubigeo_shipping['departamento']) {
         echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-1">';
         echo '<h2 class="woocommerce-column__title">Envío Ubigeo Perú</h2>';
         echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';

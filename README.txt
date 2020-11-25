@@ -77,6 +77,10 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+
+= 0.3.1 =
+Cambiando texto a español.
+
 = 0.3.0 =
 Fix de reload page con combos ubigeo checkout y cambios de texto a español.
 
@@ -86,19 +90,19 @@ Re-Ordenando la prioridad de los campos del checkout como email y phone
 = 0.2.8 =
 Agregando la lib de select2 
 
-= 0.2.7=
+= 0.2.7 =
 Fix de cambio de dep-prov-dist pegados y agregando distrito de Veintiséis de Octubre.
 
-= 0.2.6=
+= 0.2.6 =
 Agregando distrito de salamanca.
 
-= 0.2.5=
+= 0.2.5 =
 Fix con el tema avada (doble ajax).
 
-= 0.2.4=
+= 0.2.4 =
 Mostrando ubigeo billing y shipping en el orden de pedido y en page thanks you.
 
-= 0.2.3=
+= 0.2.3 =
 Fix de query de ubigeo front provincia
 
 = 0.2.2 =
