@@ -29,7 +29,7 @@ Where:
 * Massive cost loading, new import functionality via .csv
 
 
-More information about the plugin in [Peru Ubigeo Shipping Cost for Woocommerce] (https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Peru Ubigeo Shipping Cost for Woocommerce")
+More information about the plugin in [Peru Ubigeo Shipping Cost for Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Peru Ubigeo Shipping Cost for Woocommerce")
 
 == Installation ==
 
@@ -80,6 +80,9 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 0.3.7 =
+Fix de distrios de anchash (actualizando distritos de la provincia huayla y marizcal luzuriaga).
 
 = 0.3.6 =
 Agregando sessión de shipping ubigeo.

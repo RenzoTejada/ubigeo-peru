@@ -36,6 +36,15 @@ function rt_ubigeo_errornowoocommerce()
     <?php
 }
 
+add_action( 'plugin_loaded', 'update_data_ubigeo_distrito_anchash' );
+
+function update_data_ubigeo_distrito_anchash()
+{
+    // actualizar distritos de la provincia huayla y marizcal luzuriaga
+    update_distrito_ancash_huayla();
+    update_distrito_ancash_marizcal();
+}
+
 //crear tablas
 function rt_ubigeo_setup()
 {
@@ -57,6 +66,26 @@ function rt_ubigeo_setup()
     insert_distrito_salamanca();
     //insert distrito Veintiséis de Octubre
     insert_distrito_26_octubre();
+}
+
+function update_distrito_ancash_huayla()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $update = "update $table_name set idProv=19 where idDist in (170,171,172,173,174,175,176,177,178,179);";
+    dbDelta($update);
+    return true;
+}
+
+function update_distrito_ancash_marizcal()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $update = "update $table_name set idProv=20 where idDist in (180,181,182,183,184,185,186,187);";
+    dbDelta($update);
+    return true;
 }
 
 function insert_distrito_26_octubre()
@@ -638,23 +667,24 @@ function cargaDatosDistritosTres()
                 (167, 'CULEBRAS', 18),
                 (168, 'HUAYAN', 18),
                 (169, 'MALVAS', 18),
-                (170, 'CARAZ', 26),
-                (171, 'HUALLANCA', 26),
-                (172, 'HUATA', 26),
-                (173, 'HUAYLAS', 26),(174, 'MATO', 26),
-                (175, 'PAMPAROMAS', 26),
-                (176, 'PUEBLO LIBRE', 26),
-                (177, 'SANTA CRUZ', 26),
-                (178, 'SANTO TORIBIO', 26),
-                (179, 'YURACMARCA', 26),
-                (180, 'PISCOBAMBA', 27),
-                (181, 'CASCA', 27),
-                (182, 'ELEAZAR GUZMAN BARRON', 27),
-                (183, 'FIDEL OLIVAS ESCUDERO', 27),
-                (184, 'LLAMA', 27),
-                (185, 'LLUMPA', 27),
-                (186, 'LUCMA', 27),
-                (187, 'MUSGA', 27),
+                (170, 'CARAZ', 19),
+                (171, 'HUALLANCA', 19),
+                (172, 'HUATA', 19),
+                (173, 'HUAYLAS', 19),
+                (174, 'MATO', 19),
+                (175, 'PAMPAROMAS', 19),
+                (176, 'PUEBLO LIBRE', 19),
+                (177, 'SANTA CRUZ', 19),
+                (178, 'SANTO TORIBIO', 19),
+                (179, 'YURACMARCA', 19),
+                (180, 'PISCOBAMBA', 20),
+                (181, 'CASCA', 20),
+                (182, 'ELEAZAR GUZMAN BARRON', 20),
+                (183, 'FIDEL OLIVAS ESCUDERO', 20),
+                (184, 'LLAMA', 20),
+                (185, 'LLUMPA', 20),
+                (186, 'LUCMA', 20),
+                (187, 'MUSGA', 20),
                 (188, 'OCROS', 21),
                 (189, 'ACAS', 21),
                 (190, 'CAJAMARQUILLA', 21),
@@ -700,7 +730,8 @@ function cargaDatosDistritosTres()
                 (230, 'SANTA', 25),
                 (231, 'NUEVO CHIMBOTE', 25),
                 (232, 'SIHUAS', 26),
-                (233, 'ACOBAMBA', 26),(234, 'ALFONSO UGARTE', 26),
+                (233, 'ACOBAMBA', 26),
+                (234, 'ALFONSO UGARTE', 26),
                 (235, 'CASHAPAMPA', 26),
                 (236, 'CHINGALPO', 26),
                 (237, 'HUAYLLABAMBA', 26),
