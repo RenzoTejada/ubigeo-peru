@@ -77,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.2.7=
+Fix de cambio de dep-prov-dist pegados y agregando distrito de Veintiséis de Octubre.
+
 = 0.2.6=
 Agregando distrito de salamanca.
 

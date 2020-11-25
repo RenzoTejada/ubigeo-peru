@@ -55,6 +55,24 @@ function rt_ubigeo_setup()
     insert_distrito_bagua();
     //insert distrito salamanca
     insert_distrito_salamanca();
+    //insert distrito Veintiséis de Octubre
+    insert_distrito_26_octubre();
+}
+
+function insert_distrito_26_octubre()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $idDist = 1834;
+    $select_26octubre = "SELECT idDist FROM " . $table_name . " where idDist =  $idDist";
+    $result_26octubre = $wpdb->query($select_26octubre);
+   
+    if(!$result_26octubre){
+       $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'VEINTISEIS DE OCTUBRE', 152);";
+       dbDelta($sql_insert);
+    }
+    return true;
 }
 
 function insert_distrito_salamanca()

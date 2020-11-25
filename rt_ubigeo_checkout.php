@@ -193,12 +193,25 @@ function rt_ubigeo_custom_wc_default_address_fields($address_fields)
     return $address_fields;
 }
 
+
+function is_theme_avada()
+{
+    $rpt = false;
+    $theme = wp_get_theme();
+    if ('Avada' == $theme->name || 'Avada' == $theme->parent_theme) {
+       $rpt = true;
+    }
+    return $rpt;
+}
+
 add_action('woocommerce_after_checkout_form', 'rt_ubigeo_custom_jscript_checkout');
 
 function rt_ubigeo_custom_jscript_checkout()
 {
     wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
     wp_enqueue_script('select2-js');
+    
+
     ?>
     <script>
         jQuery(document).ready(function () {
@@ -234,6 +247,10 @@ function rt_ubigeo_custom_jscript_checkout()
                         });
                     },
                     success: function (response) {
+                        <?php if(!is_theme_avada()) { ?>
+                        jQuery('#' + selectType + '_provincia').html('<option value="">Seleccionar Provincia</option>')
+                        jQuery('#' + selectType + '_distrito').html('<option value="">Seleccionar Distrito</option>')
+                        <?php } ?>
                         if (response) {
                             for (var r in response) {
                                 jQuery('#' + selectType + '_provincia').append('<option value=' + r + '>' + response[r] + '</option>');
@@ -267,6 +284,9 @@ function rt_ubigeo_custom_jscript_checkout()
                         });
                     },
                     success: function (response) {
+                        <?php if(!is_theme_avada()) { ?>
+                        jQuery('#' + selectType + '_distrito').html('<option value="">Seleccionar Distrito</option>')
+                        <?php } ?>
                         if (response) {
                             for (var r in response) {
                                 jQuery('#' + selectType + '_distrito').append('<option value=' + r + '>' + response[r] + '</option>')
