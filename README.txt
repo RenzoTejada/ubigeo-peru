@@ -8,46 +8,48 @@ Requires PHP: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
-Agrega en el checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito
+This plugin adds the tables to the database _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito with respect to Peru.
+Add the ubigeo from Peru to the Woocommerce checkout - _departamento - _provincia - _distrito
 
-Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra web https://renzotejada.com
+You will find this same information in the readme.txt of the plugin and on our website https://renzotejada.com
 
 == Description ==
 
-Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
-Agrega en la pagina del checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito.
+This plugin adds the tables to the database _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito with respect to Peru.
+Add the ubigeo from Peru to the Woocommerce checkout - _departamento - _provincia - _distrito.
 
-Además tenemos un plugin premium donde se agrega la funcionalidad de costo de envío de ubigeo de Perú para woocommerce.
-Donde:
+We also have a premium plugin where the shipping cost functionality of ubigeo from Peru is added for woocommerce.
+Where:
 
-* Habilitar costo por Departamento.
-* Habilitar costo por Distrito.
-* Habilitar y Deshabilitar la funcionalidad de costo de envío sin desactivar el plugin.
-* Agregar nombre del costo de envío.
+* Enable cost per Department.
+* Enable cost per District.
+* Enable and Disable the shipping cost functionality without disabling the plugin.
+* Add name of shipping cost, free shipping and store pickup.
+* Add shipping methods such as Shipping cost, Free shipping (plus minimum amount) and Store Pickup (whatever you require).
+* Massive cost loading, new import functionality via .csv
 
 
-Más información del plugin en [Costo de Envío de Ubigeo de Perú para Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Costo de Envío de Ubigeo de Perú para Woocommerce")
+More information about the plugin in [Peru Ubigeo Shipping Cost for Woocommerce] (https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Peru Ubigeo Shipping Cost for Woocommerce")
 
 == Installation ==
 
-Instalación automática
-1. Panel de administración plugin y añadir nueva opción.
-2. Buscar en el cuadro de texto-región-provincia común.
-3. Colocado en la descripción de este plugin y seleccione instalar.
-4. Activar el plugin desde el panel de administración de WordPress.
+Automatic installation
+1. Plugin admin panel and add new option.
+2. Search in the common province-region-text box.
+3. Placed in the description of this plugin and select install.
+4. Activate the plugin from the WordPress administration panel.
 
-Archivos ZIP Manual de instalación
-1. Descargar el archivo ZIP desde esta pantalla.
-2. Seleccione la opción agregar plugin desde el panel de administración.
-3. Seleccione la opción de alta carga y seleccione el archivo descargado.
-4. Confirmar Instalación y plugin de activación desde el panel de administración.
+ZIP files Installation manual
+1. Download the ZIP file from this screen.
+2. Select the add plugin option from the admin panel.
+3. Select the heavy load option and select the downloaded file.
+4. Confirm Installation and activation plugin from the administration panel.
 
-Instalación manual de FTP
-1. Descargue el archivo ZIP de esta pantalla y descomprimir.
-2. Ingrese a su carpeta FTP en su servidor web.
-3. Copie el directorio ubigeo dentro de la siguiente direccion  wp-content/plugins/
-4. Activar el plugin desde el panel de administración de WordPress.
+Manual FTP installation
+1. Download the ZIP file from this screen and unzip.
+2. Go to your FTP folder on your web server.
+3. Copy the directory ubigeo into the following address wp-content/plugins/
+4. Activate the plugin from the WordPress administration panel.
 
 
 == Installation ==
@@ -63,20 +65,27 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= ¿De donde obtuvo la data de los departamentos, provincias y distritos? =
+= Where did you get the data for the departments, provinces and districts? =
 
-La información se obtuvo de los siguientes url's:
-  a. http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
-  b. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
+The information was obtained from the following urls:
+  a. http://webinei.inei.gob.pe:8080/sisconcode/proyecto/index.htm?proyectoTitulo=UBIGEO&proyectoId=3
+  b. http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
+  c. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
 
 
 == Screenshots ==
 
-1. vista de finalizar compra
-2. Ubigeo Perú Dashboard
-3. Ubigeo Perú Menú
+1. checkout view
+2. Ubigeo Peru Dashboard
+3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 0.3.5 =
+Agregando Ubigeo a direcciones de mi cuenta.
+
+= 0.3.4 =
+Haciendo los campos ubigeos obligatorios (departamento , provincia y distrito).
 
 = 0.3.3 =
 Agregando traducciones para el plugin

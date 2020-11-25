@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ubigeo de Per&uacute; para WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 04:57+0000\n"
-"PO-Revision-Date: 2020-11-08 05:00+0000\n"
+"POT-Creation-Date: 2020-11-08 17:06+0000\n"
+"PO-Revision-Date: 2020-11-08 17:07+0000\n"
 "Last-Translator: alexis tejada\n"
-"Language-Team: Spanish (Peru)\n"
-"Language: es_PE\n"
+"Language-Team: Spanish (Spain)\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -140,7 +140,7 @@ msgstr "¿Qué es la versión PREMIUM?"
 
 #: rt_ubigeo_admin.php:203
 msgid "The PREMIUM version is in the following "
-msgstr "La versión PREMIUM está en la siguiente"
+msgstr "La versión PREMIUM está en la siguiente "
 
 #: rt_ubigeo_admin.php:203
 msgid "LINK"
@@ -224,16 +224,18 @@ msgstr ""
 "para funcionar correctamente."
 
 #. Name of the plugin
-msgid "Ubigeo de Per&uacute; para WooCommerce"
+#, fuzzy
+#| msgid "Ubigeo de Per&uacute; para WooCommerce"
+msgid "Ubigeo de Perú para WooCommerce"
 msgstr "Ubigeo de Perú para WooCommerce"
 
 #. Description of the plugin
 msgid ""
-"Ubigeo de Per&uacute; para WooCommerce - Plugin contiene los departamentos - "
-"provincias y distritos del Per&uacute;"
+"Peru's Ubigeo for WooCommerce - Plugin contains the departments - provinces "
+"and districts of Peru"
 msgstr ""
-"Ubigeo de Per&uacute; para WooCommerce - Plugin contains the departments - "
-"provinces and districts of Peru"
+"Ubigeo de Perú para WooCommerce - El complemento contiene los departamentos -"
+" provincias y distritos de Perú"
 
 #. URI of the plugin
 msgid "https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/"

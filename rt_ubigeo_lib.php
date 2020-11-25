@@ -3,7 +3,7 @@
 function rt_ubigeo_get_departamentos_for_select()
 {
    $dptos = [
-        '0' => 'Seleccionar Departamento'
+        '' => __('Select Department ', 'ubigeo-peru')
     ];
 
     if (!rt_plugin_ubigeo_costo_enabled()) {
@@ -15,7 +15,20 @@ function rt_ubigeo_get_departamentos_for_select()
     foreach ($departamentoList as $dpto) {
         $dptos[$dpto['idDepa']] = $dpto['departamento'];
     }
+    return $dptos;
+}
 
+function rt_ubigeo_get_departamentos_for_adress()
+{
+    $dptos = [
+        '' => __('Select Department ', 'ubigeo-peru')
+    ];
+
+    $departamentoList = rt_ubigeo_get_departamento();
+
+    foreach ($departamentoList as $dpto) {
+        $dptos[$dpto['idDepa']] = $dpto['departamento'];
+    }
     return $dptos;
 }
 
@@ -202,4 +215,51 @@ function rt_ubigeo_load_distritos_front_session($idProv)
         }
     }
      return $response;
+}
+
+function rt_ubigeo_get_provincia_address_by_idDepa($idDepa)
+{
+    $reponse = array();
+    $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
+    $reponse = array( '' => __('Select Province ', 'ubigeo-peru'));
+
+    foreach ($provincias as $prov) {
+        $reponse[$prov['idProv']] = $prov['provincia'];
+    }
+    
+    return $reponse;
+}
+
+function rt_ubigeo_get_distrito_address_by_idProv($idProv)
+{
+    $reponse = array();
+    $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
+    $reponse = array( '' => __('Select District ', 'ubigeo-peru'));
+
+    foreach ($distritos as $dist) {
+        $reponse[$dist['idDist']] = $dist['distrito'];
+    }
+    return $reponse;
+}
+
+add_action('wp_ajax_rt_ubigeo_load_provincias_address', 'rt_ubigeo_load_provincias_address');
+add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_address', 'rt_ubigeo_load_provincias_address');
+
+function rt_ubigeo_load_provincias_address()
+{
+    $idDepa = isset($_POST['idDepa']) ? $_POST['idDepa'] : null;
+    $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
+    echo json_encode($provincias);
+    wp_die();
+}
+
+add_action('wp_ajax_rt_ubigeo_load_distritos_address', 'rt_ubigeo_load_distritos_address');
+add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_address', 'rt_ubigeo_load_distritos_address');
+
+function rt_ubigeo_load_distritos_address()
+{
+    $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
+    $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
+    echo json_encode($distritos);
+    wp_die();
 }

@@ -17,7 +17,7 @@ function rt_ubigeo_submenu_settings_callback()
     if (isset($_REQUEST["settings-updated"]) && sanitize_text_field($_REQUEST["settings-updated"] == true)) {
         echo "<script>alert('Se han guardado la nuevas opciones.');</script>";
     }
-    wp_enqueue_script('rt_ubigeo_script_admin'); ?>
+?>
     
     <div class="wrap woocommerce" id="facto-conf">
         <div style="background-color:#87b43e;">

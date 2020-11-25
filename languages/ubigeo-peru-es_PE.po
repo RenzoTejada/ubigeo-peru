@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ubigeo de Per&uacute; para WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 17:06+0000\n"
-"PO-Revision-Date: 2020-11-08 17:11+0000\n"
-"Last-Translator: alexis tejada\n"
-"Language-Team: Spanish (Peru)\n"
+"POT-Creation-Date: 2020-11-12 20:38+0000\n"
+"PO-Revision-Date: 2020-11-12 20:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: Español de Perú\n"
 "Language: es_PE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
@@ -158,32 +158,56 @@ msgstr "Ir"
 msgid "RT - Contact"
 msgstr "RT - Contacto"
 
-#: rt_ubigeo_checkout.php:449 rt_ubigeo_checkout.php:480
-msgid "Billing Ubigeo Peru"
-msgstr "Facturación Ubigeo Perú"
+#: rt_ubigeo_checkout.php:101
+msgid "Select Province "
+msgstr "Seleccionar Provincia"
 
-#: rt_ubigeo_checkout.php:464 rt_ubigeo_checkout.php:490
-msgid "Shipping Ubigeo Peru"
-msgstr "Envíos Ubigeo Perú"
+#: rt_ubigeo_checkout.php:107
+msgid "Select District "
+msgstr "Seleccionar Distrito"
 
-#: rt_ubigeo_checkout.php:481 rt_ubigeo_checkout.php:491
-#: rt_ubigeo_checkout.php:506
+#: rt_ubigeo_checkout.php:112 rt_ubigeo_checkout.php:142
+#: rt_ubigeo_checkout.php:488 rt_ubigeo_checkout.php:498
+#: rt_ubigeo_checkout.php:513
 msgid "Department"
 msgstr "Departamento"
 
-#: rt_ubigeo_checkout.php:482 rt_ubigeo_checkout.php:492
-#: rt_ubigeo_checkout.php:507
+#: rt_ubigeo_checkout.php:122 rt_ubigeo_checkout.php:153
+#: rt_ubigeo_checkout.php:489 rt_ubigeo_checkout.php:499
+#: rt_ubigeo_checkout.php:514
 msgid "Province"
 msgstr "Provincia"
 
-#: rt_ubigeo_checkout.php:483 rt_ubigeo_checkout.php:493
-#: rt_ubigeo_checkout.php:508
+#: rt_ubigeo_checkout.php:132 rt_ubigeo_checkout.php:165
+#: rt_ubigeo_checkout.php:490 rt_ubigeo_checkout.php:500
+#: rt_ubigeo_checkout.php:515
 msgid "District"
 msgstr "Distrito"
 
-#: rt_ubigeo_checkout.php:505
+#: rt_ubigeo_checkout.php:158 rt_ubigeo_checkout.php:281
+msgid "Select Province"
+msgstr "Seleccionar Provincia"
+
+#: rt_ubigeo_checkout.php:170 rt_ubigeo_checkout.php:282
+#: rt_ubigeo_checkout.php:318
+msgid "Select District"
+msgstr "Seleccionar Distrito"
+
+#: rt_ubigeo_checkout.php:456 rt_ubigeo_checkout.php:487
+msgid "Billing Ubigeo Peru"
+msgstr "Facturación Ubigeo Perú"
+
+#: rt_ubigeo_checkout.php:471 rt_ubigeo_checkout.php:497
+msgid "Shipping Ubigeo Peru"
+msgstr "Envíos Ubigeo Perú"
+
+#: rt_ubigeo_checkout.php:512
 msgid "Ubigeo Peru"
 msgstr "Ubigeo Perú"
+
+#: rt_ubigeo_lib.php:6
+msgid "Select Department "
+msgstr "Seleccionar Departamento"
 
 #: rt_ubigeo_setup.php:7
 msgid ""
@@ -223,9 +247,12 @@ msgstr ""
 "Ubigeo de Perú para WooCommerce: el módulo debe tener WooCommerce instalado "
 "para funcionar correctamente."
 
+#: ubigeo-peru.php:39
+msgid "Settings"
+msgstr "Ajustes"
+
 #. Name of the plugin
 #, fuzzy
-#| msgid "Ubigeo de Per&uacute; para WooCommerce"
 msgid "Ubigeo de Perú para WooCommerce"
 msgstr "Ubigeo de Perú para WooCommerce"
 

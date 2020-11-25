@@ -85,7 +85,7 @@ function rt_ubigeo_get_country_locale($locale)
 
 add_filter('woocommerce_checkout_fields', 'rt_ubigeo_wc_checkout_fields', 99);
 
-function rt_ubigeo_wc_checkout_fields($fields)
+function rt_ubigeo_wc_checkout_fields($fields) 
 {
     $fields['billing']['billing_phone']['priority'] = 34;
     $fields['billing']['billing_email']['priority'] = 36;
@@ -94,23 +94,58 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
     $fields['shipping']['shipping_address_1']['priority'] = 74;
     $fields['shipping']['shipping_address_2']['priority'] = 76;
-    session_start();
-    if (isset($_SESSION['idDepa']) && !empty($_SESSION['idDepa'])) {
-        $data_prov = rt_ubigeo_load_provincias_front_session( $_SESSION['idDepa']);
-    } else {
-        $data_prov = array( '0' => 'Seleccionar Provincia');
-    }
-    
-    if (isset($_SESSION['idProv']) && !empty($_SESSION['idProv'])) {
-        $data_dist = rt_ubigeo_load_distritos_front_session( $_SESSION['idProv']);
-    } else {
-        $data_dist = array(  '0' => 'Seleccionar Distrito');
-    }
+    if (is_user_logged_in()) {
+        global $current_user;
+        $customer = new WC_Customer($current_user->id);
+        $idDepa = $customer->get_meta('billing_departamento', true);
+        $idProv = $customer->get_meta('billing_provincia', true);
+        $idDist = $customer->get_meta('billing_distrito', true);
+        $idDepa_shipping = $customer->get_meta('shipping_departamento', true);
+        $idProv_shipping = $customer->get_meta('shipping_provincia', true);
+        $idDist_shipping = $customer->get_meta('shipping_distrito', true);
 
+        if ($idDepa) {
+            $data_prov = rt_ubigeo_load_provincias_front_session($idDepa);
+        } else {
+            $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
+        }
+
+        if ($idProv) {
+            $data_dist = rt_ubigeo_load_distritos_front_session($idProv);
+        } else {
+            $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
+        }
+        
+        if ($idDepa_shipping) {
+            $data_prov_shipping = rt_ubigeo_load_provincias_front_session($idDepa_shipping);
+        } else {
+            $data_prov_shipping = array('' => __('Select Province ', 'ubigeo-peru'));
+        }
+
+        if ($idProv_shipping) {
+            $data_dist_shipping = rt_ubigeo_load_distritos_front_session($idProv_shipping);
+        } else {
+            $data_dist_shipping = array('' => __('Select District ', 'ubigeo-peru'));
+        }
+    } else {
+        $idDepa = $idProv = $idDist = $idDepa_shipping = $idProv_shipping = $idDist_shipping = '';
+        session_start();
+        if (isset($_SESSION['idDepa']) && !empty($_SESSION['idDepa'])) {
+            $data_prov = rt_ubigeo_load_provincias_front_session($_SESSION['idDepa']);
+        } else {
+            $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
+        }
+
+        if (isset($_SESSION['idProv']) && !empty($_SESSION['idProv'])) {
+            $data_dist = rt_ubigeo_load_distritos_front_session($_SESSION['idProv']);
+        } else {
+            $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
+        }
+    }
     $fields['billing']['billing_departamento'] = [
         'type' => 'select',
-        'label' => 'Departamento',
-        'required' => false,
+        'label' => __('Department', 'ubigeo-peru'),
+        'required' => true,
         'class' => array('form-row-wide'),
         'clear' => true,
         'options' => rt_ubigeo_get_departamentos_for_select(),
@@ -119,8 +154,8 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
     $fields['billing']['billing_provincia'] = [
         'type' => 'select',
-        'label' => 'Provincia',
-        'required' => false,
+        'label' => __('Province', 'ubigeo-peru'),
+        'required' => true,
         'class' => array('form-row-wide'),
         'clear' => true,
         'options' => $data_prov,
@@ -129,8 +164,8 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
     $fields['billing']['billing_distrito'] = [
         'type' => 'select',
-        'label' => 'Distrito',
-        'required' => false,
+        'label' => __('District', 'ubigeo-peru'),
+        'required' => true,
         'class' => array('form-row-wide'),
         'clear' => true,
         'options' => $data_dist,
@@ -139,7 +174,7 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
     $fields['shipping']['shipping_departamento'] = [
         'type' => 'select',
-        'label' => 'Departamento',
+        'label' => __('Department', 'ubigeo-peru'),
         'required' => false,
         'class' => array('form-row-wide'),
         'clear' => true,
@@ -147,31 +182,36 @@ function rt_ubigeo_wc_checkout_fields($fields)
         'priority' => 65
     ];
 
- 
+
     $fields['shipping']['shipping_provincia'] = [
         'type' => 'select',
-        'label' => 'Provincia',
+        'label' => __('Province', 'ubigeo-peru'),
         'required' => false,
         'class' => array('form-row-wide'),
         'clear' => true,
-        'options' => [
-            '0' => 'Seleccionar Provincia',
-        ],
+        'options' => $data_prov_shipping,
         'priority' => 66
     ];
 
     $fields['shipping']['shipping_distrito'] = [
         'type' => 'select',
-        'label' => 'Distrito',
+        'label' => __('District', 'ubigeo-peru'),
         'required' => false,
         'class' => array('form-row-wide'),
         'clear' => true,
-        'options' => [
-            '0' => 'Seleccionar Distrito',
-        ],
+        'options' => $data_dist_shipping,
         'priority' => 67
     ];
 
+    return $fields;
+}
+
+add_filter( 'woocommerce_checkout_fields' , 'jsm_override_checkout_fields' );
+
+function jsm_override_checkout_fields( $fields ) {
+
+    $fields['billing']['billing_departamento']['default'] = 15;
+    $fields['billing']['billing_provincia']['default'] = 130;
     return $fields;
 }
 
@@ -186,7 +226,7 @@ add_filter('default_checkout_shipping_departamento', 'rt_ubigeo_change_default_c
 
 function rt_ubigeo_change_default_checkout_shipping_departamento()
 {
-    return '0';
+    return '';
 }
 
 
@@ -228,6 +268,17 @@ function rt_ubigeo_custom_jscript_checkout()
 {
     wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
     wp_enqueue_script('select2-js');
+    $idDepa = $idProv = $idDist = '';
+     if (is_user_logged_in()) {
+        global $current_user;
+        $customer = new WC_Customer($current_user->id);
+        $idDepa = $customer->get_meta('billing_departamento', true);
+        $idProv = $customer->get_meta('billing_provincia', true);
+        $idDist = $customer->get_meta('billing_distrito', true);
+        $idDepa_shipping = $customer->get_meta('shipping_departamento', true);
+        $idProv_shipping = $customer->get_meta('shipping_provincia', true);
+        $idDist_shipping = $customer->get_meta('shipping_distrito', true);
+     }
     ?>
     <?php if(is_theme_pawsitive()) { ?>
     <style>
@@ -236,19 +287,32 @@ function rt_ubigeo_custom_jscript_checkout()
     }
     </style>
     <?php } ?>
+    <style>
+        .woocommerce form .form-row.woocommerce-invalid label {
+            color: #a00;
+        }
+    </style>
     <script>
         jQuery(document).ready(function () {
-           
+            
             jQuery("#billing_departamento").select2();            
             jQuery("#billing_provincia").select2();
             jQuery("#billing_distrito").select2();
             jQuery("#shipping_departamento").select2();
             jQuery("#shipping_provincia").select2();
             jQuery("#shipping_distrito").select2();
-            
-
+            <?php if ($idDepa) { ?>
+                jQuery("#billing_departamento").val('<?php echo $idDepa ?>').trigger('change');
+                jQuery("#billing_provincia").val('<?php echo $idProv ?>').trigger('change');
+                jQuery("#billing_distrito").val('<?php echo $idDist ?>').trigger('change');
+            <?php } ?>
+            <?php if ($idDepa_shipping) { ?>
+                jQuery("#shipping_departamento").val('<?php echo $idDepa_shipping ?>').trigger('change');
+                jQuery("#shipping_provincia").val('<?php echo $idProv_shipping ?>').trigger('change');
+                jQuery("#shipping_distrito").val('<?php echo $idDist_shipping ?>').trigger('change');
+            <?php } ?>
             var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>"
-            
+                        
             function rt_ubigeo_event_departamento(select, selectType) {
 
                 var data = {
@@ -261,28 +325,16 @@ function rt_ubigeo_custom_jscript_checkout()
                     url: ajaxurl,
                     data: data,
                     dataType: 'json',
-                    beforeSend: function (xhr, settings) {
-                        jQuery('form.woocommerce-checkout').addClass('processing').block({
-                            message: null,
-                            overlayCSS: {
-                                background: '#fff',
-                                opacity: 0.6
-                            }
-                        });
-                    },
                     success: function (response) {
                         <?php if(!is_theme_avada()) { ?>
-                        jQuery('#' + selectType + '_provincia').html('<option value="0">Seleccionar Provincia</option>')
-                        jQuery('#' + selectType + '_distrito').html('<option value="0">Seleccionar Distrito</option>')
+                        jQuery('#' + selectType + '_provincia').html('<option value="0"><?php _e('Select Province', 'ubigeo-peru') ?></option>')
+                        jQuery('#' + selectType + '_distrito').html('<option value="0"><?php _e('Select District', 'ubigeo-peru') ?></option>')
                         <?php } ?>
                         if (response) {
                             for (var r in response) {
                                 jQuery('#' + selectType + '_provincia').append('<option value=' + response[r].idProv + '>' + response[r].provincia + '</option>');
                             }
                         }
-                    },
-                    complete: function (xhr, ts) {
-                        jQuery('form.woocommerce-checkout').removeClass('processing').unblock()
                     }
                 })
             }
@@ -298,27 +350,15 @@ function rt_ubigeo_custom_jscript_checkout()
                     url: ajaxurl,
                     data: data,
                     dataType: 'json',
-                    beforeSend: function (xhr, settings) {
-                        jQuery('form.woocommerce-checkout').addClass('processing').block({
-                            message: null,
-                            overlayCSS: {
-                                background: '#fff',
-                                opacity: 0.6
-                            }
-                        });
-                    },
                     success: function (response) {
                         <?php if(!is_theme_avada()) { ?>
-                        jQuery('#' + selectType + '_distrito').html('<option value="0">Seleccionar Distrito</option>')
+                        jQuery('#' + selectType + '_distrito').html('<option value="0"><?php _e('Select District', 'ubigeo-peru') ?></option>')
                         <?php } ?>
                         if (response) {
                             for (var r in response) {
                                 jQuery('#' + selectType + '_distrito').append('<option value=' + response[r].idDist + '>' + response[r].distrito + '</option>')
                             }
                         }
-                    },
-                    complete: function (xhr, ts) {
-                        jQuery('form.woocommerce-checkout').removeClass('processing').unblock()
                     }
                 });
             }
@@ -345,6 +385,7 @@ function rt_ubigeo_custom_jscript_checkout()
                 jQuery('#billing_provincia').val('').trigger('change');
                 jQuery('#billing_distrito').val('').trigger('change');
             });
+            
             
         });
        
@@ -373,6 +414,7 @@ add_action('woocommerce_after_checkout_validation', 'rt_ubigeo_custom_wc_checkou
 function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
 {
     if ('PE' === $fields['billing_country']) {
+        
         if ('' === $fields['billing_departamento']) {
             $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Departamento') . '</strong>'), 'Billing Departamento'));
         }
@@ -478,9 +520,9 @@ function rt_show_custom_fields_thankyou($order)
     if ($ubigeo) {
         echo '<div class="woocommerce-column woocommerce-column--1 woocommerce-column--billing-address col-1">';
         echo '<h2 class="woocommerce-column__title">'._e('Billing Ubigeo Peru', 'ubigeo-peru').'</h2>';
-        echo '<p><strong>' . _e('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
-        echo '<p><strong>' . _e('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
-        echo '<p><strong>' . _e('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo['distrito'] . '</p>';
         echo '</div>';
     }
 
@@ -488,9 +530,9 @@ function rt_show_custom_fields_thankyou($order)
     if ($ubigeo_shipping['departamento']) {
         echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-1">';
         echo '<h2 class="woocommerce-column__title">'._e('Shipping Ubigeo Peru', 'ubigeo-peru').'</h2>';
-        echo '<p><strong>' . _e('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
-        echo '<p><strong>' . _e('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
-        echo '<p><strong>' . _e('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
         echo '</div>';
     }
     echo '</section>';
@@ -503,9 +545,9 @@ function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
 {
     $ubigeo = get_name_ubigeo_billing($order,'object');
     echo '<h2 class="woocommerce-order-details__title">'._e('Ubigeo Peru', 'ubigeo-peru').'</h2>';
-    echo '<p><strong>' . _e('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
-    echo '<p><strong>' . _e('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
-    echo '<p><strong>' . _e('District', 'ubigeo-peru') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
+    echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+    echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+    echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
 }
 add_action( 'woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10 , 3 );
 
@@ -516,7 +558,7 @@ function clear_checkout_fields( $value, $input ){
         if (isset($_SESSION['idDepa']) && !empty($_SESSION['idDepa'])) {
             $value = $_SESSION['idDepa'];
         } else {
-            $value = '0';
+            $value = '';
         }
     }
     
@@ -524,7 +566,7 @@ function clear_checkout_fields( $value, $input ){
         if (isset($_SESSION['idProv']) && !empty($_SESSION['idProv'])) {
             $value = $_SESSION['idProv'];
         } else {
-            $value = '0';
+            $value = '';
         }
     }
     
@@ -532,7 +574,7 @@ function clear_checkout_fields( $value, $input ){
         if (isset($_SESSION['idDist']) && !empty($_SESSION['idDist'])) {
             $value = $_SESSION['idDist'];
         } else {
-            $value = '0';
+            $value = '';
         }
     }
 
