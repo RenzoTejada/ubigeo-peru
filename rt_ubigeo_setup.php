@@ -36,15 +36,6 @@ function rt_ubigeo_errornowoocommerce()
     <?php
 }
 
-add_action( 'plugin_loaded', 'update_data_ubigeo_distrito_anchash' );
-
-function update_data_ubigeo_distrito_anchash()
-{
-    // actualizar distritos de la provincia huayla y marizcal luzuriaga
-    update_distrito_ancash_huayla();
-    update_distrito_ancash_marizcal();
-}
-
 //crear tablas
 function rt_ubigeo_setup()
 {
@@ -66,6 +57,9 @@ function rt_ubigeo_setup()
     insert_distrito_salamanca();
     //insert distrito Veintiséis de Octubre
     insert_distrito_26_octubre();
+    // actualizar distritos de la provincia huayla y marizcal luzuriaga
+    update_distrito_ancash_huayla();
+    update_distrito_ancash_marizcal();
 }
 
 function update_distrito_ancash_huayla()
@@ -73,7 +67,7 @@ function update_distrito_ancash_huayla()
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $update = "update $table_name set idProv=19 where idDist in (170,171,172,173,174,175,176,177,178,179);";
+    $update = "UPDATE $table_name SET idProv=19 where idDist in (170,171,172,173,174,175,176,177,178,179);";
     dbDelta($update);
     return true;
 }
@@ -83,7 +77,7 @@ function update_distrito_ancash_marizcal()
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $update = "update $table_name set idProv=20 where idDist in (180,181,182,183,184,185,186,187);";
+    $update = "UPDATE $table_name SET idProv=20 where idDist in (180,181,182,183,184,185,186,187);";
     dbDelta($update);
     return true;
 }
