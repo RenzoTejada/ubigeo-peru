@@ -263,3 +263,80 @@ function rt_ubigeo_load_distritos_address()
     echo json_encode($distritos);
     wp_die();
 }
+
+function rt_libro_get_departamento_front()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_departamento";
+    $request = "SELECT * FROM $table_name";
+    return $wpdb->get_results($request, ARRAY_A);
+}
+
+function rt_libro_get_provincia_by_idDepa($idDepa = 0)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_provincia";
+    $request = "SELECT * FROM $table_name where idDepa = $idDepa";
+    return $wpdb->get_results($request, ARRAY_A);
+}
+
+function rt_libro_get_distrito_by_idProv($idProv = 0)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $request = "SELECT * FROM $table_name where idProv = $idProv";
+    return $wpdb->get_results($request, ARRAY_A);
+}
+
+function rt_libro_load_distrito_front() {
+    $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
+
+    $response = [];
+    if (is_numeric($idProv)) {
+        $distritos = rt_libro_get_distrito_by_idProv($idProv);
+
+        foreach ($distritos as $distrito) {
+            $response[$distrito['idDist']] = $distrito['distrito'];
+        }
+    }
+    echo json_encode($response);
+    wp_die();
+}
+
+function libro_get_departamento_por_id_one($idDep) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_departamento";
+    $request = "SELECT departamento FROM " . $table_name . " where idDepa=" . $idDep;
+    $rpt = $wpdb->get_row($request, ARRAY_A);
+    return $rpt['departamento'];
+}
+
+function libro_get_provincia_por_id_one($prov) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_provincia";
+    $request = "SELECT provincia FROM " . $table_name . " where idProv=" . $prov;
+    $rpt = $wpdb->get_row($request, ARRAY_A);
+    return $rpt['provincia'];
+}
+
+function libro_get_distrito_por_id_one($dist) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $request = "SELECT distrito FROM " . $table_name . " where idDist=" . $dist;
+    $rpt = $wpdb->get_row($request, ARRAY_A);
+    return $rpt['distrito'];
+}
+
+function rt_libro_load_provincias_front() {
+    $idDepa = isset($_POST['idDep']) ? $_POST['idDep'] : null;
+
+    $response = [];
+    if (is_numeric($idDepa)) {
+        $provincias = rt_libro_get_provincia_by_idDepa($idDepa);
+        foreach ($provincias as $provincia) {
+            $response[$provincia['idProv']] = $provincia['provincia'];
+        }
+    }
+    echo json_encode($response);
+    wp_die();
+}

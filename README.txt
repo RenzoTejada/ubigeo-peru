@@ -1,4 +1,4 @@
-=== Ubigeo de Perú para Woocommerce ===
+=== Ubigeo de Perú para WordPress y Woocommerce ===
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
@@ -80,6 +80,9 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 0.3.8 =
+Plugin es compatible para WordPress para los funciones de libro de reclamaciones y quejas.
 
 = 0.3.7 =
 Fix de distrios de anchash (actualizando distritos de la provincia huayla y marizcal luzuriaga).

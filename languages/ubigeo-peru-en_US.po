@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Ubigeo de Per&uacute; para WooCommerce\n"
+"Project-Id-Version: Ubigeo de Perú para WordPress y WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 17:06+0000\n"
-"PO-Revision-Date: 2020-11-08 17:06+0000\n"
-"Last-Translator: alexis tejada\n"
+"POT-Creation-Date: 2020-11-25 00:38+0000\n"
+"PO-Revision-Date: 2020-11-25 00:38+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -12,7 +12,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.4; wp-5.5.3"
+"X-Loco-Version: 2.4.6; wp-5.5.3"
+
+#: rt_ubigeo_address.php:10 rt_ubigeo_address.php:67 rt_ubigeo_checkout.php:330
+msgid "Select Province"
+msgstr ""
+
+#: rt_ubigeo_address.php:11 rt_ubigeo_address.php:68 rt_ubigeo_checkout.php:331
+#: rt_ubigeo_checkout.php:355
+msgid "Select District"
+msgstr ""
+
+#: rt_ubigeo_address.php:29 rt_ubigeo_address.php:87 rt_ubigeo_checkout.php:147
+#: rt_ubigeo_checkout.php:177 rt_ubigeo_checkout.php:532
+#: rt_ubigeo_checkout.php:542 rt_ubigeo_checkout.php:557
+msgid "Department"
+msgstr ""
+
+#: rt_ubigeo_address.php:38 rt_ubigeo_address.php:96 rt_ubigeo_checkout.php:157
+#: rt_ubigeo_checkout.php:188 rt_ubigeo_checkout.php:533
+#: rt_ubigeo_checkout.php:543 rt_ubigeo_checkout.php:558
+msgid "Province"
+msgstr ""
+
+#: rt_ubigeo_address.php:47 rt_ubigeo_address.php:105
+#: rt_ubigeo_checkout.php:167 rt_ubigeo_checkout.php:198
+#: rt_ubigeo_checkout.php:534 rt_ubigeo_checkout.php:544
+#: rt_ubigeo_checkout.php:559
+msgid "District"
+msgstr ""
 
 #: rt_ubigeo_admin.php:25
 msgid ""
@@ -152,31 +180,30 @@ msgstr ""
 msgid "RT - Contact"
 msgstr ""
 
-#: rt_ubigeo_checkout.php:449 rt_ubigeo_checkout.php:480
+#: rt_ubigeo_checkout.php:110 rt_ubigeo_checkout.php:122
+#: rt_ubigeo_checkout.php:136 rt_ubigeo_lib.php:224
+msgid "Select Province "
+msgstr ""
+
+#: rt_ubigeo_checkout.php:116 rt_ubigeo_checkout.php:128
+#: rt_ubigeo_checkout.php:142 rt_ubigeo_lib.php:237
+msgid "Select District "
+msgstr ""
+
+#: rt_ubigeo_checkout.php:500 rt_ubigeo_checkout.php:531
 msgid "Billing Ubigeo Peru"
 msgstr ""
 
-#: rt_ubigeo_checkout.php:464 rt_ubigeo_checkout.php:490
+#: rt_ubigeo_checkout.php:515 rt_ubigeo_checkout.php:541
 msgid "Shipping Ubigeo Peru"
 msgstr ""
 
-#: rt_ubigeo_checkout.php:481 rt_ubigeo_checkout.php:491
-#: rt_ubigeo_checkout.php:506
-msgid "Department"
-msgstr ""
-
-#: rt_ubigeo_checkout.php:482 rt_ubigeo_checkout.php:492
-#: rt_ubigeo_checkout.php:507
-msgid "Province"
-msgstr ""
-
-#: rt_ubigeo_checkout.php:483 rt_ubigeo_checkout.php:493
-#: rt_ubigeo_checkout.php:508
-msgid "District"
-msgstr ""
-
-#: rt_ubigeo_checkout.php:505
+#: rt_ubigeo_checkout.php:556
 msgid "Ubigeo Peru"
+msgstr ""
+
+#: rt_ubigeo_lib.php:6 rt_ubigeo_lib.php:24
+msgid "Select Department "
 msgstr ""
 
 #: rt_ubigeo_setup.php:7
@@ -206,14 +233,18 @@ msgid ""
 "installed to operate correctly."
 msgstr ""
 
+#: ubigeo-peru.php:38
+msgid "Settings"
+msgstr ""
+
 #. Name of the plugin
-msgid "Ubigeo de Perú para WooCommerce"
+msgid "Ubigeo de Perú para WordPress y WooCommerce"
 msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Peru's Ubigeo for WooCommerce - Plugin contains the departments - provinces "
-"and districts of Peru"
+"Peru's Ubigeo for WordPress and WooCommerce - Plugin contains the "
+"departments - provinces and districts of Peru"
 msgstr ""
 
 #. URI of the plugin
