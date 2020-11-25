@@ -2,7 +2,7 @@
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 5.4.2
+Tested up to: 5.5.1
 Stable tag: trunk
 Requires PHP: 7.1
 License: GPLv2 or later
@@ -77,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.2.4=
+Mostrando ubigeo billing y shipping en el orden de pedido y en page thanks you.
+
 = 0.2.3=
 Fix de query de ubigeo front provincia
 
