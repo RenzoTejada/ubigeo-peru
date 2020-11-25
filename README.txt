@@ -81,6 +81,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 0.3.9 =
+Plugin formart code cs fix php - formateando codigo y actualizando imagen banner
+
 = 0.3.8 =
 Plugin es compatible para WordPress para los funciones de libro de reclamaciones y quejas.
 
