@@ -77,6 +77,12 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.2.6=
+Agregando distrito de salamanca.
+
+= 0.2.5=
+Fix con el tema avada (doble ajax).
+
 = 0.2.4=
 Mostrando ubigeo billing y shipping en el orden de pedido y en page thanks you.
 

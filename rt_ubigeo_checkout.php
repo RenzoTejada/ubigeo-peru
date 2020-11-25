@@ -197,7 +197,8 @@ add_action('woocommerce_after_checkout_form', 'rt_ubigeo_custom_jscript_checkout
 
 function rt_ubigeo_custom_jscript_checkout()
 {
-    wp_enqueue_script( 'select2-js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js', array(), '0.0.1', true );
+    wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
+    wp_enqueue_script('select2-js');
     ?>
     <script>
         jQuery(document).ready(function () {
@@ -212,6 +213,7 @@ function rt_ubigeo_custom_jscript_checkout()
             var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>"
 
             function rt_ubigeo_event_departamento(select, selectType) {
+
                 var data = {
                     'action': 'rt_ubigeo_load_provincias_front',
                     'idDepa': jQuery(select).val()
@@ -232,12 +234,9 @@ function rt_ubigeo_custom_jscript_checkout()
                         });
                     },
                     success: function (response) {
-                        jQuery('#' + selectType + '_provincia').html('<option value="">Seleccionar Provincia</option>')
-                        jQuery('#' + selectType + '_distrito').html('<option value="">Seleccionar Distrito</option>')
-
                         if (response) {
                             for (var r in response) {
-                                jQuery('#' + selectType + '_provincia').append('<option value=' + r + '>' + response[r] + '</option>')
+                                jQuery('#' + selectType + '_provincia').append('<option value=' + r + '>' + response[r] + '</option>');
                             }
                         }
                     },
@@ -268,8 +267,6 @@ function rt_ubigeo_custom_jscript_checkout()
                         });
                     },
                     success: function (response) {
-                        jQuery('#' + selectType + '_distrito').html('<option value="">Seleccionar Distrito</option>')
-
                         if (response) {
                             for (var r in response) {
                                 jQuery('#' + selectType + '_distrito').append('<option value=' + r + '>' + response[r] + '</option>')
@@ -305,7 +302,8 @@ function rt_ubigeo_custom_jscript_checkout()
                 jQuery('#billing_provincia').val('').trigger('change');
                 jQuery('#billing_distrito').val('').trigger('change');
             });
-        })
+        });
+       
     </script>
     <?php
 }
@@ -465,3 +463,4 @@ function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
 //    }
 }
 add_action( 'woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10 , 3 );
+

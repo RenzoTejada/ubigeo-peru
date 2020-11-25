@@ -53,6 +53,24 @@ function rt_ubigeo_setup()
     updateNameDistritoPuebloLibre();
     //insert distrito bagua
     insert_distrito_bagua();
+    //insert distrito salamanca
+    insert_distrito_salamanca();
+}
+
+function insert_distrito_salamanca()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $idDist = 1833;
+    $select_salamcanca = "SELECT idDist FROM " . $table_name . " where idDist =  $idDist";
+    $result_salamanca = $wpdb->query($select_salamcanca);
+   
+    if(!$result_salamanca){
+       $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'SALAMANCA', 127);";
+       dbDelta($sql_insert);
+    }
+    return true;
 }
 
 function insert_distrito_bagua()
