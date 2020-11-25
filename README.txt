@@ -1,8 +1,8 @@
 === Ubigeo de Perú para Woocommerce ===
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
-Requires at least: 5.5
-Tested up to: 5.5
+Requires at least: 5.2
+Tested up to: 5.4.2
 Stable tag: trunk
 Requires PHP: 7.1
 License: GPLv2 or later

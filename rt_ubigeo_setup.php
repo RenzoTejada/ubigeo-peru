@@ -51,6 +51,24 @@ function rt_ubigeo_setup()
     crearDistrito();
     //update distrito
     updateNameDistritoPuebloLibre();
+    //insert distrito bagua
+    insert_distrito_bagua();
+}
+
+function insert_distrito_bagua()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $idDist = 1832;
+    $select_bagua = "SELECT idDist FROM " . $table_name . " where idDist =  $idDist";
+    $result_bagua = $wpdb->query($select_bagua);
+   
+    if(!$result_bagua){
+       $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'BAGUA', 2);";
+       dbDelta($sql_insert);
+    }
+    return true;
 }
 
 // update a nombre de distrito pueblo libre

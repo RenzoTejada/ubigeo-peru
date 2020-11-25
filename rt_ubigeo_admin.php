@@ -68,10 +68,10 @@ function rt_ubigeo_submenu_settings_callback()
             if (rt_costo_ubigeo_plugin_enabled()) {
                 ?>
                 <?php
-                if ($_REQUEST['section'] == "ubigeo") {
-                    if ($_REQUEST['list_cost'] == "new") {
+                if (isset($_REQUEST['section']) == "ubigeo") {
+                    if (isset($_REQUEST['list_cost']) == "new") {
                         rt_ubigeo_submenu_settings_cost_new();
-                    } elseif ($_REQUEST['edit']) {
+                    } elseif (isset($_REQUEST['edit'])) {
                         rt_ubigeo_submenu_settings_cost_edit($_REQUEST['edit']);
                     } else {
                         rt_ubigeo_submenu_settings_cost_ubigeo();
@@ -122,12 +122,25 @@ function rt_ubigeo_register_settings()
 
     //para cada mp obtenemos su configuraci&oacute;n
     if (class_exists('woocommerce')) {
-        $mp_arr = WC()->payment_gateways->get_available_payment_gateways();
+//        $mp_arr = WC()->payment_gateways->get_available_payment_gateways();
+        if(!mercado_pago_plugin_enabled()){
+            $mp_arr = WC()->payment_gateways->get_available_payment_gateways();
+        } else {
+            $mp_arr = array();
+        }
     } else {
         add_action('admin_notices', 'rt_ubigeo_errornowoocommerce');
 
         $mp_arr = array();
     }
+}
+
+function mercado_pago_plugin_enabled()
+{
+    if (in_array('woocommerce-mercadopago/woocommerce-mercadopago.php', (array) get_option('active_plugins', array()))) {
+        return true;
+    }
+    return false;
 }
 
 function rt_ubigeo_submenu_settings_docs()
