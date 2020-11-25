@@ -16,8 +16,7 @@ function rt_ubigeo_submenu_settings_callback()
 {
     if (isset($_REQUEST["settings-updated"]) && sanitize_text_field($_REQUEST["settings-updated"] == true)) {
         echo "<script>alert('Se han guardado la nuevas opciones.');</script>";
-    }
-?>
+    } ?>
     
     <div class="wrap woocommerce" id="facto-conf">
         <div style="background-color:#87b43e;">
@@ -112,7 +111,7 @@ function rt_ubigeo_register_settings()
 
     //para cada mp obtenemos su configuraci&oacute;n
     if (class_exists('woocommerce')) {
-        if(!mercado_pago_plugin_enabled()){
+        if (!mercado_pago_plugin_enabled()) {
             $mp_arr = WC()->payment_gateways->get_available_payment_gateways();
         } else {
             $mp_arr = array();

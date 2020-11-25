@@ -1,9 +1,9 @@
 <?php
 add_filter('woocommerce_billing_fields', 'rt_ubigeo_address_billing_fields');
 
-function rt_ubigeo_address_billing_fields($fields) {
-
-    if (is_wc_endpoint_url( 'edit-address' )) {
+function rt_ubigeo_address_billing_fields($fields)
+{
+    if (is_wc_endpoint_url('edit-address')) {
         ?>
         <script>
             var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
@@ -59,8 +59,9 @@ function rt_ubigeo_address_billing_fields($fields) {
 
 add_filter('woocommerce_shipping_fields', 'rt_ubigeo_address_shipping_fields');
 
-function rt_ubigeo_address_shipping_fields($fields) {
-    if (is_wc_endpoint_url( 'edit-address' )) {
+function rt_ubigeo_address_shipping_fields($fields)
+{
+    if (is_wc_endpoint_url('edit-address')) {
         ?>
         <script>
             var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";

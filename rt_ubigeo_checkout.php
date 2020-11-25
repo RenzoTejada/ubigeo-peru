@@ -85,7 +85,7 @@ function rt_ubigeo_get_country_locale($locale)
 
 add_filter('woocommerce_checkout_fields', 'rt_ubigeo_wc_checkout_fields', 99);
 
-function rt_ubigeo_wc_checkout_fields($fields) 
+function rt_ubigeo_wc_checkout_fields($fields)
 {
     $fields['billing']['billing_phone']['priority'] = 34;
     $fields['billing']['billing_email']['priority'] = 36;
@@ -206,10 +206,10 @@ function rt_ubigeo_wc_checkout_fields($fields)
     return $fields;
 }
 
-add_filter( 'woocommerce_checkout_fields' , 'jsm_override_checkout_fields' );
+add_filter('woocommerce_checkout_fields', 'jsm_override_checkout_fields');
 
-function jsm_override_checkout_fields( $fields ) {
-
+function jsm_override_checkout_fields($fields)
+{
     $fields['billing']['billing_departamento']['default'] = 15;
     $fields['billing']['billing_provincia']['default'] = 130;
     return $fields;
@@ -246,7 +246,7 @@ function is_theme_avada()
     $rpt = false;
     $theme = wp_get_theme();
     if ('Avada' == $theme->name || 'Avada' == $theme->parent_theme) {
-       $rpt = true;
+        $rpt = true;
     }
     return $rpt;
 }
@@ -257,7 +257,7 @@ function is_theme_pawsitive()
     $rpt = false;
     $theme = wp_get_theme();
     if ('Pawsitive' == $theme->name || 'Pawsitive' == $theme->parent_theme) {
-       $rpt = true;
+        $rpt = true;
     }
     return $rpt;
 }
@@ -269,7 +269,7 @@ function rt_ubigeo_custom_jscript_checkout()
     wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
     wp_enqueue_script('select2-js');
     $idDepa = $idProv = $idDist = '';
-     if (is_user_logged_in()) {
+    if (is_user_logged_in()) {
         global $current_user;
         $customer = new WC_Customer($current_user->id);
         $idDepa = $customer->get_meta('billing_departamento', true);
@@ -278,9 +278,8 @@ function rt_ubigeo_custom_jscript_checkout()
         $idDepa_shipping = $customer->get_meta('shipping_departamento', true);
         $idProv_shipping = $customer->get_meta('shipping_provincia', true);
         $idDist_shipping = $customer->get_meta('shipping_distrito', true);
-     }
-    ?>
-    <?php if(is_theme_pawsitive()) { ?>
+    } ?>
+    <?php if (is_theme_pawsitive()) { ?>
     <style>
     .select2-container {
         display : none;
@@ -326,7 +325,7 @@ function rt_ubigeo_custom_jscript_checkout()
                     data: data,
                     dataType: 'json',
                     success: function (response) {
-                        <?php if(!is_theme_avada()) { ?>
+                        <?php if (!is_theme_avada()) { ?>
                         jQuery('#' + selectType + '_provincia').html('<option value="0"><?php _e('Select Province', 'ubigeo-peru') ?></option>')
                         jQuery('#' + selectType + '_distrito').html('<option value="0"><?php _e('Select District', 'ubigeo-peru') ?></option>')
                         <?php } ?>
@@ -351,7 +350,7 @@ function rt_ubigeo_custom_jscript_checkout()
                     data: data,
                     dataType: 'json',
                     success: function (response) {
-                        <?php if(!is_theme_avada()) { ?>
+                        <?php if (!is_theme_avada()) { ?>
                         jQuery('#' + selectType + '_distrito').html('<option value="0"><?php _e('Select District', 'ubigeo-peru') ?></option>')
                         <?php } ?>
                         if (response) {
@@ -400,7 +399,6 @@ function rt_ubigeo_checkout_update_refresh_shipping_methods($post_data)
     parse_str($post_data, $data);
 
     if ($data['ship_to_different_address']) {
-        
         if ($data['shipping_distrito']) {
             session_start();
             $_SESSION["idDist"] = $data['shipping_distrito'];
@@ -423,7 +421,6 @@ add_action('woocommerce_after_checkout_validation', 'rt_ubigeo_custom_wc_checkou
 function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
 {
     if ('PE' === $fields['billing_country']) {
-        
         if ('' === $fields['billing_departamento']) {
             $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Departamento') . '</strong>'), 'Billing Departamento'));
         }
@@ -450,9 +447,10 @@ function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
     }
 }
 
-add_action( 'woocommerce_checkout_process', 'rt_remove_wc_validation', 1 );
-function rt_remove_wc_validation () {
-	remove_action( 'woocommerce_checkout_process', 'some_custom_checkout_field_process' );
+add_action('woocommerce_checkout_process', 'rt_remove_wc_validation', 1);
+function rt_remove_wc_validation()
+{
+    remove_action('woocommerce_checkout_process', 'some_custom_checkout_field_process');
 }
 
 function get_name_ubigeo_billing($order, $type = 'object')
@@ -504,7 +502,7 @@ function rt_show_custom_fields_order_billing($order)
         echo '</div>';
     }
 }
-add_action( 'woocommerce_admin_order_data_after_billing_address', 'rt_show_custom_fields_order_billing', 1 );
+add_action('woocommerce_admin_order_data_after_billing_address', 'rt_show_custom_fields_order_billing', 1);
 
 function rt_show_custom_fields_order_shipping($order)
 {
@@ -519,13 +517,13 @@ function rt_show_custom_fields_order_shipping($order)
         echo '</div>';
     }
 }
-add_action( 'woocommerce_admin_order_data_after_shipping_address', 'rt_show_custom_fields_order_shipping', 1 );
+add_action('woocommerce_admin_order_data_after_shipping_address', 'rt_show_custom_fields_order_shipping', 1);
 
-function rt_show_custom_fields_thankyou($order) 
+function rt_show_custom_fields_thankyou($order)
 {
     echo '<section class="woocommerce-customer-details">';
     echo '<section class="woocommerce-columns woocommerce-columns--2 woocommerce-columns--addresses col2-set addresses">';
-    $ubigeo = get_name_ubigeo_billing($order,'value');
+    $ubigeo = get_name_ubigeo_billing($order, 'value');
     if ($ubigeo) {
         echo '<div class="woocommerce-column woocommerce-column--1 woocommerce-column--billing-address col-1">';
         echo '<h2 class="woocommerce-column__title">'._e('Billing Ubigeo Peru', 'ubigeo-peru').'</h2>';
@@ -547,21 +545,22 @@ function rt_show_custom_fields_thankyou($order)
     echo '</section>';
     echo '</section>';
 }
-add_action( 'woocommerce_thankyou', 'rt_show_custom_fields_thankyou', 20 );
-add_action( 'woocommerce_view_order', 'rt_show_custom_fields_thankyou', 20 );
+add_action('woocommerce_thankyou', 'rt_show_custom_fields_thankyou', 20);
+add_action('woocommerce_view_order', 'rt_show_custom_fields_thankyou', 20);
 
-function rt_show_custom_fields_emails($orden, $sent_to_admin, $order) 
+function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
 {
-    $ubigeo = get_name_ubigeo_billing($order,'object');
+    $ubigeo = get_name_ubigeo_billing($order, 'object');
     echo '<h2 class="woocommerce-order-details__title">'._e('Ubigeo Peru', 'ubigeo-peru').'</h2>';
     echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
     echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
     echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
 }
-add_action( 'woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10 , 3 );
+add_action('woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10, 3);
 
 
-function clear_checkout_fields( $value, $input ){
+function clear_checkout_fields($value, $input)
+{
     session_start();
     if ($input == 'billing_departamento') {
         if (isset($_SESSION['idDepa']) && !empty($_SESSION['idDepa'])) {
@@ -589,4 +588,4 @@ function clear_checkout_fields( $value, $input ){
 
     return $value;
 }
-add_filter( 'woocommerce_checkout_get_value' , 'clear_checkout_fields' , 1, 2 );
+add_filter('woocommerce_checkout_get_value', 'clear_checkout_fields', 1, 2);

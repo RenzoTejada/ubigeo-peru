@@ -2,7 +2,7 @@
 
 function rt_ubigeo_get_departamentos_for_select()
 {
-   $dptos = [
+    $dptos = [
         '' => __('Select Department ', 'ubigeo-peru')
     ];
 
@@ -198,7 +198,7 @@ function rt_ubigeo_load_provincias_front_session($idDepa)
             }
         }
     }
-   return $response;
+    return $response;
 }
 
 function rt_ubigeo_load_distritos_front_session($idProv)
@@ -214,7 +214,7 @@ function rt_ubigeo_load_distritos_front_session($idProv)
             $response[$distrito['idDist']] = $distrito['distrito'];
         }
     }
-     return $response;
+    return $response;
 }
 
 function rt_ubigeo_get_provincia_address_by_idDepa($idDepa)
@@ -288,7 +288,8 @@ function rt_libro_get_distrito_by_idProv($idProv = 0)
     return $wpdb->get_results($request, ARRAY_A);
 }
 
-function rt_libro_load_distrito_front() {
+function rt_libro_load_distrito_front()
+{
     $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
 
     $response = [];
@@ -303,7 +304,8 @@ function rt_libro_load_distrito_front() {
     wp_die();
 }
 
-function libro_get_departamento_por_id_one($idDep) {
+function libro_get_departamento_por_id_one($idDep)
+{
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
     $request = "SELECT departamento FROM " . $table_name . " where idDepa=" . $idDep;
@@ -311,7 +313,8 @@ function libro_get_departamento_por_id_one($idDep) {
     return $rpt['departamento'];
 }
 
-function libro_get_provincia_por_id_one($prov) {
+function libro_get_provincia_por_id_one($prov)
+{
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
     $request = "SELECT provincia FROM " . $table_name . " where idProv=" . $prov;
@@ -319,7 +322,8 @@ function libro_get_provincia_por_id_one($prov) {
     return $rpt['provincia'];
 }
 
-function libro_get_distrito_por_id_one($dist) {
+function libro_get_distrito_por_id_one($dist)
+{
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
     $request = "SELECT distrito FROM " . $table_name . " where idDist=" . $dist;
@@ -327,7 +331,8 @@ function libro_get_distrito_por_id_one($dist) {
     return $rpt['distrito'];
 }
 
-function rt_libro_load_provincias_front() {
+function rt_libro_load_provincias_front()
+{
     $idDepa = isset($_POST['idDep']) ? $_POST['idDep'] : null;
 
     $response = [];

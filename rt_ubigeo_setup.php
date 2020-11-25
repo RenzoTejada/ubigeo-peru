@@ -91,9 +91,9 @@ function insert_distrito_26_octubre()
     $select_26octubre = "SELECT idDist FROM " . $table_name . " where idDist =  $idDist";
     $result_26octubre = $wpdb->query($select_26octubre);
    
-    if(!$result_26octubre){
-       $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'VEINTISEIS DE OCTUBRE', 152);";
-       dbDelta($sql_insert);
+    if (!$result_26octubre) {
+        $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'VEINTISEIS DE OCTUBRE', 152);";
+        dbDelta($sql_insert);
     }
     return true;
 }
@@ -107,9 +107,9 @@ function insert_distrito_salamanca()
     $select_salamcanca = "SELECT idDist FROM " . $table_name . " where idDist =  $idDist";
     $result_salamanca = $wpdb->query($select_salamcanca);
    
-    if(!$result_salamanca){
-       $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'SALAMANCA', 127);";
-       dbDelta($sql_insert);
+    if (!$result_salamanca) {
+        $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'SALAMANCA', 127);";
+        dbDelta($sql_insert);
     }
     return true;
 }
@@ -123,9 +123,9 @@ function insert_distrito_bagua()
     $select_bagua = "SELECT idDist FROM " . $table_name . " where idDist =  $idDist";
     $result_bagua = $wpdb->query($select_bagua);
    
-    if(!$result_bagua){
-       $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'BAGUA', 2);";
-       dbDelta($sql_insert);
+    if (!$result_bagua) {
+        $sql_insert = "INSERT INTO $table_name (`idDist`, `distrito`, `idProv`) VALUES ($idDist, 'BAGUA', 2);";
+        dbDelta($sql_insert);
     }
     return true;
 }
