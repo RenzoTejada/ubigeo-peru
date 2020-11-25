@@ -79,7 +79,7 @@ function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
     } else {
         $request = "SELECT prov.idProv, prov.provincia FROM $table_name  as prov  
         inner join $table_ubigeo_costo as cos on cos.idProv = prov.idProv
-        where prov.idDepa=$idDepa group by prov.idDepa";
+        where prov.idDepa=$idDepa group by prov.idProv";
         $result = $wpdb->get_results($request, ARRAY_A);
     }
     return $result;

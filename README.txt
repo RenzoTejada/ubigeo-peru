@@ -77,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.2.3=
+Fix de query de ubigeo front provincia
+
 = 0.2.2 =
 Agregando info de ubigeo en la orden del pedido, correo y page de thanks you de woocoomerce
 
