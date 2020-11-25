@@ -92,8 +92,6 @@ function rt_ubigeo_wc_checkout_fields($fields)
     $fields['billing']['billing_address_1']['priority'] = 74;
     $fields['billing']['billing_address_2']['priority'] = 76;
 
-    $fields['shipping']['shipping_phone']['priority'] = 34;
-    $fields['shipping']['shipping_email']['priority'] = 36;
     $fields['shipping']['shipping_address_1']['priority'] = 74;
     $fields['shipping']['shipping_address_2']['priority'] = 76;
 
@@ -182,16 +180,16 @@ function rt_ubigeo_change_default_checkout_shipping_departamento()
     return '0';
 }
 
-add_filter('woocommerce_default_address_fields', 'rt_ubigeo_custom_wc_default_address_fields');
 
 function rt_ubigeo_custom_wc_default_address_fields($address_fields)
 {
-    $address_fields['phone']['priority'] = 34;
-    $address_fields['email']['priority'] = 36;
-    $address_fields['address_1']['priority'] = 74;
-    $address_fields['address_2']['priority'] = 76;
+    $address_fields['address_1']['priority'] = 70;
+    $address_fields['address_2']['priority'] = 80;
+
     return $address_fields;
 }
+add_filter('woocommerce_default_address_fields', 'rt_ubigeo_custom_wc_default_address_fields');
+
 
 
 function is_theme_avada()
