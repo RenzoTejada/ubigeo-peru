@@ -1,39 +1,34 @@
 === Ubigeo de Perú para Woocommerce ===
 Contributors: renzotejada
-Plugin Name: Ubigeo de Per&uacute; para Woocommerce
-Plugin URI: https://renzotejada.com/ubigeo-de-peru-para-woocommerce/
-Author URI: https://renzotejada.com/
-Author: Renzo Tejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
-Requires at least: 5.3.2
+Requires at least: 5.5
 Tested up to: 5.5
 Stable tag: trunk
-Version: 3.0.0
+Requires PHP: 7.1
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
-Agrega en la pagina del checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito
+Agrega en el checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito
 
-Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra pagina web https://renzotejada.com/
-
+Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra web https://renzotejada.com
 
 == Description ==
 
-> Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
-Agrega en la pagina del checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito
+Este plugin agrega a la base de datos las tablas _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito con respecto a Perú.
+Agrega en la pagina del checkout de Woocommerce el ubigeo de Perú - _departamento - _provincia - _distrito.
 
-Esta misma información lo encontrarás en el readme.txt del plugin y en nuestra pagina web https://renzotejada.com/
-
-> Además tenemos un plugin premium donde se agrega la funcionalidad de costo de envío de ubigeo de Perú para woocommerce.
+Además tenemos un plugin premium donde se agrega la funcionalidad de costo de envío de ubigeo de Perú para woocommerce.
 Donde:
-- Permite agregar costo por departamentos y distritos.
-- Permite mostrar solo el ubigeo que guste.
-- Permite activar o desactivar la funcionalidad del metodo de costo de envío.
 
-Más información del plugin en [Costo de Envó de Ubigeo de Perú para Woocommerce] (https://renzotejada.com/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/)
+* Habilitar costo por Departamento.
+* Habilitar costo por Distrito.
+* Habilitar y Deshabilitar la funcionalidad de costo de envío sin desactivar el plugin.
+* Agregar nombre del costo de envío.
 
 
+
+Más información del plugin en [Costo de Envío de Ubigeo de Perú para Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Costo de Envío de Ubigeo de Perú para Woocommerce")
 
 == Installation ==
 
@@ -55,19 +50,34 @@ Instalación manual de FTP
 3. Copie el directorio ubigeo dentro de la siguiente direccion  wp-content/plugins/
 4. Activar el plugin desde el panel de administración de WordPress.
 
+
+== Installation ==
+
+This section describes how to install the plugin and get it working.
+
+e.g.
+
+1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
+1. Activate the plugin through the 'Plugins' screen in WordPress
+1. Use the Settings->Plugin Name screen to configure the plugin
+1. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
+
 == Frequently Asked Questions ==
 
 = ¿De donde obtuvo la data de los departamentos, provincias y distritos? =
+
 La información se obtuvo de los siguientes url's:
   a. http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
   b. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
 
+
 == Screenshots ==
 
-1. Documentación de Ubigeo de Perú para Woocommerce
+1. vista de finalizar compra
+2. Ubigeo Perú Dashboard
+3. Ubigeo Perú Menú
 
 == Changelog ==
-
 = 0.2.1 =
 Cambio de estructura de programación a nivel back, front misma funcionalidad y agregando validacion de funcion premium
 
@@ -109,5 +119,9 @@ Inicio
 
 == Upgrade Notice ==
 
+= 0.1.1 =
+Nueva Versión 3.0.1
+
 = 0.1.0 =
 Inicio
+

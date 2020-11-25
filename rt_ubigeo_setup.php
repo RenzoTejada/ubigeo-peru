@@ -4,7 +4,7 @@ function rt_ubigeo_errortabledep()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para Woocommerce: Error al crear tabla departamento de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
+        <p><?php _e('Ubigeo de Perú para WooCommerce: Error al crear tabla departamento de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
@@ -13,7 +13,7 @@ function rt_ubigeo_errortableprov()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para Woocommerce: Error al crear tabla provincia de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
+        <p><?php _e('Ubigeo de Perú para WooCommerce: Error al crear tabla provincia de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
@@ -22,7 +22,7 @@ function rt_ubigeo_errortabledist()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para Woocommerce: Error al crear tabla distrito de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
+        <p><?php _e('Ubigeo de Perú para WooCommerce: Error al crear tabla distrito de ubigeo . Por favor comprueba que el usuario de base de datos que estás utilizando pueda crear tablas y vuelve a instalar el módulo', 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }
@@ -31,7 +31,7 @@ function rt_ubigeo_errornowoocommerce()
 {
     ?>
     <div class="error notice">
-        <p><?php _e('Ubigeo de Perú para Woocommerce : El módulo necesita tener instalado WOOCOMMERCE para operar correctamente.', 'ubigeo-peru'); ?></p>
+        <p><?php _e('Ubigeo de Perú para WooCommerce : El módulo necesita tener instalado WooCommerce para operar correctamente.', 'ubigeo-peru'); ?></p>
     </div>
     <?php
 }

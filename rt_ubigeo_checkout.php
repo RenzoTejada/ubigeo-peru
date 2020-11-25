@@ -349,3 +349,8 @@ function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
         }
     }
 }
+
+add_action( 'woocommerce_checkout_process', 'rt_remove_wc_validation', 1 );
+function rt_remove_wc_validation () {
+	remove_action( 'woocommerce_checkout_process', 'some_custom_checkout_field_process' );
+}
