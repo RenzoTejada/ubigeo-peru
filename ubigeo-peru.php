@@ -9,7 +9,7 @@
  * Plugin Name:       Ubigeo de Per&uacute; para WooCommerce
  * Plugin URI:        https://renzotejada.com/blog/ubigeo-de-peru-para-woocommerce/
  * Description:       Ubigeo de Per&uacute; para WooCommerce - Plugin contiene los departamentos - provincias y distritos del Per&uacute;
- * Version:           3.0.9
+ * Version:           3.1.0
  * Author:            Renzo Tejada
  * Author URI:        https://renzotejada.com/
  * License:           GNU General Public License v3.0

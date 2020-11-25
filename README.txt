@@ -77,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.2.8 =
+Agregando la lib de select2 
+
 = 0.2.7=
 Fix de cambio de dep-prov-dist pegados y agregando distrito de Veintiséis de Octubre.
 
