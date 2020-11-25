@@ -8,7 +8,7 @@ add_action('admin_menu', 'rt_ubigeo_register_admin_page');
 
 function rt_ubigeo_register_admin_page()
 {
-    add_submenu_page('woocommerce', 'Configuraciones', 'Ubigeo Perú', 'manage_options', 'rt_ubigeo_settings', 'rt_ubigeo_submenu_settings_callback');
+    add_submenu_page('woocommerce', 'Configuraciones', 'Ubigeo Perú', 'manage_woocommerce', 'rt_ubigeo_settings', 'rt_ubigeo_submenu_settings_callback');
     add_action('admin_init', 'rt_ubigeo_register_settings');
 }
 

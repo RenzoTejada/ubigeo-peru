@@ -355,3 +355,77 @@ add_action( 'woocommerce_checkout_process', 'rt_remove_wc_validation', 1 );
 function rt_remove_wc_validation () {
 	remove_action( 'woocommerce_checkout_process', 'some_custom_checkout_field_process' );
 }
+
+function get_name_ubigeo($order, $type = 'object')
+{
+    if ($type == 'object') {
+        $idDep = get_post_meta($order->id, '_billing_departamento');
+        $prov = get_post_meta($order->id, '_billing_provincia');
+        $dist = get_post_meta($order->id, '_billing_distrito');
+    } else {
+        $idDep = get_post_meta($order, '_billing_departamento');
+        $prov = get_post_meta($order, '_billing_provincia');
+        $dist = get_post_meta($order, '_billing_distrito');
+    }
+    $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep[0])['departamento'];
+    $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov[0])['provincia'];
+    $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist[0])['distrito'];
+    
+    return $ubigeo;
+}
+
+
+function rt_show_custom_fields_order_billing($order)
+{
+    $ubigeo = get_name_ubigeo($order,'object');
+
+    echo '<h3>Ubigeo Perú</h3>';
+    echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+    echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+    echo '<p><strong>' . __('Distrito') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
+}
+add_action( 'woocommerce_admin_order_data_after_billing_address', 'rt_show_custom_fields_order_billing', 1 );
+
+function rt_show_custom_fields_order_shipping($order) 
+{
+    if (get_post_meta($order->id, 'shipping_departamento', true)) {
+        echo '<h3>Shipping Address</h3>';
+        echo '<p><strong>' . __('Departamento') . ':</strong> ' . get_post_meta($order->id, 'shipping_departamento', true) . '</p>';
+        echo '<p><strong>' . __('Provincia') . ':</strong> ' . get_post_meta($order->id, 'shipping_provincia', true) . '</p>';
+        echo '<p><strong>' . __('Distrito') . ':</strong> ' . get_post_meta($order->id, 'shipping_distrito', true) . '</p>';
+    }
+}
+add_action( 'woocommerce_admin_order_data_after_shipping_address', 'rt_show_custom_fields_order_shipping', 1 );
+
+function rt_show_custom_fields_thankyou($order) 
+{
+    $ubigeo = get_name_ubigeo($order,'value');
+    echo '<h2 class="woocommerce-order-details__title">Ubigeo Perú</h2>';
+    echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+    echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+    echo '<p><strong>' . __('Distrito') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
+//    if (get_post_meta($order, 'shipping_departamento', true)) {
+//        echo '<h2 class="woocommerce-order-details__title">Shipping Address</h2>';
+//        echo '<p><strong>' . __('Departamento') . ':</strong> ' . get_post_meta($order, 'shipping_departamento', true) . '</p>';
+//        echo '<p><strong>' . __('Provincia') . ':</strong> ' . get_post_meta($order, 'shipping_provincia', true) . '</p>';
+//        echo '<p><strong>' . __('Distrito') . ':</strong> ' . get_post_meta($order, 'shipping_distrito', true) . '</p>';
+//    }
+}
+add_action( 'woocommerce_thankyou', 'rt_show_custom_fields_thankyou', 20 );
+add_action( 'woocommerce_view_order', 'rt_show_custom_fields_thankyou', 20 );
+
+function rt_show_custom_fields_emails($orden, $sent_to_admin, $order) 
+{
+    $ubigeo = get_name_ubigeo($order,'object');
+    echo '<h2 class="woocommerce-order-details__title">Ubigeo Perú</h2>';
+    echo '<p><strong>' . __('Departamento') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
+    echo '<p><strong>' . __('Provincia') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
+    echo '<p><strong>' . __('Distrito') . ':</strong> ' .$ubigeo['distrito'] . '</p>';
+//    if (get_post_meta($order->id, 'shipping_departamento', true)) {
+//        echo '<h2 class="woocommerce-order-details__title">Shipping Address</h2>';
+//        echo '<p><strong>' . __('Departamento') . ':</strong> ' . get_post_meta($order->id, 'shipping_departamento', true) . '</p>';
+//        echo '<p><strong>' . __('Provincia') . ':</strong> ' . get_post_meta($order->id, 'shipping_provincia', true) . '</p>';
+//        echo '<p><strong>' . __('Distrito') . ':</strong> ' . get_post_meta($order->id, 'shipping_distrito', true) . '</p>';
+//    }
+}
+add_action( 'woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10 , 3 );

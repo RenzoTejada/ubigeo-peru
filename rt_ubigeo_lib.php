@@ -148,3 +148,28 @@ function rt_costo_ubigeo_plugin_enabled()
     }
     return false;
 }
+
+
+function rt_ubigeo_get_departamento_por_id($idDep)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_departamento";
+    $request = "SELECT departamento FROM ". $table_name ." where idDepa=" . $idDep;
+    return $wpdb->get_row($request, ARRAY_A);
+}
+
+function rt_ubigeo_get_provincia_por_id($idDep)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_provincia";
+    $request = "SELECT provincia FROM ". $table_name ." where idProv=" . $idDep;
+    return $wpdb->get_row($request, ARRAY_A);
+}
+
+function rt_ubigeo_get_distrito_por_id($idDep)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $request = "SELECT distrito FROM ". $table_name ." where idDist=" . $idDep;
+    return $wpdb->get_row($request, ARRAY_A);
+}

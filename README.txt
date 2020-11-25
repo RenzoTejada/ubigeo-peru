@@ -27,7 +27,6 @@ Donde:
 * Agregar nombre del costo de envío.
 
 
-
 Más información del plugin en [Costo de Envío de Ubigeo de Perú para Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Costo de Envío de Ubigeo de Perú para Woocommerce")
 
 == Installation ==
@@ -78,6 +77,9 @@ La información se obtuvo de los siguientes url's:
 3. Ubigeo Perú Menú
 
 == Changelog ==
+= 0.2.2 =
+Agregando info de ubigeo en la orden del pedido, correo y page de thanks you de woocoomerce
+
 = 0.2.1 =
 Agregando la lib de select2 para sitio que no incluyen dicha libreria
 
