@@ -264,7 +264,7 @@ function rt_ubigeo_load_distritos_address()
     wp_die();
 }
 
-function rt_libro_get_departamento_front()
+function rt_libro_lrq_get_departamento_front()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
@@ -304,7 +304,7 @@ function rt_libro_load_distrito_front()
     wp_die();
 }
 
-function libro_get_departamento_por_id_one($idDep)
+function rt_libro_lrq_get_departamento_por_id_one($idDep)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
@@ -313,7 +313,7 @@ function libro_get_departamento_por_id_one($idDep)
     return $rpt['departamento'];
 }
 
-function libro_get_provincia_por_id_one($prov)
+function rt_libro_lrq_get_provincia_por_id_one($prov)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
@@ -322,7 +322,7 @@ function libro_get_provincia_por_id_one($prov)
     return $rpt['provincia'];
 }
 
-function libro_get_distrito_por_id_one($dist)
+function rt_libro_lrq_get_distrito_por_id_one($dist)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
