@@ -81,6 +81,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 0.4.0 =
+Rename de funciona para plugin de libro de reclamaciones y quejas
+
 = 0.3.9 =
 Plugin formart code cs fix php - formateando codigo y actualizando imagen banner
 

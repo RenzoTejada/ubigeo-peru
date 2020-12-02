@@ -117,8 +117,7 @@ function rt_ubigeo_register_settings()
             $mp_arr = array();
         }
     } else {
-        add_action('admin_notices', 'rt_ubigeo_errornowoocommerce');
-
+        
         $mp_arr = array();
     }
 }

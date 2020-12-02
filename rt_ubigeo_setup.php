@@ -27,15 +27,6 @@ function rt_ubigeo_errortabledist()
     <?php
 }
 
-function rt_ubigeo_errornowoocommerce()
-{
-    ?>
-    <div class="error notice">
-        <p><?php _e("Peru's Ubigeo for WooCommerce: The module needs to have WooCommerce installed to operate correctly.", 'ubigeo-peru'); ?></p>
-    </div>
-    <?php
-}
-
 //crear tablas
 function rt_ubigeo_setup()
 {
