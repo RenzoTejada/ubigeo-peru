@@ -21,6 +21,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+$plugin_ubigeo_peru_version = get_file_data(__FILE__, array('Version' => 'Version'), false);
+
+define('Version_RT_Ubigeo_Peru', $plugin_ubigeo_peru_version['Version']);
+
 function ubigeo_load_textdomain()
 {
     load_plugin_textdomain('ubigeo-peru', false, basename(dirname(__FILE__)) . '/languages/');
@@ -30,6 +34,10 @@ add_action('init', 'ubigeo_load_textdomain');
 
 // Agrega la página de settings en plugins
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'rt_add_plugin_page_settings_link');
+
+// Actualizaciones para el plugin
+add_action( 'plugins_loaded', 'rt_plugin_update_change');
+
 
 function rt_add_plugin_page_settings_link($links)
 {

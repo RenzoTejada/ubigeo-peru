@@ -2,9 +2,9 @@
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 5.5.3
+Tested up to: 5.6
 Stable tag: trunk
-Requires PHP: 7.1
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,7 +68,7 @@ e.g.
 = Where did you get the data for the departments, provinces and districts? =
 
 The information was obtained from the following urls:
-  a. http://webinei.inei.gob.pe:8080/sisconcode/proyecto/index.htm?proyectoTitulo=UBIGEO&proyectoId=3
+  a. http://sige.inei.gob.pe/test/atlas/
   b. http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
   c. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
 
@@ -81,8 +81,11 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 0.4.1 =
+Correción de campos de provincia y distrito que no aparecen y actualizando version de test y link de inei ubigeo
+
 = 0.4.0 =
-Rename de funciona para plugin de libro de reclamaciones y quejas
+Rename de funciona para plugin de libro de reclamaciones y quejas.
 
 = 0.3.9 =
 Plugin formart code cs fix php - formateando codigo y actualizando imagen banner

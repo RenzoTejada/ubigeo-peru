@@ -51,6 +51,26 @@ function rt_ubigeo_setup()
     // actualizar distritos de la provincia huayla y marizcal luzuriaga
     update_distrito_ancash_huayla();
     update_distrito_ancash_marizcal();
+    
+}
+
+function rt_plugin_update_change()
+{
+    $rt_ubigeo_peru_db_version = get_option('rt_ubigeo_peru_db_version');
+    if (version_compare(Version_RT_Ubigeo_Peru, $rt_ubigeo_peru_db_version) > 0) {
+        update_distrito_lurigancho();
+    }
+    update_option('rt_ubigeo_peru_db_version', Version_RT_Ubigeo_Peru);
+}
+
+function update_distrito_lurigancho()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_distrito";
+    $update = "UPDATE $table_name SET distrito='LURIGANCHO-CHOSICA' where idDist =1268;";
+    dbDelta($update);
+    return true;
 }
 
 function update_distrito_ancash_huayla()
@@ -1837,7 +1857,7 @@ function cargaDatosDistritosDieciseis()
             (1265, 'LA VICTORIA', 127),
             (1266, 'LINCE', 127),
             (1267, 'LOS OLIVOS', 127),
-            (1268, 'LURIGANCHO', 127),
+            (1268, 'LURIGANCHO-CHOSICA', 127),
             (1269, 'LURIN', 127),
             (1270, 'MAGDALENA DEL MAR', 127),
             (1271, 'PUEBLO LIBRE', 127),
