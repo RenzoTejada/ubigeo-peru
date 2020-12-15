@@ -106,40 +106,77 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
         if ($idDepa) {
             $data_prov = rt_ubigeo_load_provincias_front_session($idDepa);
+            if(empty($data_prov)){
+                $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
+            }
         } else {
             $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
         }
 
         if ($idProv) {
             $data_dist = rt_ubigeo_load_distritos_front_session($idProv);
+            if(empty($data_dist)){
+                $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
+            }
         } else {
             $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
         }
         
         if ($idDepa_shipping) {
             $data_prov_shipping = rt_ubigeo_load_provincias_front_session($idDepa_shipping);
+            if(empty($data_prov_shipping)){
+                $data_prov_shipping = array('' => __('Select Province ', 'ubigeo-peru'));
+            }
         } else {
             $data_prov_shipping = array('' => __('Select Province ', 'ubigeo-peru'));
         }
 
         if ($idProv_shipping) {
             $data_dist_shipping = rt_ubigeo_load_distritos_front_session($idProv_shipping);
+            if(empty($data_dist_shipping)){
+                $data_dist_shipping = array('' => __('Select District ', 'ubigeo-peru'));
+            }
         } else {
             $data_dist_shipping = array('' => __('Select District ', 'ubigeo-peru'));
         }
     } else {
+        
         $idDepa = $idProv = $idDist = $idDepa_shipping = $idProv_shipping = $idDist_shipping = '';
         session_start();
         if (isset($_SESSION['idDepa']) && !empty($_SESSION['idDepa'])) {
             $data_prov = rt_ubigeo_load_provincias_front_session($_SESSION['idDepa']);
+            if(empty($data_prov)){
+                $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
+            }
         } else {
             $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
         }
 
         if (isset($_SESSION['idProv']) && !empty($_SESSION['idProv'])) {
             $data_dist = rt_ubigeo_load_distritos_front_session($_SESSION['idProv']);
+            if(empty($data_dist)){
+                $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
+            }
         } else {
             $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
+        }
+        
+        if ($idDepa_shipping) {
+            $data_prov_shipping = rt_ubigeo_load_provincias_front_session($idDepa_shipping);
+            if(empty($data_prov_shipping)){
+                $data_prov_shipping = array('' => __('Select Province ', 'ubigeo-peru'));
+            }
+        } else {
+            $data_prov_shipping = array('' => __('Select Province ', 'ubigeo-peru'));
+        }
+
+        if ($idProv_shipping) {
+            $data_dist_shipping = rt_ubigeo_load_distritos_front_session($idProv_shipping);
+            if(empty($data_dist_shipping)){
+                $data_dist_shipping = array('' => __('Select District ', 'ubigeo-peru'));
+            }
+        } else {
+            $data_dist_shipping = array('' => __('Select District ', 'ubigeo-peru'));
         }
     }
     $fields['billing']['billing_departamento'] = [
@@ -384,7 +421,6 @@ function rt_ubigeo_custom_jscript_checkout()
                 jQuery('#billing_provincia').val('').trigger('change');
                 jQuery('#billing_distrito').val('').trigger('change');
             });
-            
             
         });
        
