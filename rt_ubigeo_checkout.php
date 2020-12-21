@@ -344,7 +344,7 @@ function rt_ubigeo_custom_jscript_checkout()
 		
 		 .loader.active {
 	        display: flex;
-			 z-index: 1000;
+			 z-index: 99999999;
 		 }
  
 		
