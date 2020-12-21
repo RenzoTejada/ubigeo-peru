@@ -1,4 +1,4 @@
-=== Ubigeo de Perú para WordPress y Woocommerce ===
+=== Ubigeo de Perú para Woocommerce y WordPress ===
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
@@ -80,6 +80,9 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 0.4.2 =
+Agregando un loader para la carga de ubigeo en el checkout y actualizando nombre del plugin para el seo
 
 = 0.4.1 =
 Correción de campos de provincia y distrito que no aparecen y actualizando version de test y link de inei ubigeo
