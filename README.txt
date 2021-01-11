@@ -81,6 +81,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 0.4.3 =
+Agregando traducciones correctamente y agregando html para el pago thank you
+
 = 0.4.2 =
 Agregando un loader para la carga de ubigeo en el checkout y actualizando nombre del plugin para el seo
 
