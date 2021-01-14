@@ -81,6 +81,10 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.3.2 (14/01/2021)=
+Agregando distritos Mi Perú del Callao.
+Corrigiendo error notice al activar debug del wp-config.
+
 = 3.3.1 (14/01/2021)=
 Agregando distritos faltantes.
 

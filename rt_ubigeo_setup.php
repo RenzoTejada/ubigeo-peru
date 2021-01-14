@@ -60,8 +60,24 @@ function rt_plugin_update_change()
     if (version_compare(Version_RT_Ubigeo_Peru, $rt_ubigeo_peru_db_version) > 0) {
         update_distrito_lurigancho();
         insert_ubigeo_faltantes();
+        insert_distrito_mi_peru();
     }
     update_option('rt_ubigeo_peru_db_version', Version_RT_Ubigeo_Peru);
+}
+
+function insert_distrito_mi_peru()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_distrito = $wpdb->prefix . "ubigeo_distrito";
+    $select_dist = "SELECT idDist FROM " . $table_distrito . " where idDist = 1881";
+    $result_dist = $wpdb->query($select_dist);
+   
+    if (!$result_dist) {
+        $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1881, 'MI PERU', 66);";
+        dbDelta($sql_insert);
+    }
+    return true;
 }
 
 function insert_ubigeo_faltantes()
@@ -71,6 +87,11 @@ function insert_ubigeo_faltantes()
     $table_departamento = $wpdb->prefix . "ubigeo_departamento";
     $table_provincia = $wpdb->prefix . "ubigeo_provincia";
     $table_distrito = $wpdb->prefix . "ubigeo_distrito";
+    
+    $select_dist = "SELECT idDist FROM " . $table_distrito . " where idDist = 1835";
+    $result_dist = $wpdb->query($select_dist);
+   
+    if (!$result_dist) {
     
     $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1835, 'JOSE MARIA ARGUEDAS', 29);";
     dbDelta($sql_insert);
@@ -194,6 +215,8 @@ function insert_ubigeo_faltantes()
     
     $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1880, 'CASTILLO GRANDE', 92);";
     dbDelta($sql_insert);
+    
+    }
     
     return true;
 }
