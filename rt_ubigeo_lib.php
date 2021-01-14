@@ -345,3 +345,26 @@ function rt_libro_load_provincias_front()
     echo json_encode($response);
     wp_die();
 }
+
+add_action('yith_ywpi_invoice_template_customer_data', 'rt_ubigeo_show_invoice_template_customer_data', 50);
+
+function rt_ubigeo_show_invoice_template_customer_data() {
+    global $ywpi_document;
+    /** @var WC_Order $order */
+    $order = $ywpi_document->order;
+    
+    if ($order->get_meta('_billing_departamento')) { 
+        $depa = rt_ubigeo_get_departamento_por_id($order->get_meta('_billing_departamento'))
+        ?>
+        <br>
+       <?php _e('Department ', 'ubigeo-peru') ?> : <?php echo $depa['departamento']; ?><br>
+    <?php } if ($order->get_meta('_billing_provincia')) { 
+        $prov = rt_ubigeo_get_provincia_por_id($order->get_meta('_billing_provincia'));
+        ?>
+        <?php _e('Province ', 'ubigeo-peru') ?> : <?php echo $prov['provincia'] ?><br>
+    <?php } if ($order->get_meta('_billing_distrito')) { 
+        $dist = rt_ubigeo_get_distrito_por_id($order->get_meta('_billing_distrito'));
+        ?>
+        <?php _e('District ', 'ubigeo-peru') ?> : <?php echo $dist['distrito'] ?><br>
+    <?php } 
+}

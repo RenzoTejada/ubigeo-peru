@@ -692,7 +692,7 @@ function rt_show_custom_fields_thankyou($order)
 
     $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
     if ($ubigeo_shipping['departamento']) {
-        echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-1">';
+        echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-2">';
         echo '<h2 class="woocommerce-column__title">'.__('Shipping Ubigeo Peru', 'ubigeo-peru').'</h2>';
         echo '<address>';
         echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';

@@ -81,119 +81,121 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
-= 0.4.3 =
+= 3.3.1 (14/01/2021)=
+Agregando distritos faltantes.
+
+= 3.3.0 (12/01/2021)=
+Agregando ubigeo en pdf yith invoice y actualizando changelog
+
+= 3.2.9 (11/01/2021)=
+Agregando class para col2 de shipping peru
+
+= 3.2.8 (11/01/2021) =
 Agregando traducciones correctamente y agregando html para el pago thank you
 
-= 0.4.2 =
+= 3.2.7 =
 Agregando un loader para la carga de ubigeo en el checkout y actualizando nombre del plugin para el seo
 
-= 0.4.1 =
+= 3.2.6 =
 Correción de campos de provincia y distrito que no aparecen y actualizando version de test y link de inei ubigeo
 
-= 0.4.0 =
+= 3.2.5 =
 Rename de funciona para plugin de libro de reclamaciones y quejas.
 
-= 0.3.9 =
+= 3.2.4 =
 Plugin formart code cs fix php - formateando codigo y actualizando imagen banner
 
-= 0.3.8 =
+= 3.2.3 =
 Plugin es compatible para WordPress para los funciones de libro de reclamaciones y quejas.
 
-= 0.3.7 =
+= 3.2.2 =
 Fix de distrios de anchash (actualizando distritos de la provincia huayla y marizcal luzuriaga).
 
-= 0.3.6 =
+= 3.2.1 =
 Agregando sessión de shipping ubigeo.
 
-= 0.3.5 =
+= 3.2.0 =
 Agregando Ubigeo a direcciones de mi cuenta.
 
-= 0.3.4 =
+= 3.1.9 =
 Haciendo los campos ubigeos obligatorios (departamento , provincia y distrito).
 
-= 0.3.3 =
+= 3.1.8 =
 Agregando traducciones para el plugin
 
-= 0.3.2 =
+= 3.1.7 =
 Ocultando span de select2 de los campos ubigeo pata temas Pawsitive
 
-= 0.3.1 =
+= 3.1.6 =
 Cambiando texto a español.
 
-= 0.3.0 =
+= 3.1.5 =
 Fix de reload page con combos ubigeo checkout y cambios de texto a español.
 
-= 0.2.9 =
+= 3.1.4 =
 Re-Ordenando la prioridad de los campos del checkout como email y phone
 
-= 0.2.8 =
+= 3.1.3 =
 Agregando la lib de select2 
 
-= 0.2.7 =
+= 3.1.2 =
 Fix de cambio de dep-prov-dist pegados y agregando distrito de Veintiséis de Octubre.
 
-= 0.2.6 =
+= 3.1.1 =
 Agregando distrito de salamanca.
 
-= 0.2.5 =
+= 3.1.0 =
 Fix con el tema avada (doble ajax).
 
-= 0.2.4 =
+= 3.0.9 =
 Mostrando ubigeo billing y shipping en el orden de pedido y en page thanks you.
 
-= 0.2.3 =
+= 3.0.8 =
 Fix de query de ubigeo front provincia
 
-= 0.2.2 =
+= 3.0.7 =
 Agregando info de ubigeo en la orden del pedido, correo y page de thanks you de woocoomerce
 
-= 0.2.1 =
+= 3.0.6 =
 Agregando la lib de select2 para sitio que no incluyen dicha libreria
 
-= 0.2.1 =
+= 3.0.5 =
 Cambio de estructura de programación a nivel back, front misma funcionalidad y agregando validacion de funcion premium
 
-= 0.2.1 =
+= 2.0.2 =
 Corrigiendo de ajax de distrito  y actualizando nombre de distrito
 
-= 0.2.0 =
+= 2.0.0 =
 Corrigiendo la version que soporta plugin
 
-= 0.1.9 =
+= 1.9.0 =
 Nueva estructura de ubigeo para woocommerce
 
-= 0.1.8 =
+= 1.8.0 =
 fix ubigeo para el shipping para woocommerce - error al validar ubigeo
 
-= 0.1.7 =
+= 1.7.0 =
 Agregando ubigeo para el shipping para woocommerce
 
-= 0.1.6 =
+= 1.6.0 =
 Agregando imágenes del plugin woocommerce
 
-= 0.1.5 =
+= 1.5.0 =
 delete files de plugin woocommerce
 
-= 0.1.4 =
+= 1.4.0 =
 Agregando Screenshots 2 del plugin woocommerce
 
-= 0.1.3 =
+= 1.3.0 =
 Agregando iconos y Screenshots del plugin woocommerce
 
-= 0.1.2 =
+= 1.2.0 =
 Corrección de seteo de valor de city en woocommerce
 
-= 0.1.1 =
+= 1.1.0 =
 Corrección de método deprecado
 
-= 0.1.0 =
+= 1.0.0 =
 Inicio
 
-== Upgrade Notice ==
-
-= 0.1.1 =
-Nueva Versión 3.0.1
-
-= 0.1.0 =
-Inicio
 

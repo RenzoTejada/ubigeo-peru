@@ -59,8 +59,143 @@ function rt_plugin_update_change()
     $rt_ubigeo_peru_db_version = get_option('rt_ubigeo_peru_db_version');
     if (version_compare(Version_RT_Ubigeo_Peru, $rt_ubigeo_peru_db_version) > 0) {
         update_distrito_lurigancho();
+        insert_ubigeo_faltantes();
     }
     update_option('rt_ubigeo_peru_db_version', Version_RT_Ubigeo_Peru);
+}
+
+function insert_ubigeo_faltantes()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $table_departamento = $wpdb->prefix . "ubigeo_departamento";
+    $table_provincia = $wpdb->prefix . "ubigeo_provincia";
+    $table_distrito = $wpdb->prefix . "ubigeo_distrito";
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1835, 'JOSE MARIA ARGUEDAS', 29);";
+    dbDelta($sql_insert);
+    
+    $sql_insert2 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1836, 'ROCCHACC', 33);";
+    dbDelta($sql_insert2);
+    
+    $sql_insert3 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1837, 'EL PORVENIR', 33);";
+    dbDelta($sql_insert3);
+    
+    $sql_insert4 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1838, 'ANDRES AVELINO CACERES', 43);";
+    dbDelta($sql_insert4);
+    
+    $sql_insert5 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1839, 'CANAYRE', 46);";
+    dbDelta($sql_insert5);
+    
+    $sql_insert6 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1840, 'UCHURACCAY', 46);";
+    dbDelta($sql_insert6);
+    
+    $sql_insert7 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1841, 'PUCACOLPA', 46);";
+    dbDelta($sql_insert7);
+    
+    $sql_insert8 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1842, 'CHACA', 46);";
+    dbDelta($sql_insert8);
+    
+    $sql_insert8 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1843, 'SAMUGARI', 47);";
+    dbDelta($sql_insert8);
+    
+    $sql_insert9 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1844, 'ANCHIHUAY', 47);";
+    dbDelta($sql_insert9);
+    
+    $sql_insert9 = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1845, 'ORONCCOY', 47);";
+    dbDelta($sql_insert9);
+    
+    $sql_insert = "INSERT INTO $table_provincia (`idProv`, `provincia`, `idDepa`) VALUES (194, 'SAN MIGUEL', 6);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1846, 'SAN MIGUEL', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1847, 'CALQUIS', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1848, 'CATILLUC', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1849, 'EL PRADO', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1850, 'LA FLORIDA', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1851, 'LLAPA', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1852, 'NANCHOC', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1853, 'NIEPOS', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1854, 'SAN GREGORIO', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1855, 'SAN SILVESTRE DE COCHAN', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1856, 'TONGOD', 194);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1857, 'UNION AGUA BLANCA', 194);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1858, 'INKAWASI', 75);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1859, 'MEGANTONI', 75);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1860, 'VILLA KINTIARINA', 75);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1861, 'VILLA VIRGEN', 75);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1862, 'COSME', 84);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1863, 'ANDAYMARCA', 86);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1864, 'PICHOS', 86);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1865, 'QUICHUAS', 86);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1866, 'ROBLE', 86);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1867, 'SANTIAGO DE TUCUMA', 86);";
+    dbDelta($sql_insert);
+    
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1868, 'LA MORADA', 93);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1869, 'SANTA ROSA DE ALTO YANAJANCA', 93);";
+    dbDelta($sql_insert);
+    
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1870, 'VIZCATAN DEL ENE', 108);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1871, 'VIZCATAN DEL ENE', 108);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1872, 'CONSTITUCION', 151);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1873, 'SAN MIGUEL', 170);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1874, 'SAN PEDRO DE PUTINA PUNCO', 171);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1875, 'LA YARADA LOS PALOS', 183);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1876, 'CANOAS DE PUNTA SAL', 188);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1877, 'MANANTAY', 190);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1878, 'ALEXANDER VON HUMBOLDT', 192);";
+    dbDelta($sql_insert);
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1879, 'NESHUYA', 192);";
+    dbDelta($sql_insert);
+    
+    $sql_insert = "INSERT INTO $table_distrito (`idDist`, `distrito`, `idProv`) VALUES (1880, 'CASTILLO GRANDE', 92);";
+    dbDelta($sql_insert);
+    
+    return true;
 }
 
 function update_distrito_lurigancho()
