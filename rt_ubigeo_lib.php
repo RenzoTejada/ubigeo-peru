@@ -144,7 +144,7 @@ function rt_ubigeo_get_distrito_by_idProv_display($idProv = 0)
     } else {
         $request = "SELECT dist.idDist, dist.distrito  FROM $table_costo_ubigeo  as ucu  
         inner join $table_ubigeo_distrito as dist on dist.idDist=ucu.idDist
-        where ucu.idProv=$idProv group by dist.idDist";
+        where ucu.idProv=$idProv group by dist.idDist order by dist.distrito ASC";
         $result = $wpdb->get_results($request, ARRAY_A);
     }
     return $result;

@@ -81,6 +81,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.3.4 (19/01/2021) =
+Fix: Corrigiendo el ordenamiento de la data de distritos ascendentemente.
+
 = 3.3.3 (14/01/2021) =
 Testeado en la version  WC tested up to: 4.9
 
