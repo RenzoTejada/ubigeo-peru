@@ -15,6 +15,7 @@ function rt_ubigeo_get_departamentos_for_select()
     foreach ($departamentoList as $dpto) {
         $dptos[$dpto['idDepa']] = $dpto['departamento'];
     }
+    
     return $dptos;
 }
 
@@ -132,6 +133,14 @@ function rt_ubigeo_get_distrito_by_idProv($idProv = 0)
     return $wpdb->get_results($request, ARRAY_A);
 }
 
+function rt_ubigeo_validate_prov_of_depa($idDepa, $idProv)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_provincia";
+    $request = "SELECT * FROM $table_name where idProv = $idProv and idDepa = $idDepa";
+    return $wpdb->get_results($request, ARRAY_A);
+}
+
 function rt_ubigeo_get_distrito_by_idProv_display($idProv = 0)
 {
     global $wpdb;
@@ -185,8 +194,10 @@ function rt_ubigeo_get_distrito_por_id($idDep)
 
 function rt_ubigeo_load_provincias_front_session($idDepa)
 {
-    $response = [];
+//    $response = [];
+    $response = array('' => __('Select Province ', 'ubigeo-peru'));
     if (is_numeric($idDepa)) {
+       
         if (!rt_plugin_ubigeo_costo_enabled()) {
             $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
         } else {
@@ -203,7 +214,8 @@ function rt_ubigeo_load_provincias_front_session($idDepa)
 
 function rt_ubigeo_load_distritos_front_session($idProv)
 {
-    $response = [];
+//    $response = [];
+    $response = array('' => __('Select District ', 'ubigeo-peru'));
     if (is_numeric($idProv)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
             $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);

@@ -81,6 +81,11 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.3.5 (31/01/2021) =
+Fix: Corrigiendo error de carga de ubigeo cuando solo seleccionaba departamento.
+Fix: Corrigiendo error de session start que afecta a la salud de wp.
+Testeado en la version  WC tested up to: 4.9.2
+
 = 3.3.4 (19/01/2021) =
 Fix: Corrigiendo el ordenamiento de la data de distritos ascendentemente.
 
