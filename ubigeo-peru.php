@@ -67,14 +67,15 @@ register_activation_hook(__FILE__, 'rt_ubigeo_setup');
 /*
  * ADMIN
  */
-require dirname(__FILE__) . "/rt_ubigeo_admin.php";
+//require dirname(__FILE__) . "/rt_ubigeo_admin.php";
 
 /*
  * CHECKOUT
  */
-require dirname(__FILE__) . "/rt_ubigeo_checkout.php";
+//require dirname(__FILE__) . "/rt_ubigeo_checkout.php";
 
 /*
  * Address
  */
-require dirname(__FILE__) . "/rt_ubigeo_address.php";
+//require dirname(__FILE__) . "/rt_ubigeo_address.php";
+?>

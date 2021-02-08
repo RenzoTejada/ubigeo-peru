@@ -28,12 +28,9 @@ function rt_ubigeo_errortabledist()
 }
 
 //crear tablas
+
 function rt_ubigeo_setup()
 {
-    global $wpdb;
-    $charset_collate = $wpdb->get_charset_collate();
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
     //crear departamentos
     crearDepartamento();
     //crear provincia
@@ -51,7 +48,6 @@ function rt_ubigeo_setup()
     // actualizar distritos de la provincia huayla y marizcal luzuriaga
     update_distrito_ancash_huayla();
     update_distrito_ancash_marizcal();
-    
 }
 
 function rt_plugin_update_change()
@@ -321,7 +317,6 @@ function crearDepartamento()
             departamento varchar(50) DEFAULT NULL,
             PRIMARY KEY (`idDepa`)
             )ENGINE=MyISAM DEFAULT CHARSET=utf8; ";
-
     dbDelta($sql);
     cargaDatosDepartamentos();
 }
@@ -390,7 +385,7 @@ function cargaDatosDepartamentos()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $sql = " INSERT INTO $table_name (`idDepa`, `departamento`) VALUES
+    $sql = "INSERT INTO $table_name (`idDepa`, `departamento`) VALUES
               (1, 'AMAZONAS'),
               (2, 'ANCASH'),
               (3, 'APURIMAC'),
@@ -415,8 +410,7 @@ function cargaDatosDepartamentos()
               (22, 'SAN MARTIN'),
               (23, 'TACNA'),
               (24, 'TUMBES'),
-              (25, 'UCAYALI'); ";
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+              (25, 'UCAYALI');";
     dbDelta($sql);
 }
 
@@ -504,7 +498,6 @@ function cargaDatosProvinciasUno()
               (78, 'QUISPICANCHI', 8),
               (79, 'URUBAMBA', 8),
               (80, 'HUANCAVELICA', 9);";
-
     dbDelta($sql);
 }
 
