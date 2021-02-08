@@ -312,13 +312,17 @@ function crearDepartamento()
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
 
-    $sql = " CREATE TABLE $table_name (
+    $show_table = "SHOW TABLES LIKE '" . $table_name."'";
+    $result_show = $wpdb->query($show_table);
+    if (!$result_show) {
+        $sql = "CREATE TABLE $table_name (
             idDepa int(5) NOT NULL DEFAULT '0',
             departamento varchar(50) DEFAULT NULL,
             PRIMARY KEY (`idDepa`)
             )ENGINE=MyISAM DEFAULT CHARSET=utf8; ";
-    dbDelta($sql);
-    cargaDatosDepartamentos();
+        dbDelta($sql);
+        cargaDatosDepartamentos();
+    }
 }
 
 function crearProvincia()
@@ -327,18 +331,23 @@ function crearProvincia()
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
 
-    $sql = " CREATE TABLE $table_name (
+    $show_table = "SHOW TABLES LIKE '" . $table_name . "'";
+    $result_show = $wpdb->query($show_table);
+    if (!$result_show) {
+
+        $sql = " CREATE TABLE $table_name (
           `idProv` int(5) NOT NULL DEFAULT '0',
           `provincia` varchar(50) DEFAULT NULL,
           `idDepa` int(5) DEFAULT NULL,
           PRIMARY KEY (`idProv`)
           )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
-    dbDelta($sql);
+        dbDelta($sql);
 
-    cargaDatosProvinciasUno();
-    cargaDatosProvinciasDos();
-    cargaDatosProvinciasTres();
+        cargaDatosProvinciasUno();
+        cargaDatosProvinciasDos();
+        cargaDatosProvinciasTres();
+    }
 }
 
 function crearDistrito()
@@ -347,38 +356,42 @@ function crearDistrito()
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
 
-    $sql = " CREATE TABLE $table_name (
+    $show_table = "SHOW TABLES LIKE '" . $table_name . "'";
+    $result_show = $wpdb->query($show_table);
+    if (!$result_show) {
+
+        $sql = " CREATE TABLE $table_name (
             `idDist` int(5) NOT NULL DEFAULT '0',
             `distrito` varchar(50) DEFAULT NULL,
             `idProv` int(5) DEFAULT NULL,
             PRIMARY KEY (`idDist`))";
 
-
-    dbDelta($sql);
-    cargaDatosDistritosUno();
-    cargaDatosDistritosDos();
-    cargaDatosDistritosTres();
-    cargaDatosDistritosCuatro();
-    cargaDatosDistritosCinco();
-    cargaDatosDistritosSeis();
-    cargaDatosDistritosSiete();
-    cargaDatosDistritosOcho();
-    cargaDatosDistritosNueve();
-    cargaDatosDistritosDiez();
-    cargaDatosDistritosOnce();
-    cargaDatosDistritosDoce();
-    cargaDatosDistritosTrece();
-    cargaDatosDistritosCatorce();
-    cargaDatosDistritosQuince();
-    cargaDatosDistritosDieciseis();
-    cargaDatosDistritosDiecisiete();
-    cargaDatosDistritosDieciocho();
-    cargaDatosDistritosDiecinueve();
-    cargaDatosDistritosViente();
-    cargaDatosDistritosVeintiuno();
-    cargaDatosDistritosVeintidos();
-    cargaDatosDistritosVeintitres();
-    cargaDatosDistritosVeinticuatro();
+        dbDelta($sql);
+        cargaDatosDistritosUno();
+        cargaDatosDistritosDos();
+        cargaDatosDistritosTres();
+        cargaDatosDistritosCuatro();
+        cargaDatosDistritosCinco();
+        cargaDatosDistritosSeis();
+        cargaDatosDistritosSiete();
+        cargaDatosDistritosOcho();
+        cargaDatosDistritosNueve();
+        cargaDatosDistritosDiez();
+        cargaDatosDistritosOnce();
+        cargaDatosDistritosDoce();
+        cargaDatosDistritosTrece();
+        cargaDatosDistritosCatorce();
+        cargaDatosDistritosQuince();
+        cargaDatosDistritosDieciseis();
+        cargaDatosDistritosDiecisiete();
+        cargaDatosDistritosDieciocho();
+        cargaDatosDistritosDiecinueve();
+        cargaDatosDistritosViente();
+        cargaDatosDistritosVeintiuno();
+        cargaDatosDistritosVeintidos();
+        cargaDatosDistritosVeintitres();
+        cargaDatosDistritosVeinticuatro();
+    }
 }
 
 function cargaDatosDepartamentos()

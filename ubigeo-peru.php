@@ -78,4 +78,3 @@ register_activation_hook(__FILE__, 'rt_ubigeo_setup');
  * Address
  */
 //require dirname(__FILE__) . "/rt_ubigeo_address.php";
-?>
