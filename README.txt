@@ -2,7 +2,7 @@
 Contributors: renzotejada
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 5.6
+Tested up to: 5.6.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -80,6 +80,13 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 3.3.6 (25/02/2021) =
+Refactor: Se agrega los archivos js y css para ubigeo checkout.
+Refactor: Se reformatea el codigo fuente según estandares psr-1 y psr-2.
+fix: Corrigiendo error de query al momento de calcular tipo departamento con costo de envío.
+Testeado en la version  WC tested up to: 5.0.0
+Testeado en la version  WP tested up to: 5.6.2
 
 = 3.3.5 (31/01/2021) =
 Fix: Corrigiendo error de carga de ubigeo cuando solo seleccionaba departamento.

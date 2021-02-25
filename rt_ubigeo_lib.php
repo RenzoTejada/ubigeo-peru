@@ -110,9 +110,9 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_front', 'rt_ubigeo_load_dist
 
 function rt_ubigeo_load_distritos_front()
 {
-    session_start();
+//    session_start();
     $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
-    $_SESSION["idProv"] = $idProv;
+//    $_SESSION["idProv"] = $idProv;
     $response = [];
     if (is_numeric($idProv)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
