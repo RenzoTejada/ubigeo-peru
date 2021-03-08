@@ -178,25 +178,6 @@ function rt_ubigeo_wc_checkout_fields($fields) {
         }
     }
 
-    if (count($data_prov) < 2) {
-        ?>
-        <script>
-            jQuery(document).ready(function () {
-                jQuery("#billing_departamento").select2().select2('val', "0");
-                jQuery("#billing_provincia").select2().select2('val', "0");
-                jQuery("#billing_distrito").select2().select2('val', "0");
-            });
-        </script>
-        <?php
-    } else {
-        ?>
-        <script>
-            jQuery(document).ready(function () {
-                jQuery("#billing_distrito").select2().select2('val', "0");
-            });
-        </script>
-        <?php
-    }
     $fields['billing']['billing_departamento'] = [
         'type' => 'select',
         'label' => __('Department', 'ubigeo-peru'),
@@ -299,6 +280,15 @@ function is_theme_avada() {
     return $rpt;
 }
 
+function is_theme_astra() {
+    $rpt = false;
+    $theme = wp_get_theme();
+    if ('Astra' == $theme->name || 'Astra' == $theme->parent_theme) {
+        $rpt = true;
+    }
+    return $rpt;
+}
+
 function is_theme_pawsitive() {
     $rpt = false;
     $theme = wp_get_theme();
@@ -308,16 +298,30 @@ function is_theme_pawsitive() {
     return $rpt;
 }
 
+
+add_action( 'wp_enqueue_scripts', 'rt_ubigeo_able_woocommerce_loading_css_js',99 );
+
+function rt_ubigeo_able_woocommerce_loading_css_js()
+{
+    // Check if WooCommerce plugin is active
+    if( function_exists( 'is_woocommerce' ) ){
+        // Check if it's any of WooCommerce page
+        if( is_checkout() ) {
+            wp_register_script('select2-ubigeo', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
+            wp_enqueue_script('select2-ubigeo');
+            wp_register_script('js_ubigeo_checkout-js', plugins_url('js/js_ubigeo_checkout.js', __FILE__), array(), '0.0.1', true);
+            wp_enqueue_script('js_ubigeo_checkout-js');
+            wp_register_style('css_ubigeo_checkout', plugins_url('css/css_ubigeo_checkout.css', __FILE__), array(), '0.0.1');
+            wp_enqueue_style('css_ubigeo_checkout');
+        }
+    }
+}
+
+
 add_action('woocommerce_after_checkout_form', 'rt_ubigeo_custom_jscript_checkout');
 
-function rt_ubigeo_custom_jscript_checkout() {
-
-    wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
-    wp_enqueue_script('select2-js');
-    wp_register_script('js_ubigeo_checkout-js', plugins_url('js/js_ubigeo_checkout.js', __FILE__), array(), '0.0.1', true);
-    wp_enqueue_script('js_ubigeo_checkout-js');
-    wp_register_style('css_ubigeo_checkout', plugins_url('css/css_ubigeo_checkout.css', __FILE__), array(), '0.0.1');
-    wp_enqueue_style('css_ubigeo_checkout');
+function rt_ubigeo_custom_jscript_checkout()
+{
     $idDepa = $idProv = $idDist = '';
     $idDepa_shipping = $idProv_shipping = $idDist_shipping = '';
     if (is_user_logged_in()) {
@@ -351,6 +355,7 @@ function rt_ubigeo_custom_jscript_checkout() {
         var idDist_shipping = "<?php echo $idDist_shipping ?>";
         var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
         var is_theme_avada = "<?php echo (int) is_theme_avada(); ?>";
+        var is_theme_astra = "<?php echo (int) is_theme_astra(); ?>";
     </script>
     <?php
 }

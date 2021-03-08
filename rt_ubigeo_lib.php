@@ -86,7 +86,7 @@ function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
     $table_ubigeo_provincia = $wpdb->prefix . "ubigeo_provincia";
     $tipo = get_tipo_costo_ubigeo_by_idDepa($idDepa);
 
-    if ($tipo['tipo'] == 1) {
+    if (isset($tipo['tipo']) == 1) {
         $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
     } else {
         $request = "SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  

@@ -81,6 +81,10 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.3.7 (08/03/2021) =
+fix: correción de carga de ubigeo en tema astra.
+fix: correción con plugin de culqui lest go
+
 = 3.3.6 (25/02/2021) =
 Refactor: Se agrega los archivos js y css para ubigeo checkout.
 Refactor: Se reformatea el codigo fuente según estandares psr-1 y psr-2.
