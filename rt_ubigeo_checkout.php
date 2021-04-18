@@ -45,7 +45,8 @@ function rt_ubigeo_default_address_fields($fields) {
 
 add_filter('woocommerce_get_country_locale', 'rt_ubigeo_get_country_locale');
 
-function rt_ubigeo_get_country_locale($locale) {
+function rt_ubigeo_get_country_locale($locale)
+{
     $locale['PE']['departamento'] = array(
         'required' => true,
         'hidden' => false,
@@ -178,66 +179,68 @@ function rt_ubigeo_wc_checkout_fields($fields) {
         }
     }
 
-    $fields['billing']['billing_departamento'] = [
-        'type' => 'select',
-        'label' => __('Department', 'ubigeo-peru'),
-        'required' => true,
-        'class' => array('form-row-wide'),
-        'clear' => true,
-        'options' => rt_ubigeo_get_departamentos_for_select(),
-        'priority' => 65
-    ];
+    if($fields['billing']['billing_state']['country'] == 'PE') {
 
-    $fields['billing']['billing_provincia'] = [
-        'type' => 'select',
-        'label' => __('Province', 'ubigeo-peru'),
-        'required' => true,
-        'class' => array('form-row-wide'),
-        'clear' => true,
-        'options' => $data_prov,
-        'priority' => 66
-    ];
+        $fields['billing']['billing_departamento'] = [
+            'type' => 'select',
+            'label' => __('Department', 'ubigeo-peru'),
+            'required' => true,
+            'class' => array('form-row-wide'),
+            'clear' => true,
+            'options' => rt_ubigeo_get_departamentos_for_select(),
+            'priority' => 65
+        ];
 
-    $fields['billing']['billing_distrito'] = [
-        'type' => 'select',
-        'label' => __('District', 'ubigeo-peru'),
-        'required' => true,
-        'class' => array('form-row-wide'),
-        'clear' => true,
-        'options' => $data_dist,
-        'priority' => 67
-    ];
+        $fields['billing']['billing_provincia'] = [
+            'type' => 'select',
+            'label' => __('Province', 'ubigeo-peru'),
+            'required' => true,
+            'class' => array('form-row-wide'),
+            'clear' => true,
+            'options' => $data_prov,
+            'priority' => 66
+        ];
 
-    $fields['shipping']['shipping_departamento'] = [
-        'type' => 'select',
-        'label' => __('Department', 'ubigeo-peru'),
-        'required' => false,
-        'class' => array('form-row-wide'),
-        'clear' => true,
-        'options' => rt_ubigeo_get_departamentos_for_select(),
-        'priority' => 65
-    ];
+        $fields['billing']['billing_distrito'] = [
+            'type' => 'select',
+            'label' => __('District', 'ubigeo-peru'),
+            'required' => true,
+            'class' => array('form-row-wide'),
+            'clear' => true,
+            'options' => $data_dist,
+            'priority' => 67
+        ];
 
+        $fields['shipping']['shipping_departamento'] = [
+            'type' => 'select',
+            'label' => __('Department', 'ubigeo-peru'),
+            'required' => false,
+            'class' => array('form-row-wide'),
+            'clear' => true,
+            'options' => rt_ubigeo_get_departamentos_for_select(),
+            'priority' => 65
+        ];
 
-    $fields['shipping']['shipping_provincia'] = [
-        'type' => 'select',
-        'label' => __('Province', 'ubigeo-peru'),
-        'required' => false,
-        'class' => array('form-row-wide'),
-        'clear' => true,
-        'options' => $data_prov_shipping,
-        'priority' => 66
-    ];
+        $fields['shipping']['shipping_provincia'] = [
+            'type' => 'select',
+            'label' => __('Province', 'ubigeo-peru'),
+            'required' => false,
+            'class' => array('form-row-wide'),
+            'clear' => true,
+            'options' => $data_prov_shipping,
+            'priority' => 66
+        ];
 
-    $fields['shipping']['shipping_distrito'] = [
-        'type' => 'select',
-        'label' => __('District', 'ubigeo-peru'),
-        'required' => false,
-        'class' => array('form-row-wide'),
-        'clear' => true,
-        'options' => $data_dist_shipping,
-        'priority' => 67
-    ];
+        $fields['shipping']['shipping_distrito'] = [
+            'type' => 'select',
+            'label' => __('District', 'ubigeo-peru'),
+            'required' => false,
+            'class' => array('form-row-wide'),
+            'clear' => true,
+            'options' => $data_dist_shipping,
+            'priority' => 67
+        ];
+    }
 
     return $fields;
 }
