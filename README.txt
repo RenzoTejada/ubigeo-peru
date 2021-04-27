@@ -81,6 +81,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.3.9 (27/04/2021) =
+fix: se elimino la prioridad del campo dirección 2 del plugin ubigeo.
+
 = 3.3.8 (18/04/2021) =
 fix: correción de validación ubigeo para otros paises.
 

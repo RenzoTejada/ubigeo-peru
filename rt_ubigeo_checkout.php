@@ -82,14 +82,12 @@ function rt_ubigeo_get_country_locale($locale)
 
 add_filter('woocommerce_checkout_fields', 'rt_ubigeo_wc_checkout_fields', 99);
 
-function rt_ubigeo_wc_checkout_fields($fields) {
+function rt_ubigeo_wc_checkout_fields($fields)
+{
     $fields['billing']['billing_phone']['priority'] = 34;
     $fields['billing']['billing_email']['priority'] = 36;
     $fields['billing']['billing_address_1']['priority'] = 74;
-    $fields['billing']['billing_address_2']['priority'] = 76;
-
     $fields['shipping']['shipping_address_1']['priority'] = 74;
-    $fields['shipping']['shipping_address_2']['priority'] = 76;
     if (is_user_logged_in()) {
         $current_user = wp_get_current_user();
         $idDepa = $current_user->billing_departamento;
