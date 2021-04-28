@@ -314,6 +314,7 @@ function rt_ubigeo_able_woocommerce_loading_css_js()
             wp_enqueue_script('js_ubigeo_checkout-js');
             wp_register_style('css_ubigeo_checkout', plugins_url('css/css_ubigeo_checkout.css', __FILE__), array(), '0.0.1');
             wp_enqueue_style('css_ubigeo_checkout');
+            wp_dequeue_script( 'selectWoo' );
         }
     }
 }
