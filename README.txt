@@ -81,6 +81,10 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.4.1 (30/04/2021) =
+fix: correción con la librería selectWoo para el tema Meabhy.
+fix: agregando el shipping ubigeo peru en los emails.(Para envíos de diferentes dirección)
+
 = 3.4.0 (28/04/2021) =
 fix: correción con la librería selectWoo.
 
