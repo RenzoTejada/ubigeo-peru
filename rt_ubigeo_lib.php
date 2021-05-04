@@ -58,7 +58,7 @@ function rt_ubigeo_load_provincias_front()
     session_start();
     $idDepa = isset($_POST['idDepa']) ? $_POST['idDepa'] : null;
     $_SESSION["idDepa"] = $idDepa;
-    $response = [];
+    $response = $provincias = [];
 
     if (is_numeric($idDepa)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
@@ -84,15 +84,18 @@ function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
     global $wpdb;
     $table_costo_ubigeo = $wpdb->prefix . "ubigeo_costo_ubigeo";
     $table_ubigeo_provincia = $wpdb->prefix . "ubigeo_provincia";
-    $tipo = get_tipo_costo_ubigeo_by_idDepa($idDepa);
+    $result = array();
+    if($idDepa > 0){
+        $tipo = get_tipo_costo_ubigeo_by_idDepa($idDepa);
 
-    if (isset($tipo['tipo']) == 1) {
-        $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
-    } else {
-        $request = "SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
+        if (isset($tipo['tipo']) == 1) {
+            $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
+        } else {
+            $request = "SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
         inner join $table_ubigeo_provincia as up on up.idProv=ucu.idProv
         where ucu.idDepa=$idDepa group by up.idProv order by up.provincia";
-        $result = $wpdb->get_results($request, ARRAY_A);
+            $result = $wpdb->get_results($request, ARRAY_A);
+        }
     }
     return $result;
 }
