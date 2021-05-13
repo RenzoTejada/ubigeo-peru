@@ -234,25 +234,31 @@ function rt_ubigeo_load_distritos_front_session($idProv)
 
 function rt_ubigeo_get_provincia_address_by_idDepa($idDepa)
 {
-    $reponse = array();
-    $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
+    $reponse = $provincias = array();
+    if($idDepa){
+        $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
+    }
     $reponse = array( '' => __('Select Province ', 'ubigeo-peru'));
 
-    foreach ($provincias as $prov) {
-        $reponse[$prov['idProv']] = $prov['provincia'];
+    if($provincias){
+        foreach ($provincias as $prov) {
+            $reponse[$prov['idProv']] = $prov['provincia'];
+        }
     }
-    
     return $reponse;
 }
 
 function rt_ubigeo_get_distrito_address_by_idProv($idProv)
 {
-    $reponse = array();
-    $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
+    $reponse = $distritos = array();
+    if($idProv){
+        $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
+    }
     $reponse = array( '' => __('Select District ', 'ubigeo-peru'));
-
-    foreach ($distritos as $dist) {
-        $reponse[$dist['idDist']] = $dist['distrito'];
+    if($distritos){
+        foreach ($distritos as $dist) {
+            $reponse[$dist['idDist']] = $dist['distrito'];
+        }
     }
     return $reponse;
 }
