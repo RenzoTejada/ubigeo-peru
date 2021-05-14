@@ -39,10 +39,12 @@ function rt_ubigeo_event_departamento(select, selectType) {
             }
             if (response) {
 				let html_provincia = '<option value="">Seleccionar Provincia</option>';
+				let html_distrito = '<option value="">Seleccionar Distrito</option>';
                 for (var r in response) {
                     html_provincia+='<option value=' + response[r].idProv + '>' + response[r].provincia + '</option>';
                 }
 				jQuery('#' + selectType + '_provincia').html(html_provincia);
+				jQuery('#' + selectType + '_distrito').html(html_distrito);
             }
             loader();
         }
@@ -62,7 +64,7 @@ function rt_ubigeo_event_provincia(select, selectType) {
         dataType: 'json',
         success: function (response) {
             if (!is_theme_avada) {
-                jQuery('#' + selectType + '_distrito').html('<option value="0">Select District</option>');
+                jQuery('#' + selectType + '_distrito').html('<option value="0">Seleccionar Distrito</option>');
             }
             if (response) {
 				let html_distrito = '<option value="">Seleccionar Distrito</option>';
@@ -75,9 +77,7 @@ function rt_ubigeo_event_provincia(select, selectType) {
         }
     });
 }
-setTimeout(function(){
-	jQuery('#billing_departamento').val('').trigger('change');
-},500);
+
 jQuery('#billing_departamento').on('change', function () {
     rt_ubigeo_event_departamento(this, 'billing');
 });

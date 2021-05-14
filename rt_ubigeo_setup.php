@@ -57,8 +57,14 @@ function rt_plugin_update_change()
         update_distrito_lurigancho();
         insert_ubigeo_faltantes();
         insert_distrito_mi_peru();
+        enable_ubigeo_woo();
     }
     update_option('rt_ubigeo_peru_db_version', Version_RT_Ubigeo_Peru);
+}
+
+function enable_ubigeo_woo()
+{
+    update_option('ubigeo_checkout_checkbox', 'on');
 }
 
 function insert_distrito_mi_peru()

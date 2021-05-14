@@ -81,8 +81,12 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.4.4 (14/05/2021) =
+fix: Se agrega la opción de activar/desactivar la funcionalidad del ubigeo en el checkout.
+Fix: Se agrega los addons de RT.
+
 = 3.4.3 (12/05/2021) =
-fix: correción de ubigeo con direccion en mi cuenta.
+fix: correción de ubigeo con dirección en mi cuenta.
 fix: correción de notice en generar orden de pedido desde admin.
 test: validación con wp 5.7.2
 
