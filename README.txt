@@ -22,12 +22,17 @@ Add the **Ubigeo Peru** to the Woocommerce checkout - _departamento - _provincia
 We also have a premium plugin where the shipping cost functionality of **Ubigeo Peru** is added for woocommerce.
 Where:
 
-&#9989; Enable cost per Department.
-&#9989; Enable cost per District.
-&#9989; Enable and Disable the shipping cost functionality without disabling the plugin.
-&#9989; Add name of shipping cost, free shipping and store pickup.
-&#9989; Add shipping methods such as Shipping cost, Free shipping (plus minimum amount) and Store Pickup (whatever you require).
-&#9989; Massive cost loading, new import functionality via .csv
+&#9989; Enable cost per **Department**.
+
+&#9989; Enable cost per **District**.
+
+&#9989; Enable and Disable the **shipping cost** functionality without disabling the plugin.
+
+&#9989; Add name of **shipping cost, free shipping and store pickup**.
+
+&#9989; Add shipping methods such as **Shipping cost**, **Free shipping** (plus minimum amount) and **Store Pickup** (whatever you require).
+
+&#9989; **Massive cost** loading, new import functionality via .csv
 
 
 &#9989; More information about the plugin in [Peru Ubigeo Shipping Cost for Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Peru Ubigeo Shipping Cost for Woocommerce")
