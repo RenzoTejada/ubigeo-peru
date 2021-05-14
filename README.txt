@@ -9,27 +9,28 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 This plugin adds the tables to the database _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito with respect to Peru.
-Add the ubigeo from Peru to the Woocommerce checkout - _departamento - _provincia - _distrito
+
+Add the **Ubigeo Peru** to the Woocommerce checkout - _departamento - _provincia - _distrito
 
 You will find this same information in the readme.txt of the plugin and on our website https://renzotejada.com
 
 == Description ==
 
 This plugin adds the tables to the database _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito with respect to Peru.
-Add the ubigeo from Peru to the Woocommerce checkout - _departamento - _provincia - _distrito.
+Add the **Ubigeo Peru** to the Woocommerce checkout - _departamento - _provincia - _distrito.
 
-We also have a premium plugin where the shipping cost functionality of ubigeo from Peru is added for woocommerce.
+We also have a premium plugin where the shipping cost functionality of **Ubigeo Peru** is added for woocommerce.
 Where:
 
-* Enable cost per Department.
-* Enable cost per District.
-* Enable and Disable the shipping cost functionality without disabling the plugin.
-* Add name of shipping cost, free shipping and store pickup.
-* Add shipping methods such as Shipping cost, Free shipping (plus minimum amount) and Store Pickup (whatever you require).
-* Massive cost loading, new import functionality via .csv
+&#9989; Enable cost per Department.
+&#9989; Enable cost per District.
+&#9989; Enable and Disable the shipping cost functionality without disabling the plugin.
+&#9989; Add name of shipping cost, free shipping and store pickup.
+&#9989; Add shipping methods such as Shipping cost, Free shipping (plus minimum amount) and Store Pickup (whatever you require).
+&#9989; Massive cost loading, new import functionality via .csv
 
 
-More information about the plugin in [Peru Ubigeo Shipping Cost for Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Peru Ubigeo Shipping Cost for Woocommerce")
+&#9989; More information about the plugin in [Peru Ubigeo Shipping Cost for Woocommerce](https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/ "Peru Ubigeo Shipping Cost for Woocommerce")
 
 == Installation ==
 
@@ -83,6 +84,7 @@ The information was obtained from the following urls:
 
 = 3.4.4 (14/05/2021) =
 fix: Se agrega la opción de activar/desactivar la funcionalidad del ubigeo en el checkout.
+fix: correción de error de js de ubigeo checkout de no limpiar distritos.
 Fix: Se agrega los addons de RT.
 
 = 3.4.3 (12/05/2021) =
