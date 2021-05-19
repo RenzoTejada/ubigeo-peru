@@ -389,3 +389,11 @@ function rt_ubigeo_show_invoice_template_customer_data() {
         <?php _e('District ', 'ubigeo-peru') ?> : <?php echo $dist['distrito'] ?><br>
     <?php } 
 }
+
+function rt_yith_woo_request_quote_premium_plugin_enabled()
+{
+    if (in_array('yith-woocommerce-request-a-quote-premium/init.php', (array) get_option('active_plugins', array()))) {
+        return true;
+    }
+    return false;
+}

@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    jQuery("#billing_departamento").select2();
+    jQuery("#billing_provincia").select2();
+    jQuery("#billing_distrito").select2();
+    jQuery("#shipping_departamento").select2();
+    jQuery("#shipping_provincia").select2();
+    jQuery("#shipping_distrito").select2();
 
     jQuery('#billing_departamento').on('change', function () {
         rt_ubigeo_event_departamento(this, 'billing')

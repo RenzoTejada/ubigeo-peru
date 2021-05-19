@@ -87,6 +87,10 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.4.5 (19/05/2021) =
+fix: Elimina una secuencia de js puesta en cola del plugin YITH WooCommerce Request A Quote Premium que afecta a mi cuenta direcciones.
+fix: Se agrega la libreria de select2 en mi cuenta direcciones.
+
 = 3.4.4 (14/05/2021) =
 fix: Se agrega la opción de activar/desactivar la funcionalidad del ubigeo en el checkout.
 fix: correción de error de js de ubigeo checkout de no limpiar distritos.

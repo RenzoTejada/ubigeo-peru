@@ -13,8 +13,19 @@ function rt_ubigeo_address_billing_fields($fields)
         <?php
         wp_register_script('jquery.3.0.0.min', plugins_url('js/jquery.3.0.0.min.js', __FILE__), array(), '3.0.0');
         wp_enqueue_script('jquery.3.0.0.min');
+        wp_register_script('select2-ubigeo', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
+        wp_enqueue_script('select2-ubigeo');
         wp_register_script('js_ubigeo_peru', plugins_url('js/js_ubigeo_peru.js', __FILE__), array(), '0.0.3');
         wp_enqueue_script('js_ubigeo_peru');
+
+        if(rt_yith_woo_request_quote_premium_plugin_enabled()){
+            wp_dequeue_script( 'ywraq-default-form-js-js' );
+            wp_deregister_script( 'ywraq-default-form-js-js' );
+            wp_dequeue_script( 'ywraq-default-form-js' );
+            wp_deregister_script( 'ywraq-default-form-js' );
+        }
+
+
 
         if ('PE' === get_user_meta(get_current_user_id(), 'billing_country', true)) {
             unset($fields['city']);
