@@ -397,3 +397,23 @@ function rt_yith_woo_request_quote_premium_plugin_enabled()
     }
     return false;
 }
+
+
+function rt_ubigeo_get_product_order($response, $object, $request)
+{
+    if (empty($response->data))
+        return $response;
+    $shipping_departamento = rt_ubigeo_get_departamento_por_id(get_post_meta($response->data['id'], '_shipping_departamento', true))['departamento'];
+    $shipping_provincia = rt_ubigeo_get_provincia_por_id(get_post_meta($response->data['id'], '_shipping_provincia', true))['provincia'];
+    $shipping_distrito = rt_ubigeo_get_distrito_por_id(get_post_meta($response->data['id'], '_shipping_distrito', true))['distrito'];
+    $response->data['billing']['departamento'] = rt_ubigeo_get_departamento_por_id(get_post_meta($response->data['id'], '_billing_departamento', true))['departamento'];
+    $response->data['billing']['provincia'] = rt_ubigeo_get_provincia_por_id(get_post_meta($response->data['id'], '_billing_provincia', true))['provincia'];
+    $response->data['billing']['distrito'] = rt_ubigeo_get_distrito_por_id(get_post_meta($response->data['id'], '_billing_distrito', true))['distrito'];
+    $response->data['shipping']['departamento'] = ($shipping_departamento) ? $shipping_departamento : '';
+    $response->data['shipping']['provincia'] = ($shipping_provincia) ? $shipping_provincia : '';
+    $response->data['shipping']['distrito'] = ($shipping_distrito) ? $shipping_distrito : '';
+    return $response;
+}
+
+add_filter("woocommerce_rest_prepare_shop_order_object", "rt_ubigeo_get_product_order", 1, 3);
+

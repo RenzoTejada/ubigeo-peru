@@ -87,6 +87,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.4.7 (03/06/2021) =
+fix: Se agrega ubigeo perú para el api de WC tanto billing como shipping.
+
 = 3.4.6 (19/05/2021) =
 fix: Se corrige el error de las cabeceras han sido enviadas en mi cuenta direcciones.
 
