@@ -364,7 +364,17 @@ function rt_ubigeo_custom_jscript_checkout()
     <div class="loader">
         <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
-
+    <script>
+        var idDepa = "<?php echo $idDepa ?>";
+        var idProv = "<?php echo $idProv ?>";
+        var idDist = "<?php echo $idDist ?>";
+        var idDepa_shipping = "<?php echo $idDepa_shipping ?>";
+        var idProv_shipping = "<?php echo $idProv_shipping ?>";
+        var idDist_shipping = "<?php echo $idDist_shipping ?>";
+        var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+        var is_theme_avada = "<?php echo (int)is_theme_avada(); ?>";
+        var is_theme_astra = "<?php echo (int)is_theme_astra(); ?>";
+    </script>
     <?php
 }
 
