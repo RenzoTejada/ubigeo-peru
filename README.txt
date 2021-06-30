@@ -49,6 +49,7 @@ For additional functionality, check out our companion plugin, such as:
 * [Utils para WooCommerce y WordPress](https://wordpress.org/plugins/wp-utils/)
 * [Multi Link in Bio](https://wordpress.org/plugins/multi-link-in-bio/)
 * [Display Price Free](https://wordpress.org/plugins/display-price-free/)
+* [Recojo por otra persona](https://wordpress.org/plugins/recojo-por-otra-persona/)
 
 = View more plugins PREMIUM =
 
@@ -101,6 +102,9 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 3.4.9 (29/06/2021) =
+Fix: correción de ubigeo solo para Perú.
 
 = 3.4.8 (14/06/2021) =
 Fix: validando versión WC 5.4.1.
