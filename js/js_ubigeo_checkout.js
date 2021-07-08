@@ -77,7 +77,11 @@ function rt_ubigeo_event_provincia(select, selectType) {
         }
     });
 }
-
+setTimeout(function(){
+    jQuery('#billing_departamento').val('').trigger('change');
+    jQuery('#billing_provincia').val('').trigger('change');
+    jQuery('#billing_distrito').val('').trigger('change');
+},500);
 jQuery('#billing_departamento').on('change', function () {
     rt_ubigeo_event_departamento(this, 'billing');
 });

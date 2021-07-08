@@ -327,7 +327,7 @@ function rt_ubigeo_able_woocommerce_loading_css_js()
         if (is_checkout()) {
             wp_register_script('select2-ubigeo', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
             wp_enqueue_script('select2-ubigeo');
-            wp_register_script('js_ubigeo_checkout-js', plugins_url('js/js_ubigeo_checkout.js', __FILE__), array(), '0.0.1', true);
+            wp_register_script('js_ubigeo_checkout-js', plugins_url('js/js_ubigeo_checkout.js', __FILE__), array(), '0.0.2', true);
             wp_enqueue_script('js_ubigeo_checkout-js');
             wp_register_style('css_ubigeo_checkout', plugins_url('css/css_ubigeo_checkout.css', __FILE__), array(), '0.0.1');
             wp_enqueue_style('css_ubigeo_checkout');

@@ -103,6 +103,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.5.0 (07/07/2021) =
+Fix: forzando a limpiar los campos de ubigeo en checkout.
+
 = 3.4.9 (29/06/2021) =
 Fix: correción de ubigeo solo para Perú.
 
