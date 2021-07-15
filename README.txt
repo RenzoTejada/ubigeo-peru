@@ -103,6 +103,10 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.5.1 (15/07/2021) =
+Fix: corrigiendo notice de variables no declaradas.
+Fix: validando versión WC 5.5.1.
+
 = 3.5.0 (07/07/2021) =
 Fix: forzando a limpiar los campos de ubigeo en checkout.
 

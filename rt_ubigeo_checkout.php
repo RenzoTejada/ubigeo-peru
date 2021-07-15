@@ -344,7 +344,7 @@ function rt_ubigeo_custom_jscript_checkout()
 {
     wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
     wp_enqueue_script('select2-js');
-    $idDepa = $idProv = $idDist = '';
+    $idDepa = $idProv = $idDist = $idDepa_shipping = $idProv_shipping = $idDist_shipping = '';
     if (is_user_logged_in()) {
         $current_user = wp_get_current_user();
         $idDepa = $current_user->billing_departamento;
@@ -353,7 +353,8 @@ function rt_ubigeo_custom_jscript_checkout()
         $idDepa_shipping = $current_user->shipping_departamento;
         $idProv_shipping = $current_user->shipping_provincia;
         $idDist_shipping = $current_user->shipping_distrito;
-    } ?>
+    }
+?>
     <?php if (is_theme_pawsitive()) { ?>
     <style>
         .select2-container {
