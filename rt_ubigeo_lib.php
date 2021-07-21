@@ -56,7 +56,7 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_front', 'rt_ubigeo_load_pro
 function rt_ubigeo_load_provincias_front()
 {
     session_start();
-    $idDepa = isset($_POST['idDepa']) ? $_POST['idDepa'] : null;
+    $idDepa = sanitize_text_field($_POST['idDepa']) !== null ? sanitize_text_field($_POST['idDepa']) : null;
     $_SESSION["idDepa"] = $idDepa;
     $response = $provincias = [];
 
@@ -114,7 +114,7 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_front', 'rt_ubigeo_load_dist
 function rt_ubigeo_load_distritos_front()
 {
 //    session_start();
-    $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
+    $idProv = sanitize_text_field($_POST['idProv']) !== null ? sanitize_text_field($_POST['idProv']) : null;
 //    $_SESSION["idProv"] = $idProv;
     $response = [];
     if (is_numeric($idProv)) {
@@ -268,7 +268,7 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_address', 'rt_ubigeo_load_p
 
 function rt_ubigeo_load_provincias_address()
 {
-    $idDepa = isset($_POST['idDepa']) ? $_POST['idDepa'] : null;
+    $idDepa = sanitize_text_field($_POST['idDepa']) !== null ? sanitize_text_field($_POST['idDepa']) : null;
     $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
     echo json_encode($provincias);
     wp_die();
@@ -279,7 +279,7 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_address', 'rt_ubigeo_load_di
 
 function rt_ubigeo_load_distritos_address()
 {
-    $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
+    $idProv = sanitize_text_field($_POST['idProv']) !== null ? sanitize_text_field($_POST['idProv']) : null;
     $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
     echo json_encode($distritos);
     wp_die();
@@ -311,7 +311,7 @@ function rt_libro_get_distrito_by_idProv($idProv = 0)
 
 function rt_libro_load_distrito_front()
 {
-    $idProv = isset($_POST['idProv']) ? $_POST['idProv'] : null;
+    $idProv = sanitize_text_field($_POST['idProv']) !== null ? sanitize_text_field($_POST['idProv']) : null;
 
     $response = [];
     if (is_numeric($idProv)) {
@@ -354,7 +354,7 @@ function rt_libro_lrq_get_distrito_por_id_one($dist)
 
 function rt_libro_load_provincias_front()
 {
-    $idDepa = isset($_POST['idDep']) ? $_POST['idDep'] : null;
+    $idDepa = sanitize_text_field($_POST['idDep']) !== null ? sanitize_text_field($_POST['idDep']) : null;
 
     $response = [];
     if (is_numeric($idDepa)) {
