@@ -486,9 +486,9 @@ function rt_show_custom_fields_order_billing($order)
     if ($ubigeo_billing) {
         echo '<div class="ubigeo_data_column">';
         echo '<h3>' . __('Billing Ubigeo Peru', 'ubigeo-peru') . '</h3>';
-        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_billing['departamento'] . '</p>';
-        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_billing['provincia'] . '</p>';
-        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_billing['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_billing['departamento']) . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_billing['provincia']) . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_billing['distrito']) . '</p>';
         echo '</div>';
     }
 }
@@ -502,9 +502,9 @@ function rt_show_custom_fields_order_shipping($order)
     if ($ubigeo_shipping) {
         echo '<div class="ubigeo_data_column">';
         echo '<h3>' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h3>';
-        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
-        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
-        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']) . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']) . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']) . '</p>';
         echo '</div>';
     }
 }
@@ -520,9 +520,9 @@ function rt_show_custom_fields_thankyou($order)
         echo '<div class="woocommerce-column woocommerce-column--1 woocommerce-column--billing-address col-1">';
         echo '<h2 class="woocommerce-column__title">' . __('Billing Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         echo '<address>';
-        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
-        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
-        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['departamento']) . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['provincia']) . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['distrito']) . '</p>';
         echo '</div>';
         echo '</address>';
     }
@@ -533,9 +533,9 @@ function rt_show_custom_fields_thankyou($order)
         echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-2">';
         echo '<h2 class="woocommerce-column__title">' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         echo '<address>';
-        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
-        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
-        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']) . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']) . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']) . '</p>';
         echo '</div>';
         echo '</address>';
     }
@@ -554,9 +554,9 @@ function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
     echo '<td valign="top" width="50%" style="text-align: left; font-family: Helvetica, Roboto, Arial, sans-serif; border: 0; padding: 0;">';
     echo '<h2 class="woocommerce-order-details__title">' . __('Billing Ubigeo Peru', 'ubigeo-peru') . '</h2>';
     echo '<address>';
-    echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo['departamento'] . '</p>';
-    echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo['provincia'] . '</p>';
-    echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo['distrito'] . '</p>';
+    echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['departamento']) . '</p>';
+    echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['provincia']) . '</p>';
+    echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['distrito']) . '</p>';
     echo '</address>';
     echo '</td>';
 
@@ -566,9 +566,9 @@ function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
         echo '<td valign="top" width="50%" style="text-align: left; font-family: Helvetica, Roboto, Arial, sans-serif; padding: 0;">';
         echo '<h2 class="woocommerce-order-details__title">' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         echo '<address>';
-        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['departamento'] . '</p>';
-        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['provincia'] . '</p>';
-        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . $ubigeo_shipping['distrito'] . '</p>';
+        echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']) . '</p>';
+        echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']) . '</p>';
+        echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']) . '</p>';
         echo '</div>';
         echo '</address>';
         echo '</td>';
