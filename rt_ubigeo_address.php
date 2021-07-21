@@ -11,8 +11,6 @@ function rt_ubigeo_address_billing_fields($fields)
             var name_distrito = "<?php _e('Select District', 'ubigeo-peru') ?>";
         </script>
         <?php
-        wp_register_script('jquery.3.0.0.min', plugins_url('js/jquery.3.0.0.min.js', __FILE__), array(), '3.0.0');
-        wp_enqueue_script('jquery.3.0.0.min');
         wp_register_script('select2-ubigeo', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
         wp_enqueue_script('select2-ubigeo');
         wp_register_script('js_ubigeo_peru', plugins_url('js/js_ubigeo_peru.js', __FILE__), array(), '0.0.3');
@@ -80,8 +78,6 @@ function rt_ubigeo_address_shipping_fields($fields)
             var name_distrito = "<?php _e('Select District', 'ubigeo-peru') ?>";
         </script>
         <?php
-        wp_register_script('jquery.3.0.0.min', plugins_url('js/jquery.3.0.0.min.js', __FILE__), array(), '3.0.0');
-        wp_enqueue_script('jquery.3.0.0.min');
         wp_register_script('js_ubigeo_peru', plugins_url('js/js_ubigeo_peru.js', __FILE__), array(), '0.0.4');
         wp_enqueue_script('js_ubigeo_peru');
 

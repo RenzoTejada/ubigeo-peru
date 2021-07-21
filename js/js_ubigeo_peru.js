@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(document).ready(function () {
     jQuery("#billing_departamento").select2();
     jQuery("#billing_provincia").select2();
     jQuery("#billing_distrito").select2();
@@ -66,5 +66,4 @@ $(document).ready(function () {
             }
         });
     }
-
 });

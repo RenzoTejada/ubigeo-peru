@@ -276,7 +276,7 @@ function rt_ubigeo_custom_wc_default_address_fields($address_fields)
 }
 add_filter('woocommerce_default_address_fields', 'rt_ubigeo_custom_wc_default_address_fields');
 
-function is_theme_avada()
+function rt_ubigeo_peru_is_theme_avada()
 {
     $rpt = false;
     $theme = wp_get_theme();
@@ -286,7 +286,7 @@ function is_theme_avada()
     return $rpt;
 }
 
-function is_theme_astra()
+function rt_ubigeo_peru_is_theme_astra()
 {
     $rpt = false;
     $theme = wp_get_theme();
@@ -296,7 +296,7 @@ function is_theme_astra()
     return $rpt;
 }
 
-function is_theme_pawsitive()
+function rt_ubigeo_peru_is_theme_pawsitive()
 {
     $rpt = false;
     $theme = wp_get_theme();
@@ -306,7 +306,7 @@ function is_theme_pawsitive()
     return $rpt;
 }
 
-function is_theme_meabhy()
+function rt_ubigeo_peru_is_theme_meabhy()
 {
     $rpt = false;
     $theme = wp_get_theme();
@@ -331,7 +331,7 @@ function rt_ubigeo_able_woocommerce_loading_css_js()
             wp_enqueue_script('js_ubigeo_checkout-js');
             wp_register_style('css_ubigeo_checkout', plugins_url('css/css_ubigeo_checkout.css', __FILE__), array(), '0.0.1');
             wp_enqueue_style('css_ubigeo_checkout');
-            if (is_theme_meabhy()) {
+            if (rt_ubigeo_peru_is_theme_meabhy()) {
                 wp_dequeue_script('selectWoo');
             }
         }
@@ -355,7 +355,7 @@ function rt_ubigeo_custom_jscript_checkout()
         $idDist_shipping = $current_user->shipping_distrito;
     }
 ?>
-    <?php if (is_theme_pawsitive()) { ?>
+    <?php if (rt_ubigeo_peru_is_theme_pawsitive()) { ?>
     <style>
         .select2-container {
             display : none;
@@ -366,15 +366,15 @@ function rt_ubigeo_custom_jscript_checkout()
         <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
     <script>
-        var idDepa = "<?php echo $idDepa ?>";
-        var idProv = "<?php echo $idProv ?>";
-        var idDist = "<?php echo $idDist ?>";
-        var idDepa_shipping = "<?php echo $idDepa_shipping ?>";
-        var idProv_shipping = "<?php echo $idProv_shipping ?>";
-        var idDist_shipping = "<?php echo $idDist_shipping ?>";
+        var idDepa = "<?php echo esc_attr($idDepa) ?>";
+        var idProv = "<?php echo esc_attr($idProv) ?>";
+        var idDist = "<?php echo esc_attr($idDist) ?>";
+        var idDepa_shipping = "<?php echo esc_attr($idDepa_shipping) ?>";
+        var idProv_shipping = "<?php echo esc_attr($idProv_shipping) ?>";
+        var idDist_shipping = "<?php echo esc_attr($idDist_shipping) ?>";
         var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
-        var is_theme_avada = "<?php echo (int)is_theme_avada(); ?>";
-        var is_theme_astra = "<?php echo (int)is_theme_astra(); ?>";
+        var is_theme_avada = "<?php echo (int)rt_ubigeo_peru_is_theme_avada(); ?>";
+        var is_theme_astra = "<?php echo (int)rt_ubigeo_peru_is_theme_astra(); ?>";
     </script>
     <?php
 }
@@ -583,24 +583,24 @@ add_action('woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails'
 function clear_checkout_fields($value, $input)
 {
     if ($input == 'billing_departamento') {
-        if (isset($_SESSION['idDepa']) && !empty($_SESSION['idDepa'])) {
-            $value = $_SESSION['idDepa'];
+        if (sanitize_text_field($_SESSION['idDepa']) !== null && !empty(sanitize_text_field($_SESSION['idDepa']))) {
+            $value = sanitize_text_field($_SESSION['idDepa']);
         } else {
             $value = '';
         }
     }
 
     if ($input == 'billing_provincia') {
-        if (isset($_SESSION['idProv']) && !empty($_SESSION['idProv'])) {
-            $value = $_SESSION['idProv'];
+        if (sanitize_text_field($_SESSION['idProv']) !== null && !empty(sanitize_text_field($_SESSION['idProv']))) {
+            $value = sanitize_text_field($_SESSION['idProv']);
         } else {
             $value = '';
         }
     }
 
     if ($input == 'billing_distrito') {
-        if (isset($_SESSION['idDist']) && !empty($_SESSION['idDist'])) {
-            $value = $_SESSION['idDist'];
+        if (sanitize_text_field($_SESSION['idDist']) !== null && !empty(sanitize_text_field($_SESSION['idDist']))) {
+            $value = sanitize_text_field($_SESSION['idDist']);
         } else {
             $value = '';
         }
