@@ -12,9 +12,9 @@ add_filter('woocommerce_country_locale_field_selectors', 'rt_ubigeo_country_loca
 function rt_ubigeo_country_locale_field_selectors($locale_fields)
 {
     $custom_locale_fields = array(
-        'departamento'  => '#billing_departamento_field, #shipping_departamento_field',
-        'provincia'  => '#billing_provincia_field, #shipping_provincia_field',
-        'distrito'  => '#billing_distrito_field, #shipping_distrito_field',
+        'departamento' => '#billing_departamento_field, #shipping_departamento_field',
+        'provincia' => '#billing_provincia_field, #shipping_provincia_field',
+        'distrito' => '#billing_distrito_field, #shipping_distrito_field',
     );
 
     $locale_fields = array_merge($locale_fields, $custom_locale_fields);
@@ -102,7 +102,7 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
         if ($idDepa) {
             $data_prov = rt_ubigeo_load_provincias_front_session($idDepa);
-            if(empty($data_prov)){
+            if (empty($data_prov)) {
                 $data_prov = array('' => __('Select Province ', 'ubigeo-peru'));
             }
         } else {
@@ -111,7 +111,7 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
         if ($idProv) {
             $data_dist = rt_ubigeo_load_distritos_front_session($idProv);
-            if(empty($data_dist)){
+            if (empty($data_dist)) {
                 $data_dist = array('' => __('Select District ', 'ubigeo-peru'));
             }
         } else {
@@ -120,7 +120,7 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
         if ($idDepa_shipping) {
             $data_prov_shipping = rt_ubigeo_load_provincias_front_session($idDepa_shipping);
-            if(empty($data_prov_shipping)){
+            if (empty($data_prov_shipping)) {
                 $data_prov_shipping = array('' => __('Select Province ', 'ubigeo-peru'));
             }
         } else {
@@ -129,7 +129,7 @@ function rt_ubigeo_wc_checkout_fields($fields)
 
         if ($idProv_shipping) {
             $data_dist_shipping = rt_ubigeo_load_distritos_front_session($idProv_shipping);
-            if(empty($data_dist_shipping)){
+            if (empty($data_dist_shipping)) {
                 $data_dist_shipping = array('' => __('Select District ', 'ubigeo-peru'));
             }
         } else {
@@ -274,6 +274,7 @@ function rt_ubigeo_custom_wc_default_address_fields($address_fields)
 
     return $address_fields;
 }
+
 add_filter('woocommerce_default_address_fields', 'rt_ubigeo_custom_wc_default_address_fields');
 
 function rt_ubigeo_peru_is_theme_avada()
@@ -354,16 +355,25 @@ function rt_ubigeo_custom_jscript_checkout()
         $idProv_shipping = $current_user->shipping_provincia;
         $idDist_shipping = $current_user->shipping_distrito;
     }
-?>
+    ?>
     <?php if (rt_ubigeo_peru_is_theme_pawsitive()) { ?>
     <style>
         .select2-container {
-            display : none;
+            display: none;
         }
     </style>
 <?php } ?>
     <div class="loader">
-        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
     <script>
         var idDepa = "<?php echo esc_attr($idDepa) ?>";
@@ -546,7 +556,7 @@ function rt_show_custom_fields_thankyou($order)
 add_action('woocommerce_thankyou', 'rt_show_custom_fields_thankyou', 20);
 add_action('woocommerce_view_order', 'rt_show_custom_fields_thankyou', 20);
 
-function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
+function rt_show_custom_fields_emails($order)
 {
     $ubigeo = get_name_ubigeo_billing($order, 'object');
     echo '<table id="addresses" cellspacing="0" cellpadding="0" border="0" style="width: 100%; vertical-align: top; margin-bottom: 40px; padding: 0;">';
@@ -578,7 +588,9 @@ function rt_show_custom_fields_emails($orden, $sent_to_admin, $order)
 
 }
 
-add_action('woocommerce_email_order_meta_fields', 'rt_show_custom_fields_emails', 10, 3);
+if (get_option('ubigeo_emails_checkbox') == "on") {
+    add_action('woocommerce_email_after_order_table', 'rt_show_custom_fields_emails', 20, 1);
+}
 
 function clear_checkout_fields($value, $input)
 {

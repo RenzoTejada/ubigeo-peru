@@ -26,7 +26,7 @@ function rt_ubigeo_submenu_settings_callback()
     if (isset($_REQUEST["settings-updated"]) && sanitize_text_field($_REQUEST["settings-updated"] == true)) {
         rt_ubigeo_peru_success_notice();
     } ?>
-    
+
     <div class="wrap woocommerce" id="facto-conf">
         <div style="background-color:#87b43e;">
         </div>
@@ -36,10 +36,10 @@ function rt_ubigeo_submenu_settings_callback()
             <a href="?page=rt_ubigeo_settings&tab=docs" class="nav-tab <?php
             if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "docs")) {
                 print " nav-tab-active";
-            } ?>"><?php echo     _e('Docs', 'ubigeo-peru') ?></a>
-               <?php
-               if (rt_costo_ubigeo_plugin_enabled()) {
-                   ?>
+            } ?>"><?php echo _e('Docs', 'ubigeo-peru') ?></a>
+            <?php
+            if (rt_costo_ubigeo_plugin_enabled()) {
+                ?>
                 <a href="?page=rt_ubigeo_settings&tab=cost" class="nav-tab <?php
                 if ($_REQUEST['tab'] == "cost") {
                     print " nav-tab-active";
@@ -52,16 +52,16 @@ function rt_ubigeo_submenu_settings_callback()
                 if ($_REQUEST['tab'] == "license") {
                     print " nav-tab-active";
                 } ?>"><?php _e('License', 'ubigeo-peru') ?></a>
-               <?php
-               } ?>
+                <?php
+            } ?>
             <a href="?page=rt_ubigeo_settings&tab=settings" class="nav-tab <?php
             if ($_REQUEST['tab'] == "settings") {
                 print " nav-tab-active";
             } ?>"><?php _e('Settings', 'ubigeo-peru') ?></a>
             <a href="?page=rt_ubigeo_settings&tab=help" class="nav-tab <?php
-               if ($_REQUEST['tab'] == "help") {
-                   print " nav-tab-active";
-               } ?>"><?php _e('Help', 'ubigeo-peru') ?></a>
+            if ($_REQUEST['tab'] == "help") {
+                print " nav-tab-active";
+            } ?>"><?php _e('Help', 'ubigeo-peru') ?></a>
             <a href="?page=rt_ubigeo_settings&tab=addons" class="nav-tab <?php
             if ($_REQUEST['tab'] == "addons") {
                 print " nav-tab-active";
@@ -141,11 +141,12 @@ function rt_ubigeo_register_settings()
         $mp_arr = array();
     }
     register_setting('ubigeo_peru_settings_group', 'ubigeo_checkout_checkbox');
+    register_setting('ubigeo_peru_settings_group', 'ubigeo_emails_checkbox');
 }
 
 function mercado_pago_plugin_enabled()
 {
-    if (in_array('woocommerce-mercadopago/woocommerce-mercadopago.php', (array) get_option('active_plugins', array()))) {
+    if (in_array('woocommerce-mercadopago/woocommerce-mercadopago.php', (array)get_option('active_plugins', array()))) {
         return true;
     }
     return false;
@@ -181,7 +182,9 @@ function rt_ubigeo_submenu_settings_docs()
             <h3><?php _e("Activate shipping ubigeo", 'ubigeo-peru'); ?></h3>
         </div>
         <div>
-            <p><?php _e('You can go to the following link', 'ubigeo-peru'); ?> <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=shipping&section=costo_ubigeo_peru_shipping_method') ?>" ><?php _e('Shipping Ubigeo ', 'ubigeo-peru'); ?></a>.</p>
+            <p><?php _e('You can go to the following link', 'ubigeo-peru'); ?> <a
+                        href="<?php echo admin_url('admin.php?page=wc-settings&tab=shipping&section=costo_ubigeo_peru_shipping_method') ?>"><?php _e('Shipping Ubigeo ', 'ubigeo-peru'); ?></a>.
+            </p>
         </div>
     </div>
     <div>
@@ -189,11 +192,13 @@ function rt_ubigeo_submenu_settings_docs()
             <h3><?php _e("Link Docs Ubigeo", 'ubigeo-peru'); ?></h3>
         </div>
         <div>
-            <p><?php _e('You can read the documentation in the ', 'ubigeo-peru'); ?> <a href="https://renzotejada.com/documentacion/docs-costo-de-envio-de-ubigeo-de-peru-para-woocommerce/?url=dashboard-wodpress" target="_blank" ><?php  _e('Docs ', 'ubigeo-peru'); ?></a>.</p>
+            <p><?php _e('You can read the documentation in the ', 'ubigeo-peru'); ?> <a
+                        href="https://renzotejada.com/documentacion/docs-costo-de-envio-de-ubigeo-de-peru-para-woocommerce/?url=dashboard-wodpress"
+                        target="_blank"><?php _e('Docs ', 'ubigeo-peru'); ?></a>.</p>
         </div>
     </div>
     <?php
-    }
+}
 }
 
 function rt_ubigeo_submenu_settings_settings()
@@ -208,17 +213,26 @@ function rt_ubigeo_submenu_settings_settings()
             <tbody>
             <tr valign="top">
                 <th scope="row" class="titledesc">
-                    <label><?php _e('Enable Ubigeo in checkout', 'ubigeo-peru') ?></label>
+                    <label><?php _e('Enable in Checkout', 'ubigeo-peru') ?></label>
                 </th>
                 <td class="forminp forminp-checkbox">
                     <input type="checkbox" name="ubigeo_checkout_checkbox" id="ubigeo_checkout_checkbox" value="on"
                         <?php if (esc_attr(get_option('ubigeo_checkout_checkbox')) == "on") echo "checked"; ?> />
                 </td>
             </tr>
+            <tr valign="top">
+                <th scope="row" class="titledesc">
+                    <label><?php _e('Display in Emails', 'ubigeo-peru') ?></label>
+                </th>
+                <td class="forminp forminp-checkbox">
+                    <input type="checkbox" name="ubigeo_emails_checkbox" id="ubigeo_emails_checkbox" value="on"
+                        <?php if (esc_attr(get_option('ubigeo_emails_checkbox')) == "on") echo "checked"; ?> />
+                </td>
+            </tr>
             </tbody>
         </table>
 
-        <?php submit_button(__( 'Save Changes', 'ubigeo-peru' )); ?>
+        <?php submit_button(__('Save Changes', 'ubigeo-peru')); ?>
     </form>
     <?php
 }
@@ -237,7 +251,7 @@ function rt_ubigeo_submenu_settings_help()
     <p><?php _e('This plugin is totally free.', 'ubigeo-peru'); ?></p>
 
     <h3><?php _e('How do I add the shipping cost or configure the costs?', 'ubigeo-peru'); ?></h3>
-    
+
     <p><?php _e('This plugin only adds the ubigeo in the woocommerce checkout, it does not have the shipping cost functionality', 'ubigeo-peru'); ?></p>
 
     <h3><?php _e('How to configure the shipping cost to the module?', 'ubigeo-peru'); ?></h3>
@@ -246,11 +260,14 @@ function rt_ubigeo_submenu_settings_help()
 
     <h3><?php _e('What is the PREMIUM version?', 'ubigeo-peru'); ?></h3>
 
-    <p><?php _e('The PREMIUM version is in the following ', 'ubigeo-peru'); ?><a href="https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/" target="_blank"><?php _e('LINK', 'ubigeo-peru'); ?></a>.</p>
+    <p><?php _e('The PREMIUM version is in the following ', 'ubigeo-peru'); ?><a
+                href="https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/"
+                target="_blank"><?php _e('LINK', 'ubigeo-peru'); ?></a>.</p>
 
     <h3><?php _e('I have other questions', 'ubigeo-peru'); ?></h3>
 
-    <p><?php _e('Go to', 'ubigeo-peru'); ?> <a href="https://renzotejada.com/contacto?url=dashboard-wodpress" target="_blank"><?php _e('RT - Contact', 'ubigeo-peru'); ?></a></p>
+    <p><?php _e('Go to', 'ubigeo-peru'); ?> <a href="https://renzotejada.com/contacto?url=dashboard-wodpress"
+                                               target="_blank"><?php _e('RT - Contact', 'ubigeo-peru'); ?></a></p>
     <?php
 }
 
@@ -267,29 +284,31 @@ function rt_ubigeo_submenu_settings_addons()
             <div class="ubigeo_admin_container">
                 <div class="ubigeo_admin_item">
                     <div class="ubigeo_admin_header">
-                        <img src="<?php echo plugins_url('image/costo-de-envio-de-ubigeo-peru.jpg', __FILE__) ; ?>" />
+                        <img src="<?php echo plugins_url('image/costo-de-envio-de-ubigeo-peru.jpg', __FILE__); ?>"/>
                     </div>
                     <div class="ubigeo_admin_body">
                         <h2><?php _e('Costo de Envío de Ubigeo Perú', 'ubigeo-peru'); ?></h2>
                         <p><?php _e('This plugin adds the shipping cost functionality of ubigeo Peru to WooCommerce.', 'ubigeo-peru'); ?></p>
                     </div>
                     <div class="ubigeo_admin_footer">
-                            <a href="https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click" target="_blank"
-                               class="button"><?php _e('Add', 'ubigeo-peru'); ?></a>
+                        <a href="https://renzotejada.com/plugin/costo-de-envio-de-ubigeo-de-peru-para-woocommerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click"
+                           target="_blank"
+                           class="button"><?php _e('Add', 'ubigeo-peru'); ?></a>
                     </div>
                 </div>
             </div>
             <div class="ubigeo_admin_container">
                 <div class="ubigeo_admin_item">
                     <div class="ubigeo_admin_header">
-                        <img src="<?php echo plugins_url('image/libro-de-reclamaciones-y-quejas-pro.jpg', __FILE__) ; ?>" />
+                        <img src="<?php echo plugins_url('image/libro-de-reclamaciones-y-quejas-pro.jpg', __FILE__); ?>"/>
                     </div>
                     <div class="ubigeo_admin_body">
                         <h2><?php _e('Libro de Reclamos y quejas PRO', 'ubigeo-peru'); ?></h2>
                         <p><?php _e('Useful tool for the protection of consumer rights, and by Indecopi\'s considerations.', 'ubigeo-peru'); ?></p>
                     </div>
                     <div class="ubigeo_admin_footer">
-                        <a href="https://renzotejada.com/plugin/libro-de-reclamaciones-y-quejas-pro/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click" target="_blank"
+                        <a href="https://renzotejada.com/plugin/libro-de-reclamaciones-y-quejas-pro/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click"
+                           target="_blank"
                            class="button"><?php _e('Add', 'ubigeo-peru'); ?></a>
                     </div>
                 </div>
@@ -297,14 +316,15 @@ function rt_ubigeo_submenu_settings_addons()
             <div class="ubigeo_admin_container">
                 <div class="ubigeo_admin_item">
                     <div class="ubigeo_admin_header">
-                        <img src="<?php echo plugins_url('image/plugin-wooyape.jpg', __FILE__) ; ?>" />
+                        <img src="<?php echo plugins_url('image/plugin-wooyape.jpg', __FILE__); ?>"/>
                     </div>
                     <div class="ubigeo_admin_body">
                         <h2><?php _e('WooYape para WooCommerce', 'ubigeo-peru'); ?></h2>
                         <p><?php _e('Add Yape digital wallet for WooCommerce to your online shop.', 'ubigeo-peru'); ?></p>
                     </div>
                     <div class="ubigeo_admin_footer">
-                        <a href="https://renzotejada.com/plugin/wooyape-para-woocommerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click" target="_blank"
+                        <a href="https://renzotejada.com/plugin/wooyape-para-woocommerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click"
+                           target="_blank"
                            class="button"><?php _e('Add', 'ubigeo-peru'); ?></a>
                     </div>
                 </div>
@@ -312,14 +332,15 @@ function rt_ubigeo_submenu_settings_addons()
             <div class="ubigeo_admin_container">
                 <div class="ubigeo_admin_item">
                     <div class="ubigeo_admin_header">
-                        <img src="<?php echo plugins_url('image/plugin-wooplin.jpg', __FILE__) ; ?>" />
+                        <img src="<?php echo plugins_url('image/plugin-wooplin.jpg', __FILE__); ?>"/>
                     </div>
                     <div class="ubigeo_admin_body">
                         <h2><?php _e('WooPlin para WooCommerce', 'ubigeo-peru'); ?></h2>
                         <p><?php _e('Add Plin digital wallet for WooCommerce to your online shop.', 'ubigeo-peru'); ?></p>
                     </div>
                     <div class="ubigeo_admin_footer">
-                        <a href="https://renzotejada.com/plugin/wooplin-para-woocommerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click" target="_blank"
+                        <a href="https://renzotejada.com/plugin/wooplin-para-woocommerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click"
+                           target="_blank"
                            class="button"><?php _e('Add', 'ubigeo-peru'); ?></a>
                     </div>
                 </div>
@@ -327,14 +348,15 @@ function rt_ubigeo_submenu_settings_addons()
             <div class="ubigeo_admin_container">
                 <div class="ubigeo_admin_item">
                     <div class="ubigeo_admin_header">
-                        <img src="<?php echo plugins_url('image/comprobante-de-pago-woo.jpg', __FILE__) ; ?>" />
+                        <img src="<?php echo plugins_url('image/comprobante-de-pago-woo.jpg', __FILE__); ?>"/>
                     </div>
                     <div class="ubigeo_admin_body">
                         <h2><?php _e('Comprobante de Pago Perú', 'ubigeo-peru'); ?></h2>
                         <p><?php _e('Choose bill or Invoice or others in your online shop.', 'ubigeo-peru'); ?></p>
                     </div>
                     <div class="ubigeo_admin_footer">
-                        <a href="https://renzotejada.com/plugin/comprobante-de-pago-peru-para-woocooomerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click" target="_blank"
+                        <a href="https://renzotejada.com/plugin/comprobante-de-pago-peru-para-woocooomerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click"
+                           target="_blank"
                            class="button"><?php _e('Download', 'ubigeo-peru'); ?></a>
                     </div>
                 </div>
@@ -342,14 +364,15 @@ function rt_ubigeo_submenu_settings_addons()
             <div class="ubigeo_admin_container">
                 <div class="ubigeo_admin_item">
                     <div class="ubigeo_admin_header">
-                        <img src="<?php echo plugins_url('image/tipo-de-documento-woo.jpg', __FILE__) ; ?>" />
+                        <img src="<?php echo plugins_url('image/tipo-de-documento-woo.jpg', __FILE__); ?>"/>
                     </div>
                     <div class="ubigeo_admin_body">
                         <h2><?php _e('Tipo Documento Perú', 'ubigeo-peru'); ?></h2>
                         <p><?php _e('Choose DNI or RUC or others is added in your online shop.', 'ubigeo-peru'); ?></p>
                     </div>
                     <div class="ubigeo_admin_footer">
-                        <a href="https://renzotejada.com/plugin/tipo-de-documento-peru-para-woocooomerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click" target="_blank"
+                        <a href="https://renzotejada.com/plugin/tipo-de-documento-peru-para-woocooomerce/?utm_source=addons&utm_medium=link&utm_campaign=ubigeo&utm_content=click"
+                           target="_blank"
                            class="button"><?php _e('Download', 'ubigeo-peru'); ?></a>
                     </div>
                 </div>

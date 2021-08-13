@@ -1,12 +1,12 @@
 === Ubigeo de Perú para Woocommerce y WordPress ===
 Contributors: renzotejada
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
 Tested up to: 5.8
-Stable tag: 3.5.3
-Requires PHP: 5.6
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 3.5.4
+Requires PHP: 5.6.20
 
 This plugin adds the tables to the database _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito with respect to Peru.
 
@@ -102,6 +102,10 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 3.5.4 (12/08/2021) =
+Fix: Corrigiendo compatibilidad de checkout field editor con datos en el email.
+Fix: Se agrega la funcionalidad de desactivar el ubigeo en los emils.
 
 = 3.5.3 (20/07/2021) =
 Fix: Corrigiendo problemas de vulnerabilidades de team wp.
