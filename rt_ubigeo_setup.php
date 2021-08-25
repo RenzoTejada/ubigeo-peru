@@ -32,48 +32,48 @@ function rt_ubigeo_errortabledist()
 function rt_ubigeo_setup()
 {
     //crear departamentos
-    crearDepartamento();
+    rt_ubigeo_crearDepartamento();
     //crear provincia
-    crearProvincia();
+    rt_ubigeo_crearProvincia();
     //crear distrito
-    crearDistrito();
+    rt_ubigeo_crearDistrito();
     //update distrito
-    updateNameDistritoPuebloLibre();
+    rt_ubigeo_updateNameDistritoPuebloLibre();
     //insert distrito bagua
-    insert_distrito_bagua();
+    rt_ubigeo_insert_distrito_bagua();
     //insert distrito salamanca
-    insert_distrito_salamanca();
+    rt_ubigeo_insert_distrito_salamanca();
     //insert distrito Veintiséis de Octubre
-    insert_distrito_26_octubre();
+    rt_ubigeo_insert_distrito_26_octubre();
     // actualizar distritos de la provincia huayla y marizcal luzuriaga
-    update_distrito_ancash_huayla();
-    update_distrito_ancash_marizcal();
+    rt_ubigeo_update_distrito_ancash_huayla();
+    rt_ubigeo_update_distrito_ancash_marizcal();
 }
 
 function rt_plugin_update_change()
 {
     $rt_ubigeo_peru_db_version = get_option('rt_ubigeo_peru_db_version');
     if (version_compare(Version_RT_Ubigeo_Peru, $rt_ubigeo_peru_db_version) > 0) {
-        update_distrito_lurigancho();
-        insert_ubigeo_faltantes();
-        insert_distrito_mi_peru();
-        enable_ubigeo_woo();
-        enable_mails_woo();
+        rt_ubigeo_update_distrito_lurigancho();
+        rt_ubigeo_insert_ubigeo_faltantes();
+        rt_ubigeo_insert_distrito_mi_peru();
+        rt_ubigeo_enable_ubigeo_woo();
+        rt_ubigeo_enable_mails_woo();
     }
     update_option('rt_ubigeo_peru_db_version', Version_RT_Ubigeo_Peru);
 }
 
-function enable_ubigeo_woo()
+function rt_ubigeo_enable_ubigeo_woo()
 {
     update_option('ubigeo_checkout_checkbox', 'on');
 }
 
-function enable_mails_woo()
+function rt_ubigeo_enable_mails_woo()
 {
     update_option('ubigeo_emails_checkbox', 'on');
 }
 
-function insert_distrito_mi_peru()
+function rt_ubigeo_insert_distrito_mi_peru()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -88,7 +88,7 @@ function insert_distrito_mi_peru()
     return true;
 }
 
-function insert_ubigeo_faltantes()
+function rt_ubigeo_insert_ubigeo_faltantes()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -229,7 +229,7 @@ function insert_ubigeo_faltantes()
     return true;
 }
 
-function update_distrito_lurigancho()
+function rt_ubigeo_update_distrito_lurigancho()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -239,7 +239,7 @@ function update_distrito_lurigancho()
     return true;
 }
 
-function update_distrito_ancash_huayla()
+function rt_ubigeo_update_distrito_ancash_huayla()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -249,7 +249,7 @@ function update_distrito_ancash_huayla()
     return true;
 }
 
-function update_distrito_ancash_marizcal()
+function rt_ubigeo_update_distrito_ancash_marizcal()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -259,7 +259,7 @@ function update_distrito_ancash_marizcal()
     return true;
 }
 
-function insert_distrito_26_octubre()
+function rt_ubigeo_insert_distrito_26_octubre()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -275,7 +275,7 @@ function insert_distrito_26_octubre()
     return true;
 }
 
-function insert_distrito_salamanca()
+function rt_ubigeo_insert_distrito_salamanca()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -291,7 +291,7 @@ function insert_distrito_salamanca()
     return true;
 }
 
-function insert_distrito_bagua()
+function rt_ubigeo_insert_distrito_bagua()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -308,7 +308,7 @@ function insert_distrito_bagua()
 }
 
 // update a nombre de distrito pueblo libre
-function updateNameDistritoPuebloLibre()
+function rt_ubigeo_updateNameDistritoPuebloLibre()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -318,7 +318,7 @@ function updateNameDistritoPuebloLibre()
     dbDelta($sql);
 }
 
-function crearDepartamento()
+function rt_ubigeo_crearDepartamento()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -333,11 +333,11 @@ function crearDepartamento()
             PRIMARY KEY (`idDepa`)
             )ENGINE=MyISAM DEFAULT CHARSET=utf8; ";
         dbDelta($sql);
-        cargaDatosDepartamentos();
+        rt_ubigeo_cargaDatosDepartamentos();
     }
 }
 
-function crearProvincia()
+function rt_ubigeo_crearProvincia()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -356,13 +356,13 @@ function crearProvincia()
 
         dbDelta($sql);
 
-        cargaDatosProvinciasUno();
-        cargaDatosProvinciasDos();
-        cargaDatosProvinciasTres();
+        rt_ubigeo_cargaDatosProvinciasUno();
+        rt_ubigeo_cargaDatosProvinciasDos();
+        rt_ubigeo_cargaDatosProvinciasTres();
     }
 }
 
-function crearDistrito()
+function rt_ubigeo_crearDistrito()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
@@ -379,34 +379,34 @@ function crearDistrito()
             PRIMARY KEY (`idDist`))";
 
         dbDelta($sql);
-        cargaDatosDistritosUno();
-        cargaDatosDistritosDos();
-        cargaDatosDistritosTres();
-        cargaDatosDistritosCuatro();
-        cargaDatosDistritosCinco();
-        cargaDatosDistritosSeis();
-        cargaDatosDistritosSiete();
-        cargaDatosDistritosOcho();
-        cargaDatosDistritosNueve();
-        cargaDatosDistritosDiez();
-        cargaDatosDistritosOnce();
-        cargaDatosDistritosDoce();
-        cargaDatosDistritosTrece();
-        cargaDatosDistritosCatorce();
-        cargaDatosDistritosQuince();
-        cargaDatosDistritosDieciseis();
-        cargaDatosDistritosDiecisiete();
-        cargaDatosDistritosDieciocho();
-        cargaDatosDistritosDiecinueve();
-        cargaDatosDistritosViente();
-        cargaDatosDistritosVeintiuno();
-        cargaDatosDistritosVeintidos();
-        cargaDatosDistritosVeintitres();
-        cargaDatosDistritosVeinticuatro();
+        rt_ubigeo_cargaDatosDistritosUno();
+        rt_ubigeo_cargaDatosDistritosDos();
+        rt_ubigeo_cargaDatosDistritosTres();
+        rt_ubigeo_cargaDatosDistritosCuatro();
+        rt_ubigeo_cargaDatosDistritosCinco();
+        rt_ubigeo_cargaDatosDistritosSeis();
+        rt_ubigeo_cargaDatosDistritosSiete();
+        rt_ubigeo_cargaDatosDistritosOcho();
+        rt_ubigeo_cargaDatosDistritosNueve();
+        rt_ubigeo_cargaDatosDistritosDiez();
+        rt_ubigeo_cargaDatosDistritosOnce();
+        rt_ubigeo_cargaDatosDistritosDoce();
+        rt_ubigeo_cargaDatosDistritosTrece();
+        rt_ubigeo_cargaDatosDistritosCatorce();
+        rt_ubigeo_cargaDatosDistritosQuince();
+        rt_ubigeo_cargaDatosDistritosDieciseis();
+        rt_ubigeo_cargaDatosDistritosDiecisiete();
+        rt_ubigeo_cargaDatosDistritosDieciocho();
+        rt_ubigeo_cargaDatosDistritosDiecinueve();
+        rt_ubigeo_cargaDatosDistritosViente();
+        rt_ubigeo_cargaDatosDistritosVeintiuno();
+        rt_ubigeo_cargaDatosDistritosVeintidos();
+        rt_ubigeo_cargaDatosDistritosVeintitres();
+        rt_ubigeo_cargaDatosDistritosVeinticuatro();
     }
 }
 
-function cargaDatosDepartamentos()
+function rt_ubigeo_cargaDatosDepartamentos()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
@@ -439,7 +439,7 @@ function cargaDatosDepartamentos()
     dbDelta($sql);
 }
 
-function cargaDatosProvinciasUno()
+function rt_ubigeo_cargaDatosProvinciasUno()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
@@ -526,7 +526,7 @@ function cargaDatosProvinciasUno()
     dbDelta($sql);
 }
 
-function cargaDatosProvinciasDos()
+function rt_ubigeo_cargaDatosProvinciasDos()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
@@ -615,7 +615,7 @@ function cargaDatosProvinciasDos()
     dbDelta($sql);
 }
 
-function cargaDatosProvinciasTres()
+function rt_ubigeo_cargaDatosProvinciasTres()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
@@ -657,7 +657,7 @@ function cargaDatosProvinciasTres()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosUno()
+function rt_ubigeo_cargaDatosDistritosUno()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -745,7 +745,7 @@ function cargaDatosDistritosUno()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDos()
+function rt_ubigeo_cargaDatosDistritosDos()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -834,7 +834,7 @@ function cargaDatosDistritosDos()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosTres()
+function rt_ubigeo_cargaDatosDistritosTres()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -923,7 +923,7 @@ function cargaDatosDistritosTres()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosCuatro()
+function rt_ubigeo_cargaDatosDistritosCuatro()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1011,7 +1011,7 @@ function cargaDatosDistritosCuatro()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosCinco()
+function rt_ubigeo_cargaDatosDistritosCinco()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1099,7 +1099,7 @@ function cargaDatosDistritosCinco()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosSeis()
+function rt_ubigeo_cargaDatosDistritosSeis()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1186,7 +1186,7 @@ function cargaDatosDistritosSeis()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosSiete()
+function rt_ubigeo_cargaDatosDistritosSiete()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1274,7 +1274,7 @@ function cargaDatosDistritosSiete()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosOcho()
+function rt_ubigeo_cargaDatosDistritosOcho()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1362,7 +1362,7 @@ function cargaDatosDistritosOcho()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosNueve()
+function rt_ubigeo_cargaDatosDistritosNueve()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1436,7 +1436,7 @@ function cargaDatosDistritosNueve()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDiez()
+function rt_ubigeo_cargaDatosDistritosDiez()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1524,7 +1524,7 @@ function cargaDatosDistritosDiez()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosOnce()
+function rt_ubigeo_cargaDatosDistritosOnce()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1612,7 +1612,7 @@ function cargaDatosDistritosOnce()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDoce()
+function rt_ubigeo_cargaDatosDistritosDoce()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1699,7 +1699,7 @@ function cargaDatosDistritosDoce()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosTrece()
+function rt_ubigeo_cargaDatosDistritosTrece()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1787,7 +1787,7 @@ function cargaDatosDistritosTrece()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosCatorce()
+function rt_ubigeo_cargaDatosDistritosCatorce()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1875,7 +1875,7 @@ function cargaDatosDistritosCatorce()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosQuince()
+function rt_ubigeo_cargaDatosDistritosQuince()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -1962,7 +1962,7 @@ function cargaDatosDistritosQuince()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDieciseis()
+function rt_ubigeo_cargaDatosDistritosDieciseis()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2050,7 +2050,7 @@ function cargaDatosDistritosDieciseis()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDiecisiete()
+function rt_ubigeo_cargaDatosDistritosDiecisiete()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2138,7 +2138,7 @@ function cargaDatosDistritosDiecisiete()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDieciocho()
+function rt_ubigeo_cargaDatosDistritosDieciocho()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2206,7 +2206,7 @@ function cargaDatosDistritosDieciocho()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosDiecinueve()
+function rt_ubigeo_cargaDatosDistritosDiecinueve()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2293,7 +2293,7 @@ function cargaDatosDistritosDiecinueve()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosViente()
+function rt_ubigeo_cargaDatosDistritosViente()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2381,7 +2381,7 @@ function cargaDatosDistritosViente()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosVeintiuno()
+function rt_ubigeo_cargaDatosDistritosVeintiuno()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2449,7 +2449,7 @@ function cargaDatosDistritosVeintiuno()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosVeintidos()
+function rt_ubigeo_cargaDatosDistritosVeintidos()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2537,7 +2537,7 @@ function cargaDatosDistritosVeintidos()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosVeintitres()
+function rt_ubigeo_cargaDatosDistritosVeintitres()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
@@ -2623,7 +2623,7 @@ function cargaDatosDistritosVeintitres()
     dbDelta($sql);
 }
 
-function cargaDatosDistritosVeinticuatro()
+function rt_ubigeo_cargaDatosDistritosVeinticuatro()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";

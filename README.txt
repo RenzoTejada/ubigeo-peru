@@ -103,6 +103,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.5.6 (25/08/2021) =
+Fix: Actualizando nombre de funciones de setup de ubigeo.
+
 = 3.5.5 (24/08/2021) =
 Fix:  actualizando banner por marca derecho de marca de woo.
 test: validación con WC 5.6
