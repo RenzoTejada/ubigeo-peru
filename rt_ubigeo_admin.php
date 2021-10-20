@@ -74,7 +74,9 @@ function rt_ubigeo_submenu_settings_callback()
         } elseif ($_REQUEST['tab'] == "cost") {
             if (rt_costo_ubigeo_plugin_enabled()) {
                 if (isset($_REQUEST['section']) == "ubigeo") {
-                    if (isset($_REQUEST['list_cost']) == "new") {
+                    if (($_REQUEST['list_cost']) == "clear") {
+                        rt_ubigeo_submenu_settings_cost_clear();
+                    } elseif (($_REQUEST['list_cost']) == "new") {
                         rt_ubigeo_submenu_settings_cost_new();
                     } elseif (isset($_REQUEST['edit'])) {
                         rt_ubigeo_submenu_settings_cost_edit($_REQUEST['edit']);

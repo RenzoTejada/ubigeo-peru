@@ -600,24 +600,24 @@ if (get_option('ubigeo_emails_checkbox') == "on") {
 function clear_checkout_fields($value, $input)
 {
     if ($input == 'billing_departamento') {
-        if (sanitize_text_field($_SESSION['idDepa']) !== null && !empty(sanitize_text_field($_SESSION['idDepa']))) {
-            $value = sanitize_text_field($_SESSION['idDepa']);
+        if (sanitize_text_field(isset($_SESSION['idDepa'])) !== null && !empty(sanitize_text_field(isset($_SESSION['idDepa'])))) {
+            $value = sanitize_text_field(isset($_SESSION['idDepa']));
         } else {
             $value = '';
         }
     }
 
     if ($input == 'billing_provincia') {
-        if (sanitize_text_field($_SESSION['idProv']) !== null && !empty(sanitize_text_field($_SESSION['idProv']))) {
-            $value = sanitize_text_field($_SESSION['idProv']);
+        if (sanitize_text_field(isset($_SESSION['idProv'])) !== null && !empty(sanitize_text_field(isset($_SESSION['idProv'])))) {
+            $value = sanitize_text_field(isset($_SESSION['idProv']));
         } else {
             $value = '';
         }
     }
 
     if ($input == 'billing_distrito') {
-        if (sanitize_text_field($_SESSION['idDist']) !== null && !empty(sanitize_text_field($_SESSION['idDist']))) {
-            $value = sanitize_text_field($_SESSION['idDist']);
+        if (sanitize_text_field(isset($_SESSION['idDist'])) !== null && !empty(sanitize_text_field(isset($_SESSION['idDist'])))) {
+            $value = sanitize_text_field(isset($_SESSION['idDist']));
         } else {
             $value = '';
         }

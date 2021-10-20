@@ -116,7 +116,7 @@ function rt_ubigeo_load_distritos_front()
 //    session_start();
     $idProv = sanitize_text_field($_POST['idProv']) !== null ? sanitize_text_field($_POST['idProv']) : null;
 //    $_SESSION["idProv"] = $idProv;
-    $response = [];
+    $distritos = [];
     if (is_numeric($idProv)) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
             $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
