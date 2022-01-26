@@ -103,7 +103,7 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
-= 3.5.5 (24/08/2021) =
+= 3.5.9 (26/01/2022) =
 test: validación con WC 5.9
 
 = 3.5.8 (19/10/2021) =
