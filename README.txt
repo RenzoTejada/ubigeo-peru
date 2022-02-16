@@ -103,6 +103,10 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.6.0 (16/02/2022) =
+fix: agregando la opción de prioridad de método de envío gratis
+test: Testeado en la versión WC tested up to: 6.2.0
+
 = 3.5.9 (26/01/2022) =
 test: validación con WC 5.9
 

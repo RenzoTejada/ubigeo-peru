@@ -144,6 +144,7 @@ function rt_ubigeo_register_settings()
     }
     register_setting('ubigeo_peru_settings_group', 'ubigeo_checkout_checkbox');
     register_setting('ubigeo_peru_settings_group', 'ubigeo_emails_checkbox');
+    register_setting('ubigeo_peru_settings_group', 'ubigeo_priority_method_free_checkbox');
 }
 
 function mercado_pago_plugin_enabled()
@@ -229,6 +230,15 @@ function rt_ubigeo_submenu_settings_settings()
                 <td class="forminp forminp-checkbox">
                     <input type="checkbox" name="ubigeo_emails_checkbox" id="ubigeo_emails_checkbox" value="on"
                         <?php if (esc_attr(get_option('ubigeo_emails_checkbox')) == "on") echo "checked"; ?> />
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" class="titledesc">
+                    <label><?php _e('Priority Method Free Shipping', 'ubigeo-peru') ?></label>
+                </th>
+                <td class="forminp forminp-checkbox">
+                    <input type="checkbox" name="ubigeo_priority_method_free_checkbox" id="ubigeo_priority_method_free_checkbox" value="on"
+                        <?php if (esc_attr(get_option('ubigeo_priority_method_free_checkbox')) == "on") echo "checked"; ?> />
                 </td>
             </tr>
             </tbody>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Ubigeo de Per&uacute; para WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-12 20:38+0000\n"
-"PO-Revision-Date: 2021-08-13 22:32+0000\n"
+"PO-Revision-Date: 2022-02-16 22:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: Español\n"
 "Language: es_ES\n"
@@ -14,73 +14,73 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.4.6; wp-5.5.3"
 
-#: rt_ubigeo_admin.php:182
+#: rt_ubigeo_admin.php:185
 msgid "Activate shipping ubigeo"
 msgstr "Activar envío ubigeo"
 
-#: rt_ubigeo_admin.php:296 rt_ubigeo_admin.php:312 rt_ubigeo_admin.php:328
-#: rt_ubigeo_admin.php:344
+#: rt_ubigeo_admin.php:308 rt_ubigeo_admin.php:324 rt_ubigeo_admin.php:340
+#: rt_ubigeo_admin.php:356
 msgid "Add"
 msgstr "Agregar"
 
-#: rt_ubigeo_admin.php:339
+#: rt_ubigeo_admin.php:351
 msgid "Add Plin digital wallet for WooCommerce to your online shop."
 msgstr "Añade el monedero digital Plin para WooCommerce a tu tienda online."
 
-#: rt_ubigeo_admin.php:173
+#: rt_ubigeo_admin.php:176
 msgid "Add the Departments of Peru"
 msgstr "Agregar los Departamentos del Perú"
 
-#: rt_ubigeo_admin.php:175
+#: rt_ubigeo_admin.php:178
 msgid "Add the Districts of Peru"
 msgstr "Agregar los distritos de Perú"
 
-#: rt_ubigeo_admin.php:174
+#: rt_ubigeo_admin.php:177
 msgid "Add the Provinces of Peru"
 msgstr "Agregar las Provincias del Perú"
 
-#: rt_ubigeo_admin.php:323
+#: rt_ubigeo_admin.php:335
 msgid "Add Yape digital wallet for WooCommerce to your online shop."
 msgstr "Añade el monedero digital Yape para WooCommerce a tu tienda online."
 
-#: rt_ubigeo_admin.php:68 rt_ubigeo_admin.php:281
+#: rt_ubigeo_admin.php:68 rt_ubigeo_admin.php:293
 msgid "Addons"
 msgstr "Addons"
 
-#: rt_ubigeo_admin.php:164
+#: rt_ubigeo_admin.php:167
 msgid "Allows you to select departments, provinces and districts of Peru"
 msgstr "Le permite seleccionar departamentos, provincias y distritos del Perú"
 
-#: rt_ubigeo_admin.php:169
+#: rt_ubigeo_admin.php:172
 msgid "Attributes"
 msgstr "Atributos"
 
-#: rt_ubigeo_checkout.php:498 rt_ubigeo_checkout.php:531
-#: rt_ubigeo_checkout.php:565
+#: rt_ubigeo_checkout.php:503 rt_ubigeo_checkout.php:536
+#: rt_ubigeo_checkout.php:570
 msgid "Billing Ubigeo Peru"
 msgstr "Facturación Ubigeo Perú"
 
-#: rt_ubigeo_admin.php:355
+#: rt_ubigeo_admin.php:367
 msgid "Choose bill or Invoice or others in your online shop."
 msgstr "Elija boleta o factura o otros en su tienda online."
 
-#: rt_ubigeo_admin.php:371
+#: rt_ubigeo_admin.php:383
 msgid "Choose DNI or RUC or others is added in your online shop."
 msgstr "Elija DNI o RUC u otros se añade en su tienda online."
 
-#: rt_ubigeo_admin.php:354
+#: rt_ubigeo_admin.php:366
 msgid "Comprobante de Pago Perú"
 msgstr "Comprobante de Pago Perú"
 
-#: rt_ubigeo_admin.php:290
+#: rt_ubigeo_admin.php:302
 msgid "Costo de Envío de Ubigeo Perú"
 msgstr "Costo de Envío de Ubigeo Perú"
 
-#: rt_ubigeo_address.php:38 rt_ubigeo_address.php:95 rt_ubigeo_checkout.php:184
-#: rt_ubigeo_checkout.php:214 rt_ubigeo_checkout.php:499
-#: rt_ubigeo_checkout.php:515 rt_ubigeo_checkout.php:533
-#: rt_ubigeo_checkout.php:546 rt_ubigeo_checkout.php:567
-#: rt_ubigeo_checkout.php:579
+#: rt_ubigeo_address.php:38 rt_ubigeo_address.php:95 rt_ubigeo_checkout.php:188
+#: rt_ubigeo_checkout.php:218 rt_ubigeo_checkout.php:504
+#: rt_ubigeo_checkout.php:520 rt_ubigeo_checkout.php:538
+#: rt_ubigeo_checkout.php:551 rt_ubigeo_checkout.php:572
+#: rt_ubigeo_checkout.php:584
 msgid "Department"
 msgstr "Departamento"
 
@@ -88,19 +88,19 @@ msgstr "Departamento"
 msgid "Department "
 msgstr "Departamento"
 
-#: rt_ubigeo_admin.php:161
+#: rt_ubigeo_admin.php:164
 msgid "Description"
 msgstr "Descripción"
 
-#: rt_ubigeo_admin.php:225
+#: rt_ubigeo_admin.php:228
 msgid "Display in Emails"
 msgstr "Mostrar en los correos electrónicos"
 
 #: rt_ubigeo_address.php:56 rt_ubigeo_address.php:113
-#: rt_ubigeo_checkout.php:204 rt_ubigeo_checkout.php:235
-#: rt_ubigeo_checkout.php:501 rt_ubigeo_checkout.php:517
-#: rt_ubigeo_checkout.php:535 rt_ubigeo_checkout.php:548
-#: rt_ubigeo_checkout.php:569 rt_ubigeo_checkout.php:581
+#: rt_ubigeo_checkout.php:208 rt_ubigeo_checkout.php:239
+#: rt_ubigeo_checkout.php:506 rt_ubigeo_checkout.php:522
+#: rt_ubigeo_checkout.php:540 rt_ubigeo_checkout.php:553
+#: rt_ubigeo_checkout.php:574 rt_ubigeo_checkout.php:586
 msgid "District"
 msgstr "Distrito"
 
@@ -108,35 +108,35 @@ msgstr "Distrito"
 msgid "District "
 msgstr "Distrito"
 
-#: rt_ubigeo_admin.php:39 ubigeo-peru.php:53
+#: rt_ubigeo_admin.php:39 ubigeo-peru.php:56
 msgid "Docs"
 msgstr "Documentación"
 
-#: rt_ubigeo_admin.php:197
+#: rt_ubigeo_admin.php:200
 msgid "Docs "
 msgstr "Documentación"
 
-#: rt_ubigeo_admin.php:360 rt_ubigeo_admin.php:376
+#: rt_ubigeo_admin.php:372 rt_ubigeo_admin.php:388
 msgid "Download"
 msgstr "Descargar"
 
-#: rt_ubigeo_admin.php:216
+#: rt_ubigeo_admin.php:219
 msgid "Enable in Checkout"
 msgstr "Habilitar en el finalizar compra"
 
-#: rt_ubigeo_admin.php:269
+#: rt_ubigeo_admin.php:281
 msgid "Go to"
 msgstr "Ir"
 
-#: rt_ubigeo_admin.php:64 rt_ubigeo_admin.php:243
+#: rt_ubigeo_admin.php:64 rt_ubigeo_admin.php:255
 msgid "Help"
 msgstr "Ayuda"
 
-#: rt_ubigeo_admin.php:253
+#: rt_ubigeo_admin.php:265
 msgid "How do I add the shipping cost or configure the costs?"
 msgstr "¿Cómo agrego el costo de envío o configuro los costos?"
 
-#: rt_ubigeo_admin.php:257
+#: rt_ubigeo_admin.php:269
 msgid "How to configure the shipping cost to the module?"
 msgstr "¿Cómo configurar el costo de envío al módulo?"
 
@@ -149,7 +149,7 @@ msgstr "https://renzotejada.com/"
 msgid "https://renzotejada.com/ubigeo-de-peru-para-woocommerce/"
 msgstr "https://renzotejada.com/ubigeo-de-peru-para-woocommerce/"
 
-#: rt_ubigeo_admin.php:267
+#: rt_ubigeo_admin.php:279
 msgid "I have other questions"
 msgstr "Tengo otras preguntas"
 
@@ -157,7 +157,7 @@ msgstr "Tengo otras preguntas"
 msgid "Import"
 msgstr "Importar"
 
-#: rt_ubigeo_admin.php:247
+#: rt_ubigeo_admin.php:259
 msgid ""
 "It allows you to integrate your Woocommerce to Ubigeo from Peru to ask "
 "customers for their information at checkout."
@@ -165,7 +165,7 @@ msgstr ""
 "Le permite integrar su Woocommerce a Ubigeo desde Perú para solicitar a los "
 "clientes su información al momento de pagar."
 
-#: rt_ubigeo_admin.php:306
+#: rt_ubigeo_admin.php:318
 msgid "Libro de Reclamos y quejas PRO"
 msgstr "Libro de Reclamos y quejas PRO"
 
@@ -173,15 +173,15 @@ msgstr "Libro de Reclamos y quejas PRO"
 msgid "License"
 msgstr "Licencia"
 
-#: rt_ubigeo_admin.php:265
+#: rt_ubigeo_admin.php:277
 msgid "LINK"
 msgstr "LINK"
 
-#: rt_ubigeo_admin.php:192
+#: rt_ubigeo_admin.php:195
 msgid "Link Docs Ubigeo"
 msgstr "Enlace Docs Ubigeo"
 
-#: rt_ubigeo_admin.php:158
+#: rt_ubigeo_admin.php:161
 msgid "Peru Ubigeo Documentation for Woocommerce"
 msgstr "Documentación de Ubigeo de Perú para Woocommerce"
 
@@ -226,11 +226,15 @@ msgstr ""
 "Ubigeo de Perú para WordPress y WooCommerce - El complemento contiene los "
 "departamentos - provincias y distritos de Perú"
 
+#: rt_ubigeo_admin.php:237
+msgid "Priority Method Free Shipping"
+msgstr "Método prioritario Envío gratuito"
+
 #: rt_ubigeo_address.php:47 rt_ubigeo_address.php:104
-#: rt_ubigeo_checkout.php:194 rt_ubigeo_checkout.php:225
-#: rt_ubigeo_checkout.php:500 rt_ubigeo_checkout.php:516
-#: rt_ubigeo_checkout.php:534 rt_ubigeo_checkout.php:547
-#: rt_ubigeo_checkout.php:568 rt_ubigeo_checkout.php:580
+#: rt_ubigeo_checkout.php:198 rt_ubigeo_checkout.php:229
+#: rt_ubigeo_checkout.php:505 rt_ubigeo_checkout.php:521
+#: rt_ubigeo_checkout.php:539 rt_ubigeo_checkout.php:552
+#: rt_ubigeo_checkout.php:573 rt_ubigeo_checkout.php:585
 msgid "Province"
 msgstr "Provincia"
 
@@ -242,15 +246,15 @@ msgstr "Provincia"
 msgid "Renzo Tejada"
 msgstr "Renzo Tejada"
 
-#: rt_ubigeo_admin.php:270
+#: rt_ubigeo_admin.php:282
 msgid "RT - Contact"
 msgstr "RT - Contacto"
 
-#: rt_ubigeo_admin.php:259
+#: rt_ubigeo_admin.php:271
 msgid "Said functional functionality is in a PREMIUM version."
 msgstr "Dicha funcionalidad funcional se encuentra en versión PREMIUM."
 
-#: rt_ubigeo_admin.php:235
+#: rt_ubigeo_admin.php:247
 msgid "Save Changes"
 msgstr "Guardar Cambios"
 
@@ -262,11 +266,11 @@ msgstr "Seleccionar Departamento"
 msgid "Select District"
 msgstr "Seleccionar Distrito"
 
-#: rt_ubigeo_checkout.php:115 rt_ubigeo_checkout.php:118
-#: rt_ubigeo_checkout.php:133 rt_ubigeo_checkout.php:136
-#: rt_ubigeo_checkout.php:155 rt_ubigeo_checkout.php:158
-#: rt_ubigeo_checkout.php:161 rt_ubigeo_checkout.php:176
-#: rt_ubigeo_checkout.php:179 rt_ubigeo_lib.php:221 rt_ubigeo_lib.php:257
+#: rt_ubigeo_checkout.php:116 rt_ubigeo_checkout.php:119
+#: rt_ubigeo_checkout.php:134 rt_ubigeo_checkout.php:137
+#: rt_ubigeo_checkout.php:156 rt_ubigeo_checkout.php:159
+#: rt_ubigeo_checkout.php:162 rt_ubigeo_checkout.php:177
+#: rt_ubigeo_checkout.php:180 rt_ubigeo_lib.php:221 rt_ubigeo_lib.php:257
 msgid "Select District "
 msgstr "Seleccionar Distrito"
 
@@ -274,36 +278,36 @@ msgstr "Seleccionar Distrito"
 msgid "Select Province"
 msgstr "Seleccionar Provincia"
 
-#: rt_ubigeo_checkout.php:106 rt_ubigeo_checkout.php:109
-#: rt_ubigeo_checkout.php:124 rt_ubigeo_checkout.php:127
-#: rt_ubigeo_checkout.php:144 rt_ubigeo_checkout.php:147
-#: rt_ubigeo_checkout.php:167 rt_ubigeo_checkout.php:170 rt_ubigeo_lib.php:201
+#: rt_ubigeo_checkout.php:107 rt_ubigeo_checkout.php:110
+#: rt_ubigeo_checkout.php:125 rt_ubigeo_checkout.php:128
+#: rt_ubigeo_checkout.php:145 rt_ubigeo_checkout.php:148
+#: rt_ubigeo_checkout.php:168 rt_ubigeo_checkout.php:171 rt_ubigeo_lib.php:201
 #: rt_ubigeo_lib.php:241
 msgid "Select Province "
 msgstr "Seleccionar Provincia"
 
-#: rt_ubigeo_admin.php:60 rt_ubigeo_admin.php:207 ubigeo-peru.php:62
+#: rt_ubigeo_admin.php:60 rt_ubigeo_admin.php:210 ubigeo-peru.php:65
 msgid "Settings"
 msgstr "Ajustes"
 
-#: rt_ubigeo_admin.php:186
+#: rt_ubigeo_admin.php:189
 msgid "Shipping Ubigeo "
 msgstr "Envíos Ubigeo"
 
-#: rt_ubigeo_checkout.php:514 rt_ubigeo_checkout.php:544
-#: rt_ubigeo_checkout.php:577
+#: rt_ubigeo_checkout.php:519 rt_ubigeo_checkout.php:549
+#: rt_ubigeo_checkout.php:582
 msgid "Shipping Ubigeo Peru"
 msgstr "Envíos Ubigeo Perú"
 
-#: ubigeo-peru.php:54
+#: ubigeo-peru.php:57
 msgid "Support"
 msgstr "Soporte"
 
-#: rt_ubigeo_admin.php:263
+#: rt_ubigeo_admin.php:275
 msgid "The PREMIUM version is in the following "
 msgstr "La versión PREMIUM está en la siguiente"
 
-#: rt_ubigeo_admin.php:291
+#: rt_ubigeo_admin.php:303
 msgid ""
 "This plugin adds the shipping cost functionality of ubigeo Peru to "
 "WooCommerce."
@@ -311,11 +315,11 @@ msgstr ""
 "Este plugin añade la funcionalidad de gastos de envío de ubigeo Perú a "
 "WooCommerce."
 
-#: rt_ubigeo_admin.php:251
+#: rt_ubigeo_admin.php:263
 msgid "This plugin is totally free."
 msgstr "Este complemento es totalmente gratuito."
 
-#: rt_ubigeo_admin.php:255
+#: rt_ubigeo_admin.php:267
 msgid ""
 "This plugin only adds the ubigeo in the woocommerce checkout, it does not "
 "have the shipping cost functionality"
@@ -323,7 +327,7 @@ msgstr ""
 "Este complemento solo agrega el ubigeo en el pago de woocommerce, no tiene "
 "la funcionalidad de costo de envío"
 
-#: rt_ubigeo_admin.php:370
+#: rt_ubigeo_admin.php:382
 msgid "Tipo Documento Perú"
 msgstr "Tipo Documento Perú"
 
@@ -343,7 +347,7 @@ msgstr ""
 "Ubigeo de Perú para Woocommerce | Integración de Ubigeo de Perú a tu "
 "Woocommerce"
 
-#: rt_ubigeo_admin.php:307
+#: rt_ubigeo_admin.php:319
 msgid ""
 "Useful tool for the protection of consumer rights, and by Indecopi's "
 "considerations."
@@ -355,30 +359,30 @@ msgstr ""
 msgid "Was saved successfully"
 msgstr "Se guardó con éxito"
 
-#: rt_ubigeo_admin.php:245
+#: rt_ubigeo_admin.php:257
 msgid "What does this module do?"
 msgstr "¿Qué hace este módulo?"
 
-#: rt_ubigeo_admin.php:249
+#: rt_ubigeo_admin.php:261
 msgid "What is the cost of the module?"
 msgstr "¿Cuál es el costo del módulo?"
 
-#: rt_ubigeo_admin.php:261
+#: rt_ubigeo_admin.php:273
 msgid "What is the PREMIUM version?"
 msgstr "¿Qué es la versión PREMIUM?"
 
-#: rt_ubigeo_admin.php:338
+#: rt_ubigeo_admin.php:350
 msgid "WooPlin para WooCommerce"
 msgstr "WooPlin para WooCommerce"
 
-#: rt_ubigeo_admin.php:322
+#: rt_ubigeo_admin.php:334
 msgid "WooYape para WooCommerce"
 msgstr "WooYape para WooCommerce"
 
-#: rt_ubigeo_admin.php:185
+#: rt_ubigeo_admin.php:188
 msgid "You can go to the following link"
 msgstr "Puedes ir al siguiente enlace"
 
-#: rt_ubigeo_admin.php:195
+#: rt_ubigeo_admin.php:198
 msgid "You can read the documentation in the "
 msgstr "Puede leer la documentación en el"
