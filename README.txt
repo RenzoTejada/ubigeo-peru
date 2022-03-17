@@ -4,7 +4,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 5.9
+Tested up to: 5.9.2
 Stable tag: trunk
 Requires PHP: 5.6.20
 
@@ -102,6 +102,11 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 3.6.1 (17/03/2022) =
+fix: corrigiendo error de notice del menu de ubigeo
+test: validación con WP 5.9.2
+test: validación con WC 6.3.1
 
 = 3.6.0 (16/02/2022) =
 fix: agregando la opción de prioridad de método de envío gratis

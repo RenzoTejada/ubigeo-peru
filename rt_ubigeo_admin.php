@@ -41,29 +41,29 @@ function rt_ubigeo_submenu_settings_callback()
             if (rt_costo_ubigeo_plugin_enabled()) {
                 ?>
                 <a href="?page=rt_ubigeo_settings&tab=cost" class="nav-tab <?php
-                if ($_REQUEST['tab'] == "cost") {
+                if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "cost") {
                     print " nav-tab-active";
                 } ?>"><?php _e('Ubigeo', 'ubigeo-peru') ?></a>
                 <a href="?page=rt_ubigeo_settings&tab=import" class="nav-tab <?php
-                if ($_REQUEST['tab'] == "import") {
+                if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "import") {
                     print " nav-tab-active";
                 } ?>"><?php _e('Import', 'ubigeo-peru') ?></a>
                 <a href="?page=rt_ubigeo_settings&tab=license" class="nav-tab <?php
-                if ($_REQUEST['tab'] == "license") {
+                if ( isset($_REQUEST['tab']) && $_REQUEST['tab'] == "license") {
                     print " nav-tab-active";
                 } ?>"><?php _e('License', 'ubigeo-peru') ?></a>
                 <?php
             } ?>
             <a href="?page=rt_ubigeo_settings&tab=settings" class="nav-tab <?php
-            if ($_REQUEST['tab'] == "settings") {
+            if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "settings") {
                 print " nav-tab-active";
             } ?>"><?php _e('Settings', 'ubigeo-peru') ?></a>
             <a href="?page=rt_ubigeo_settings&tab=help" class="nav-tab <?php
-            if ($_REQUEST['tab'] == "help") {
+            if ( isset($_REQUEST['tab']) && $_REQUEST['tab'] == "help") {
                 print " nav-tab-active";
             } ?>"><?php _e('Help', 'ubigeo-peru') ?></a>
             <a href="?page=rt_ubigeo_settings&tab=addons" class="nav-tab <?php
-            if ($_REQUEST['tab'] == "addons") {
+            if ( isset($_REQUEST['tab']) && $_REQUEST['tab'] == "addons") {
                 print " nav-tab-active";
             } ?>"><?php _e('Addons', 'ubigeo-peru') ?></a>
 
