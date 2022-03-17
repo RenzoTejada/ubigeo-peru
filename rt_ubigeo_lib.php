@@ -132,7 +132,7 @@ function rt_ubigeo_get_distrito_by_idProv($idProv = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $request = "SELECT * FROM $table_name where idProv = $idProv order by distrito asc";
+    $request = "SELECT * FROM $table_name where idProv = sanitize_text_field($idProv) order by distrito asc";
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -140,7 +140,7 @@ function rt_ubigeo_validate_prov_of_depa($idDepa, $idProv)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT * FROM $table_name where idProv = $idProv and idDepa = $idDepa";
+    $request = "SELECT * FROM $table_name where idProv = sanitize_text_field($idProv) and idDepa = sanitize_text_field($idDepa)";
     return $wpdb->get_results($request, ARRAY_A);
 }
 

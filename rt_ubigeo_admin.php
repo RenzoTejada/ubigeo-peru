@@ -79,7 +79,7 @@ function rt_ubigeo_submenu_settings_callback()
                     } elseif (($_REQUEST['list_cost']) == "new") {
                         rt_ubigeo_submenu_settings_cost_new();
                     } elseif (isset($_REQUEST['edit'])) {
-                        rt_ubigeo_submenu_settings_cost_edit($_REQUEST['edit']);
+                        rt_ubigeo_submenu_settings_cost_edit(sanitize_text_field($_REQUEST['edit']));
                     } else {
                         rt_ubigeo_submenu_settings_cost_ubigeo();
                     }
