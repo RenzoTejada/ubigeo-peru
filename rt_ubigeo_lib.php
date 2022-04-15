@@ -38,7 +38,7 @@ function rt_ubigeo_get_departamento_display()
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
     $table_display = $wpdb->prefix . "ubigeo_display";
-    $request = "SELECT * FROM $table_name as dep inner join $table_display as dis on dis.idDepa=dep.idDepa order by dep.departamento asc";
+    $request = $wpdb->prepare("SELECT * FROM $table_name as dep inner join $table_display as dis on dis.idDepa=dep.idDepa order by dep.departamento asc");
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -46,7 +46,8 @@ function rt_ubigeo_get_departamento()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $request = "SELECT * FROM $table_name";
+    $request = $wpdb->prepare("SELECT * FROM $table_name");
+
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -75,7 +76,8 @@ function rt_ubigeo_get_provincia_by_idDepa($idDepa = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT idProv, provincia FROM $table_name where idDepa = $idDepa order by provincia asc";
+    $request = $wpdb->prepare("SELECT idProv, provincia FROM $table_name where idDepa =%d  order by provincia asc",sanitize_text_field($idDepa));
+
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -142,7 +144,6 @@ function rt_ubigeo_validate_prov_of_depa($idDepa, $idProv)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-//    $request = "SELECT * FROM $table_name where idProv = sanitize_text_field($idProv) and idDepa = sanitize_text_field($idDepa)";
     $request = $wpdb->prepare("SELECT * FROM $table_name where idProv =%d and idDepa =%d", sanitize_text_field($idProv), sanitize_text_field($idDepa));
 
     return $wpdb->get_results($request, ARRAY_A);
@@ -294,7 +295,6 @@ function rt_libro_lrq_get_departamento_front()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-//    $request = "SELECT * FROM $table_name";
     $request = $wpdb->prepare("SELECT * FROM $table_name");
 
     return $wpdb->get_results($request, ARRAY_A);
