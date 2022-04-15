@@ -91,12 +91,13 @@ function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
         if (isset($tipo['tipo']) == 1) {
             $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
         } else {
-            $request = "SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
-        inner join $table_ubigeo_provincia as up on up.idProv=ucu.idProv
-        where ucu.idDepa=$idDepa group by up.idProv order by up.provincia";
+            $request = $wpdb->prepare("SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
+                    inner join $table_ubigeo_provincia as up on up.idProv=ucu.idProv
+                    where ucu.idDepa=%d group by up.idProv order by up.provincia",$idDepa);
             $result = $wpdb->get_results($request, ARRAY_A);
         }
     }
+
     return $result;
 }
 
@@ -132,7 +133,8 @@ function rt_ubigeo_get_distrito_by_idProv($idProv = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $request = "SELECT * FROM $table_name where idProv = sanitize_text_field($idProv) order by distrito asc";
+    $request = $wpdb->prepare("SELECT * FROM $table_name where idProv = %d order by distrito asc",sanitize_text_field($idProv));
+
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -140,7 +142,9 @@ function rt_ubigeo_validate_prov_of_depa($idDepa, $idProv)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT * FROM $table_name where idProv = sanitize_text_field($idProv) and idDepa = sanitize_text_field($idDepa)";
+//    $request = "SELECT * FROM $table_name where idProv = sanitize_text_field($idProv) and idDepa = sanitize_text_field($idDepa)";
+    $request = $wpdb->prepare("SELECT * FROM $table_name where idProv =%d and idDepa =%d", sanitize_text_field($idProv), sanitize_text_field($idDepa));
+
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -154,9 +158,10 @@ function rt_ubigeo_get_distrito_by_idProv_display($idProv = 0)
     if ($tipo['tipo'] == 1) {
         $result = rt_ubigeo_get_distrito_by_idProv($idProv);
     } else {
-        $request = "SELECT dist.idDist, dist.distrito  FROM $table_costo_ubigeo  as ucu  
+        $request = $wpdb->prepare( "SELECT dist.idDist, dist.distrito  FROM $table_costo_ubigeo  as ucu  
         inner join $table_ubigeo_distrito as dist on dist.idDist=ucu.idDist
-        where ucu.idProv=$idProv group by dist.idDist order by dist.distrito ASC";
+        where ucu.idProv=%d group by dist.idDist order by dist.distrito ASC",$idProv);
+
         $result = $wpdb->get_results($request, ARRAY_A);
     }
     return $result;
@@ -175,23 +180,23 @@ function rt_ubigeo_get_departamento_por_id($idDep)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $request = "SELECT departamento FROM ". $table_name ." where idDepa=" . $idDep;
+    $request = $wpdb->prepare("SELECT departamento FROM ". $table_name ." where idDepa =%d",sanitize_text_field($idDep));
     return $wpdb->get_row($request, ARRAY_A);
 }
 
-function rt_ubigeo_get_provincia_por_id($idDep)
+function rt_ubigeo_get_provincia_por_id($idProv)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT provincia FROM ". $table_name ." where idProv=" . $idDep;
+    $request = $wpdb->prepare("SELECT provincia FROM ". $table_name ." where idProv=%d",sanitize_text_field($idProv));
     return $wpdb->get_row($request, ARRAY_A);
 }
 
-function rt_ubigeo_get_distrito_por_id($idDep)
+function rt_ubigeo_get_distrito_por_id($idDist)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $request = "SELECT distrito FROM ". $table_name ." where idDist=" . $idDep;
+    $request = $wpdb->prepare("SELECT distrito FROM ". $table_name ." where idDist=%d",sanitize_text_field($idDist));
     return $wpdb->get_row($request, ARRAY_A);
 }
 
@@ -289,7 +294,9 @@ function rt_libro_lrq_get_departamento_front()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $request = "SELECT * FROM $table_name";
+//    $request = "SELECT * FROM $table_name";
+    $request = $wpdb->prepare("SELECT * FROM $table_name");
+
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -297,7 +304,7 @@ function rt_libro_get_provincia_by_idDepa($idDepa = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT * FROM $table_name where idDepa = $idDepa";
+    $request = $wpdb->prepare("SELECT * FROM $table_name where idDepa =%d",$idDepa);
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -305,7 +312,8 @@ function rt_libro_get_distrito_by_idProv($idProv = 0)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $request = "SELECT * FROM $table_name where idProv = $idProv";
+    $request = $wpdb->prepare("SELECT * FROM $table_name where idProv = %d",$idProv);
+
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -329,7 +337,8 @@ function rt_libro_lrq_get_departamento_por_id_one($idDep)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $request = "SELECT departamento FROM " . $table_name . " where idDepa=" . $idDep;
+    $request = $wpdb->prepare("SELECT departamento FROM " . $table_name . " where idDepa= %d",$idDep);
+
     $rpt = $wpdb->get_row($request, ARRAY_A);
     return $rpt['departamento'];
 }
@@ -338,7 +347,8 @@ function rt_libro_lrq_get_provincia_por_id_one($prov)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_provincia";
-    $request = "SELECT provincia FROM " . $table_name . " where idProv=" . $prov;
+    $request = $wpdb->prepare("SELECT provincia FROM " . $table_name . " where idProv= %d",$prov);
+
     $rpt = $wpdb->get_row($request, ARRAY_A);
     return $rpt['provincia'];
 }
@@ -347,7 +357,8 @@ function rt_libro_lrq_get_distrito_por_id_one($dist)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_distrito";
-    $request = "SELECT distrito FROM " . $table_name . " where idDist=" . $dist;
+    $request = $wpdb->prepare("SELECT distrito FROM " . $table_name . " where idDist= %d",$dist);
+
     $rpt = $wpdb->get_row($request, ARRAY_A);
     return $rpt['distrito'];
 }

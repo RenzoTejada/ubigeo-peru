@@ -4,8 +4,8 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 5.9.2
-Stable tag: 3.6.3
+Tested up to: 5.9.3
+Stable tag: 3.6.4
 Requires PHP: 5.6.20
 
 This plugin adds the tables to the database _ubigeo_departamento, _ubigeo_provincia, _ubigeo_distrito with respect to Peru.
@@ -102,6 +102,11 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 3.6.4 (15/04/2022) =
+fix: corrigiendo querys a bd por parte de team WordPress.
+test: validación con WP 5.9.3
+test: validación con WC 6.4.0
 
 = 3.6.3 (17/03/2022) =
 fix: removiendo código con vulnerabilidades por parte de team WordPress.
