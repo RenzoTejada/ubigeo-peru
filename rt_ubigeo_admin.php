@@ -144,6 +144,9 @@ function rt_ubigeo_register_settings()
     }
     register_setting('ubigeo_peru_settings_group', 'ubigeo_checkout_checkbox');
     register_setting('ubigeo_peru_settings_group', 'ubigeo_emails_checkbox');
+    register_setting('ubigeo_peru_settings_group', 'ubigeo_thanks_checkbox');
+    register_setting('ubigeo_peru_settings_group', 'ubigeo_title_checkbox');
+    register_setting('ubigeo_peru_settings_group', 'ubigeo_format_checkbox');
     register_setting('ubigeo_peru_settings_group', 'ubigeo_priority_method_free_checkbox');
 }
 
@@ -230,6 +233,35 @@ function rt_ubigeo_submenu_settings_settings()
                 <td class="forminp forminp-checkbox">
                     <input type="checkbox" name="ubigeo_emails_checkbox" id="ubigeo_emails_checkbox" value="on"
                         <?php if (esc_attr(get_option('ubigeo_emails_checkbox')) == "on") echo "checked"; ?> />
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" class="titledesc">
+                    <label><?php _e('Display in Checkout', 'ubigeo-peru') ?></label>
+                </th>
+                <td class="forminp forminp-checkbox">
+                    <input type="checkbox" name="ubigeo_thanks_checkbox" id="ubigeo_thanks_checkbox" value="on"
+                        <?php if (esc_attr(get_option('ubigeo_thanks_checkbox')) == "on") echo "checked"; ?> />
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" class="titledesc">
+                    <label><?php _e('Show title', 'ubigeo-peru') ?></label>
+                </th>
+                <td class="forminp forminp-checkbox">
+                    <input type="checkbox" name="ubigeo_title_checkbox" id="ubigeo_title_checkbox" value="on"
+                        <?php if (esc_attr(get_option('ubigeo_title_checkbox')) == "on") echo "checked"; ?> />
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" class="titledesc">
+                    <label><?php _e('Format ', 'ubigeo-peru') ?></label>
+                </th>
+                <td class="forminp forminp-checkbox">
+                    <select name="ubigeo_format_checkbox" id="ubigeo_format_checkbox">
+                        <option value="vertical" <?php if (esc_attr(get_option('ubigeo_format_checkbox')) == "vertical") echo "selected"; ?> ><?php _e('Vertical', 'ubigeo-peru') ?></option>
+                        <option value="horizontal" <?php if (esc_attr(get_option('ubigeo_format_checkbox')) == "horizontal") echo "selected"; ?> ><?php _e('Horizontal', 'ubigeo-peru') ?></option>
+                    </select>
                 </td>
             </tr>
             <tr valign="top">
@@ -394,3 +426,6 @@ function rt_ubigeo_submenu_settings_addons()
 
     <?php
 }
+
+
+

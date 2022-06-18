@@ -46,8 +46,16 @@ function rt_plugin_update_change()
         rt_ubigeo_enable_ubigeo_woo();
         rt_ubigeo_enable_mails_woo();
         rt_ubigeo_enable_priority_method_free_woo();
+        rt_ubigeo_enable_title_formt_woo();
     }
     update_option('rt_ubigeo_peru_db_version', Version_RT_Ubigeo_Peru);
+}
+
+function rt_ubigeo_enable_title_formt_woo()
+{
+    update_option('ubigeo_thanks_checkbox', 'on');
+    update_option('ubigeo_title_checkbox', 'on');
+    update_option('ubigeo_format_checkbox', 'vertical');
 }
 
 function rt_ubigeo_enable_ubigeo_woo()

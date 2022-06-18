@@ -415,12 +415,19 @@ function rt_ubigeo_get_product_order($response, $object, $request)
     if (empty($response->data))
         return $response;
 
-    $billing_departamento = rt_ubigeo_get_departamento_por_id(get_post_meta($response->data['id'], '_billing_departamento', true))['departamento'];
-    $billing_provincia = rt_ubigeo_get_provincia_por_id(get_post_meta($response->data['id'], '_billing_provincia', true))['provincia'];
-    $billing_distrito = rt_ubigeo_get_distrito_por_id(get_post_meta($response->data['id'], '_billing_distrito', true))['distrito'];
-    $shipping_departamento = rt_ubigeo_get_departamento_por_id(get_post_meta($response->data['id'], '_shipping_departamento', true))['departamento'];
-    $shipping_provincia = rt_ubigeo_get_provincia_por_id(get_post_meta($response->data['id'], '_shipping_provincia', true))['provincia'];
-    $shipping_distrito = rt_ubigeo_get_distrito_por_id(get_post_meta($response->data['id'], '_shipping_distrito', true))['distrito'];
+    $data_billing_departamento = rt_ubigeo_get_departamento_por_id(get_post_meta($response->data['id'], '_billing_departamento', true));
+    $billing_departamento = ($data_billing_departamento) ? $data_billing_departamento['departamento'] : '';
+    $data_billing_provincia = rt_ubigeo_get_provincia_por_id(get_post_meta($response->data['id'], '_billing_provincia', true));
+    $billing_provincia = ($data_billing_provincia) ? $data_billing_provincia['provincia'] : '';
+    $data_billing_distrito = rt_ubigeo_get_distrito_por_id(get_post_meta($response->data['id'], '_billing_distrito', true));
+    $billing_distrito = ($data_billing_distrito) ? $data_billing_distrito['distrito'] : '';
+    $data_shipping_departamento = rt_ubigeo_get_departamento_por_id(get_post_meta($response->data['id'], '_shipping_departamento', true));
+    $shipping_departamento = ($data_shipping_departamento) ? $data_shipping_departamento['departamento'] : '';
+    $data_shipping_provincia = rt_ubigeo_get_provincia_por_id(get_post_meta($response->data['id'], '_shipping_provincia', true));
+    $shipping_provincia = ($data_shipping_provincia) ? $data_shipping_provincia['provincia'] : '';
+    $data_shipping_distrito = rt_ubigeo_get_distrito_por_id(get_post_meta($response->data['id'], '_shipping_distrito', true));
+    $shipping_distrito = ($data_shipping_distrito) ? $data_shipping_distrito['distrito'] : '';
+
 
     $response->data['billing']['departamento'] = ($billing_departamento) ? $billing_departamento : '';
     $response->data['billing']['provincia'] = ($billing_provincia) ? $billing_provincia : '';
