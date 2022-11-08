@@ -87,7 +87,7 @@ function rt_ubigeo_crearDepartamento()
             idDepa int(5) NOT NULL DEFAULT '0',
             departamento varchar(50) DEFAULT NULL,
             PRIMARY KEY (`idDepa`)
-            )ENGINE=MyISAM DEFAULT CHARSET=utf8; ";
+            )ENGINE=InnoDB DEFAULT CHARSET=utf8; ";
         dbDelta($sql);
         rt_ubigeo_cargaDatosDepartamentos();
     }
@@ -108,7 +108,7 @@ function rt_ubigeo_crearProvincia()
           `provincia` varchar(50) DEFAULT NULL,
           `idDepa` int(5) DEFAULT NULL,
           PRIMARY KEY (`idProv`)
-          )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+          )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
         dbDelta($sql);
 
@@ -132,7 +132,8 @@ function rt_ubigeo_crearDistrito()
             `idDist` int(5) NOT NULL DEFAULT '0',
             `distrito` varchar(50) DEFAULT NULL,
             `idProv` int(5) DEFAULT NULL,
-            PRIMARY KEY (`idDist`))";
+            PRIMARY KEY (`idDist`)
+           )ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
         dbDelta($sql);
         rt_ubigeo_cargaDatosDistritosUno();
