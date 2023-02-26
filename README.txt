@@ -2,7 +2,7 @@
 Contributors: renzotejada, drplugins
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
 Requires at least: 5.2
-Tested up to: 6.1.1
+Tested up to: 7.4.0
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -103,6 +103,9 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 3.7.0 (25/12/2022) =
+Fix: validando versión WC 7.4.0
 
 = 3.6.9 (06/12/2022) =
 Fix: validando versión WC 7.1.0
