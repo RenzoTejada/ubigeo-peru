@@ -104,6 +104,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.7.1 (07/03/2023) =
+Fix: corrigiendo error de ocultar titulo en billing y shipping del checkout
+
 = 3.7.0 (25/12/2022) =
 Fix: validando versión WC 7.4.0
 
