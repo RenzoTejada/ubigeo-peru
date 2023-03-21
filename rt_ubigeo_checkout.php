@@ -570,7 +570,7 @@ function rt_show_custom_fields_thankyou($order)
         echo '<div class="woocommerce-column woocommerce-column--1 woocommerce-column--billing-address col-1">';
         echo '<h2 class="woocommerce-column__title">';
         if (get_option('ubigeo_title_checkbox') == "on") :
-            e_('Billing Ubigeo Peru', 'ubigeo-peru');
+            echo __('Billing Ubigeo Peru', 'ubigeo-peru');
         endif;
         echo '</h2>';
 
@@ -599,7 +599,7 @@ function rt_show_custom_fields_thankyou($order)
 //        echo '<h2 class="woocommerce-column__title">' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         echo '<h2 class="woocommerce-column__title">';
         if (get_option('ubigeo_title_checkbox') == "on") :
-            e_('Shipping Ubigeo Peru', 'ubigeo-peru');
+            echo  __('Shipping Ubigeo Peru', 'ubigeo-peru');
         endif;
         echo '</h2>';
         echo '<address>';

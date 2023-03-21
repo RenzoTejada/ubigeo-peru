@@ -104,6 +104,9 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.7.2 (20/03/2023) =
+Fix: corrigiendo error de translate de checkout en billing y shiping
+
 = 3.7.1 (07/03/2023) =
 Fix: corrigiendo error de ocultar titulo en billing y shipping del checkout
 
