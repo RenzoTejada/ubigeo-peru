@@ -316,6 +316,7 @@ function rt_ubigeo_peru_is_theme_meabhy()
 {
     $rpt = false;
     $theme = wp_get_theme();
+
     if ('Meabhy' == $theme->name || 'Meabhy' == $theme->parent_theme) {
         $rpt = true;
     }
@@ -340,6 +341,30 @@ function rt_ubigeo_able_woocommerce_loading_css_js()
             if (rt_ubigeo_peru_is_theme_meabhy()) {
                 wp_dequeue_script('selectWoo');
             }
+            $idDepa = $idProv = $idDist = $idDepa_shipping = $idProv_shipping = $idDist_shipping = '';
+            if (is_user_logged_in()) {
+                $current_user = wp_get_current_user();
+                $idDepa = $current_user->billing_departamento;
+                $idProv = $current_user->billing_provincia;
+                $idDist = $current_user->billing_distrito;
+                $idDepa_shipping = $current_user->shipping_departamento;
+                $idProv_shipping = $current_user->shipping_provincia;
+                $idDist_shipping = $current_user->shipping_distrito;
+            }
+            ?>
+            <script>
+                var idDepa = "<?php echo esc_attr($idDepa) ?>";
+                var idProv = "<?php echo esc_attr($idProv) ?>";
+                var idDist = "<?php echo esc_attr($idDist) ?>";
+                var idDepa_shipping = "<?php echo esc_attr($idDepa_shipping) ?>";
+                var idProv_shipping = "<?php echo esc_attr($idProv_shipping) ?>";
+                var idDist_shipping = "<?php echo esc_attr($idDist_shipping) ?>";
+                var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+                var is_theme_avada = "<?php echo (int)rt_ubigeo_peru_is_theme_avada(); ?>";
+                var is_theme_astra = "<?php echo (int)rt_ubigeo_peru_is_theme_astra(); ?>";
+            </script>
+            <?php
+
         }
     }
 }
@@ -350,16 +375,7 @@ function rt_ubigeo_custom_jscript_checkout()
 {
     wp_register_script('select2-js', plugins_url('js/select2.min.js', __FILE__), array(), '4.0.1', true);
     wp_enqueue_script('select2-js');
-    $idDepa = $idProv = $idDist = $idDepa_shipping = $idProv_shipping = $idDist_shipping = '';
-    if (is_user_logged_in()) {
-        $current_user = wp_get_current_user();
-        $idDepa = $current_user->billing_departamento;
-        $idProv = $current_user->billing_provincia;
-        $idDist = $current_user->billing_distrito;
-        $idDepa_shipping = $current_user->shipping_departamento;
-        $idProv_shipping = $current_user->shipping_provincia;
-        $idDist_shipping = $current_user->shipping_distrito;
-    }
+
     ?>
     <?php if (rt_ubigeo_peru_is_theme_pawsitive()) { ?>
     <style>
@@ -380,17 +396,6 @@ function rt_ubigeo_custom_jscript_checkout()
             <div></div>
         </div>
     </div>
-    <script>
-        var idDepa = "<?php echo esc_attr($idDepa) ?>";
-        var idProv = "<?php echo esc_attr($idProv) ?>";
-        var idDist = "<?php echo esc_attr($idDist) ?>";
-        var idDepa_shipping = "<?php echo esc_attr($idDepa_shipping) ?>";
-        var idProv_shipping = "<?php echo esc_attr($idProv_shipping) ?>";
-        var idDist_shipping = "<?php echo esc_attr($idDist_shipping) ?>";
-        var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
-        var is_theme_avada = "<?php echo (int)rt_ubigeo_peru_is_theme_avada(); ?>";
-        var is_theme_astra = "<?php echo (int)rt_ubigeo_peru_is_theme_astra(); ?>";
-    </script>
     <?php
 }
 
