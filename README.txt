@@ -1,10 +1,10 @@
 === Ubigeo de Perú para Woocommerce y WordPress ===
-Contributors: renzotejada, drplugins
-Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito, Woocommerce
+Contributors: renzotejada, huakotech
+Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito
 Requires at least: 5.2
 Tested up to: 6.2
 Stable tag: trunk
-Requires PHP: 5.6
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,11 +104,15 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.7.4 (30/07/2023) =
+Fix: validando versión WC 7.9.0
+Fix: validando versión WP 6.3
+
 = 3.7.3 (21/04/2023) =
-Fix: corrigiendo error carga de ubigeo en el checkout en billing y shiping con la version wp 6.2
+Fix: corrigiendo error carga de ubigeo en el checkout en billing y shipping con la version wp 6.2
 
 = 3.7.2 (20/03/2023) =
-Fix: corrigiendo error de translate de checkout en billing y shiping
+Fix: corrigiendo error de translate de checkout en billing y shipping
 
 = 3.7.1 (07/03/2023) =
 Fix: corrigiendo error de ocultar titulo en billing y shipping del checkout
