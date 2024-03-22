@@ -1,4 +1,6 @@
 <?php
+use Automattic\WooCommerce\Utilities\OrderUtil;
+
 add_filter('woocommerce_states', 'rt_ubigeo_remove_peru_state');
 
 function rt_ubigeo_remove_peru_state($states)
@@ -462,46 +464,74 @@ function rt_remove_wc_validation()
 function get_name_ubigeo_billing($order, $type = 'object')
 {
     $ubigeo = array();
-    if ($type == 'object') {
-        $idDep = get_post_meta($order->id, '_billing_departamento');
-        $prov = get_post_meta($order->id, '_billing_provincia');
-        $dist = get_post_meta($order->id, '_billing_distrito');
+    if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+        $order_data = wc_get_order( $order );
+        $idDep = $order_data->get_meta( '_billing_departamento');
+        $prov = $order_data->get_meta( '_billing_provincia');
+        $dist = $order_data->get_meta( '_billing_distrito');
+        if ($idDep) {
+            $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep)['departamento'];
+            $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov)['provincia'];
+            $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist)['distrito'];
+        }
     } else {
-        $idDep = get_post_meta($order, '_billing_departamento');
-        $prov = get_post_meta($order, '_billing_provincia');
-        $dist = get_post_meta($order, '_billing_distrito');
+        if ($type == 'object') {
+            $idDep = get_post_meta($order->id, '_billing_departamento');
+            $prov = get_post_meta($order->id, '_billing_provincia');
+            $dist = get_post_meta($order->id, '_billing_distrito');
+        } else {
+            $idDep = get_post_meta($order, '_billing_departamento');
+            $prov = get_post_meta($order, '_billing_provincia');
+            $dist = get_post_meta($order, '_billing_distrito');
+        }
+        if ($idDep) {
+            $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep[0])['departamento'];
+            $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov[0])['provincia'];
+            $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist[0])['distrito'];
+        }
     }
-    if ($idDep) {
-        $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep[0])['departamento'];
-        $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov[0])['provincia'];
-        $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist[0])['distrito'];
-    }
+
     return $ubigeo;
 }
 
 function get_name_ubigeo_shipping($order, $type = 'object')
 {
     $ubigeo = [];
-    if ($type == 'object') {
-        $idDep = get_post_meta($order->id, '_billing_departamento');
-        $prov = get_post_meta($order->id, '_billing_provincia');
-        $dist = get_post_meta($order->id, '_billing_distrito');
+    if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+        $order_data = wc_get_order( $order );
+        $idDep = $order_data->get_meta( '_shipping_departamento');
+        $prov = $order_data->get_meta( '_shipping_provincia');
+        $dist = $order_data->get_meta( '_shipping_distrito');
+        if ($idDep) {
+            $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep)['departamento'];
+            $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov)['provincia'];
+            $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist)['distrito'];
+        }
     } else {
-        $idDep = get_post_meta($order, '_shipping_departamento');
-        $prov = get_post_meta($order, '_shipping_provincia');
-        $dist = get_post_meta($order, '_shipping_distrito');
+        if ($type == 'object') {
+            $idDep = get_post_meta($order->id, '_shipping_departamento');
+            $prov = get_post_meta($order->id, '_shipping_provincia');
+            $dist = get_post_meta($order->id, '_shipping_distrito');
+        } else {
+            $idDep = get_post_meta($order, '_shipping_departamento');
+            $prov = get_post_meta($order, '_shipping_provincia');
+            $dist = get_post_meta($order, '_shipping_distrito');
+        }
+        if ($idDep) {
+            $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep[0])['departamento'];
+            $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov[0])['provincia'];
+            $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist[0])['distrito'];
+        }
     }
-    if ($idDep) {
-        $ubigeo['departamento'] = rt_ubigeo_get_departamento_por_id($idDep[0])['departamento'];
-        $ubigeo['provincia'] = rt_ubigeo_get_provincia_por_id($prov[0])['provincia'];
-        $ubigeo['distrito'] = rt_ubigeo_get_distrito_por_id($dist[0])['distrito'];
-    }
+
 
     return $ubigeo;
 }
 
+
 function rt_show_custom_fields_order_billing($order)
 {
+
     $ubigeo_billing = get_name_ubigeo_billing($order->get_id(), 'value');
     if ($ubigeo_billing) {
         echo '<div class="ubigeo_data_column">';

@@ -440,3 +440,5 @@ function rt_ubigeo_get_product_order($response, $object, $request)
 
 add_filter("woocommerce_rest_prepare_shop_order_object", "rt_ubigeo_get_product_order", 1, 3);
 
+
+

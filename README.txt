@@ -1,8 +1,8 @@
 === Ubigeo de Perú para Woocommerce y WordPress ===
-Contributors: renzotejada, huakotech, alexistejada
+Contributors: renzotejada, huakotech
 Tags: ubigeo perú, ubigeo, peru, departamentos, provincia, distrito
 Requires at least: 5.2
-Tested up to: 6.4.3
+Tested up to: 6.2
 Stable tag: trunk
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -103,10 +103,6 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
-
-= 3.7.5 (22/03/2024) =
-Fix: validando versión WC 8.7.0
-Fix: validando versión WP 6.4.3
 
 = 3.7.4 (30/07/2023) =
 Fix: validando versión WC 7.9.0
