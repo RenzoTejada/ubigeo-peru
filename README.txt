@@ -1,6 +1,6 @@
 === Ubigeo de Perú para Woocommerce y WordPress ===
 Contributors: renzotejada, huakotech, alexistejada
-Tags: ubigeo, perú, departamento, provincia, distrito
+Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
 Tested up to: 6.6.1
 Stable tag: trunk
