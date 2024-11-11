@@ -25,7 +25,7 @@ function rt_ubigeo_get_departamentos_for_adress()
         '' => __('Select Department ', 'ubigeo-peru')
     ];
 
-    $departamentoList = rt_ubigeo_get_departamento();
+    $departamentoList = rt_ubigeo_get_departamento_adress();
 
     foreach ($departamentoList as $dpto) {
         $dptos[$dpto['idDepa']] = $dpto['departamento'];
@@ -441,4 +441,11 @@ function rt_ubigeo_get_product_order($response, $object, $request)
 add_filter("woocommerce_rest_prepare_shop_order_object", "rt_ubigeo_get_product_order", 1, 3);
 
 
+function rt_ubigeo_get_departamento_adress()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . "ubigeo_departamento";
+    $request = "SELECT * FROM $table_name";
 
+    return $wpdb->get_results($request, ARRAY_A);
+}

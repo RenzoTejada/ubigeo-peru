@@ -2,7 +2,7 @@
 Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Stable tag: trunk
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -100,26 +100,31 @@ The information was obtained from the following urls:
 
 == Changelog ==
 
+= 3.7.9 (10/11/2024) =
+Fix: validado versión WC 9.3.3
+Fix: validado versión WP 6.6.2
+Fix: correción de query de ubigeo address
+
 = 3.7.8 (28/08/2024) =
-Fix: validando versión WC 9.2.3
-Fix: validando versión WP 6.6.1
+Fix: validado versión WC 9.2.3
+Fix: validado versión WP 6.6.1
 
 = 3.7.7 (04/04/2024) =
-Fix: validando versión WC 8.7.0
-Fix: validando versión WP 6.5
+Fix: validado versión WC 8.7.0
+Fix: validado versión WP 6.5
 
 = 3.7.6 (25/03/2024) =
-Fix: validando versión WC 8.7.0
-Fix: validando versión WP 6.4.3
+Fix: validado versión WC 8.7.0
+Fix: validado versión WP 6.4.3
 Fix: corrigiendo error carga de ubigeo en el checkout en billing y shipping con la version wp 6.4.3
 
 = 3.7.5 (22/03/2024) =
-Fix: validando versión WC 8.7.0
-Fix: validando versión WP 6.4.3
+Fix: validado versión WC 8.7.0
+Fix: validado versión WP 6.4.3
 
 = 3.7.4 (30/07/2023) =
-Fix: validando versión WC 7.9.0
-Fix: validando versión WP 6.3
+Fix: validado versión WC 7.9.0
+Fix: validado versión WP 6.3
 
 = 3.7.3 (21/04/2023) =
 Fix: corrigiendo error carga de ubigeo en el checkout en billing y shipping con la version wp 6.2
@@ -131,23 +136,23 @@ Fix: corrigiendo error de translate de checkout en billing y shipping
 Fix: corrigiendo error de ocultar titulo en billing y shipping del checkout
 
 = 3.7.0 (25/12/2022) =
-Fix: validando versión WC 7.4.0
+Fix: validado versión WC 7.4.0
 
 = 3.6.9 (06/12/2022) =
-Fix: validando versión WC 7.1.0
-Fix: validando versión WP 6.1.1
+Fix: validado versión WC 7.1.0
+Fix: validado versión WP 6.1.1
 
 = 3.6.8 (07/11/2022) =
-Fix: validando versión WC 7.0.1
-Fix: validando versión WP 6.1
+Fix: validado versión WC 7.0.1
+Fix: validado versión WP 6.1
 Fix: agregando Engine = InnoDB tablas de ubigeo.
 
 = 3.6.7 (17/06/2022) =
 Fix: Agregando configuración para mostrar titulo, data ubigeo en el checkout
 
 = 3.6.6 (16/05/2022) =
-Fix: validando versión WC 6.5.1
-Fix: validando versión WP 6.0
+Fix: validado versión WC 6.5.1
+Fix: validado versión WP 6.0
 
 = 3.6.5 (25/04/2022) =
 fix: corrigiendo querys del api de WC.
@@ -203,7 +208,7 @@ test: validación con wp 5.8
 
 = 3.5.1 (15/07/2021) =
 Fix: corrigiendo notice de variables no declaradas.
-Fix: validando versión WC 5.5.1.
+Fix: validado versión WC 5.5.1.
 
 = 3.5.0 (07/07/2021) =
 Fix: forzando a limpiar los campos de ubigeo en checkout.
@@ -212,7 +217,7 @@ Fix: forzando a limpiar los campos de ubigeo en checkout.
 Fix: correción de ubigeo solo para Perú.
 
 = 3.4.8 (14/06/2021) =
-Fix: validando versión WC 5.4.1.
+Fix: validado versión WC 5.4.1.
 Fix: agregando links plugins premimum y free en el readme.txt
 
 = 3.4.7 (03/06/2021) =
