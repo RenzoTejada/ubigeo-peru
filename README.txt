@@ -2,9 +2,9 @@
 Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
-Tested up to: 6.7.1
-Stable tag: 3.9
-Requires PHP: 7.4
+Tested up to: 6.8
+Stable tag: 4.0
+Requires PHP: 8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,8 +88,7 @@ Manual FTP installation
 
 The information was obtained from the following urls:
   a. http://sige.inei.gob.pe/test/atlas/
-  b. http://www.strategy.org.pe/articulos/cbdf11_strategy_76382231-UBIGEO-PERU-MYSQL.pdf
-  c. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
+  b. http://www.scribd.com/doc/220863416/Cbdf11-Strategy-76382231-Ubigeo-Peru-Mysql
 
 
 == Screenshots ==
@@ -99,6 +98,10 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 4.0 (20/06/2025) =
+Fix: validando versión WC 9.9.4
+Fix: validando versión WP 6.8
 
 = 3.9 (16/01/2025) =
 Fix: validando versión WC 9.5.2
