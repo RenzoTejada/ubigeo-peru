@@ -31,8 +31,8 @@ jobs:
         with:
           projectBaseDir: .
           args: |
-            -Dsonar.projectKey=display-price-free
-            -Dsonar.projectName=Display_Price_Free
+            -Dsonar.projectKey=ubigeo_peru
+            -Dsonar.projectName=Ubigeo_Perú
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
