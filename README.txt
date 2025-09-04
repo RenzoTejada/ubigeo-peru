@@ -3,8 +3,8 @@ Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
 Tested up to: 6.8
-Stable tag: 4.0
-Requires PHP: 8.2
+Stable tag: 4.1
+Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,11 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 4.1 (27/08/2025) =
+Fix: validando versión WC 10.1.2
+Fix: validando versión WP 6.8.2
+Fix: corrigiendo error de vista previa en emails
 
 = 4.0 (20/06/2025) =
 Fix: validando versión WC 9.9.4
