@@ -149,23 +149,43 @@ function rt_ubigeo_validate_prov_of_depa($idDepa, $idProv)
     return $wpdb->get_results($request, ARRAY_A);
 }
 
-function rt_ubigeo_get_distrito_by_idProv_display($idProv = 0)
-{
+function rt_ubigeo_get_distrito_by_idProv_display( $idProv = 0 ) {
     global $wpdb;
-    $table_costo_ubigeo = $wpdb->prefix . "ubigeo_costo_ubigeo";
-    $table_ubigeo_distrito = $wpdb->prefix . "ubigeo_distrito";
-    $tipo = get_tipo_costo_ubigeo_by_idProv($idProv);
 
-    if ($tipo['tipo'] == 1) {
-        $result = rt_ubigeo_get_distrito_by_idProv($idProv);
-    } else {
-        $request = $wpdb->prepare( "SELECT dist.idDist, dist.distrito  FROM $table_costo_ubigeo  as ucu  
-        inner join $table_ubigeo_distrito as dist on dist.idDist=ucu.idDist
-        where ucu.idProv=%d group by dist.idDist order by dist.distrito ASC",$idProv);
-
-        $result = $wpdb->get_results($request, ARRAY_A);
+    // Sanitiza/valida
+    $idProv = absint( $idProv );
+    if ( $idProv <= 0 ) {
+        return array(); // o devolver WP_Error si prefieres
     }
-    return $result;
+
+    // Tablas
+    $table_costo_ubigeo   = $wpdb->prefix . 'ubigeo_costo_ubigeo';
+    $table_ubigeo_distrito = $wpdb->prefix . 'ubigeo_distrito';
+
+    // Evita warning al leer índice si $tipo es null/false
+    $tipo_info = get_tipo_costo_ubigeo_by_idProv( $idProv );
+    $tipo_val  = ( is_array( $tipo_info ) && isset( $tipo_info['tipo'] ) ) ? (int) $tipo_info['tipo'] : 0;
+
+    if ( $tipo_val === 1 ) {
+        // Si tienes una versión “corta/alternativa”
+        return rt_ubigeo_get_distrito_by_idProv( $idProv );
+    }
+
+    // Consulta con prepare POSICIONAL (sin argumentos con nombre)
+    $sql = "
+        SELECT  dist.idDist, dist.distrito
+        FROM    {$table_costo_ubigeo} AS ucu
+        INNER JOIN {$table_ubigeo_distrito} AS dist ON dist.idDist = ucu.idDist
+        WHERE   ucu.idProv = %d
+        GROUP BY dist.idDist, dist.distrito
+        ORDER BY dist.distrito ASC
+    ";
+
+    // Preparar y ejecutar
+    $prepared = $wpdb->prepare( $sql, $idProv );
+    $result   = $wpdb->get_results( $prepared, ARRAY_A );
+
+    return is_array( $result ) ? $result : array();
 }
 
 function rt_costo_ubigeo_plugin_enabled()
