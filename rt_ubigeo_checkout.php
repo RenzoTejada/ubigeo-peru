@@ -29,6 +29,7 @@ add_filter('woocommerce_default_address_fields', 'rt_ubigeo_default_address_fiel
 
 function rt_ubigeo_default_address_fields($fields)
 {
+    if ( !is_account_page() ) {
         $custom_fields = array(
                 'departamento' => array(
                         'hidden' => true,
@@ -45,7 +46,8 @@ function rt_ubigeo_default_address_fields($fields)
         );
 
         $fields = array_merge($fields, $custom_fields);
-    
+    }
+
     return $fields;
 }
 
