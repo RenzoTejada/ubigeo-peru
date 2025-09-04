@@ -32,7 +32,7 @@ jobs:
           projectBaseDir: .
           args: |
             -Dsonar.projectKey=ubigeo_peru
-            -Dsonar.projectName=Ubigeo_Perú
+            -Dsonar.projectName=Ubigeo Perú
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
