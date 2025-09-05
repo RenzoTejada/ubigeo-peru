@@ -1,6 +1,6 @@
 <?php
-use Automattic\WooCommerce\Utilities\OrderUtil;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 
 add_filter('woocommerce_states', 'rt_ubigeo_remove_peru_state');
 
@@ -15,9 +15,9 @@ add_filter('woocommerce_country_locale_field_selectors', 'rt_ubigeo_country_loca
 function rt_ubigeo_country_locale_field_selectors($locale_fields)
 {
     $custom_locale_fields = array(
-        'departamento' => '#billing_departamento_field, #shipping_departamento_field',
-        'provincia' => '#billing_provincia_field, #shipping_provincia_field',
-        'distrito' => '#billing_distrito_field, #shipping_distrito_field',
+            'departamento' => '#billing_departamento_field, #shipping_departamento_field',
+            'provincia' => '#billing_provincia_field, #shipping_provincia_field',
+            'distrito' => '#billing_distrito_field, #shipping_distrito_field',
     );
 
     $locale_fields = array_merge($locale_fields, $custom_locale_fields);
@@ -29,7 +29,7 @@ add_filter('woocommerce_default_address_fields', 'rt_ubigeo_default_address_fiel
 
 function rt_ubigeo_default_address_fields($fields)
 {
-    if ( !is_account_page() ) {
+    if (!is_account_page()) {
         $custom_fields = array(
                 'departamento' => array(
                         'hidden' => true,
@@ -56,33 +56,33 @@ add_filter('woocommerce_get_country_locale', 'rt_ubigeo_get_country_locale');
 function rt_ubigeo_get_country_locale($locale)
 {
     $locale['PE']['departamento'] = array(
-        'required' => true,
-        'hidden' => false,
+            'required' => true,
+            'hidden' => false,
     );
 
     $locale['PE']['provincia'] = array(
-        'required' => true,
-        'hidden' => false,
+            'required' => true,
+            'hidden' => false,
     );
 
     $locale['PE']['distrito'] = array(
-        'required' => true,
-        'hidden' => false,
+            'required' => true,
+            'hidden' => false,
     );
 
     $locale['PE']['state'] = array(
-        'required' => false,
-        'hidden' => true,
+            'required' => false,
+            'hidden' => true,
     );
 
     $locale['PE']['city'] = array(
-        'required' => false,
-        'hidden' => true,
+            'required' => false,
+            'hidden' => true,
     );
 
     $locale['PE']['postcode'] = array(
-        'required' => false,
-        'hidden' => true,
+            'required' => false,
+            'hidden' => true,
     );
 
     return $locale;
@@ -186,67 +186,67 @@ function rt_ubigeo_wc_checkout_fields($fields)
         }
     }
 
-    if($fields['billing']['billing_state']['country'] == 'PE') {
+    if ($fields['billing']['billing_state']['country'] == 'PE') {
 
         $fields['billing']['billing_departamento'] = [
-            'type' => 'select',
-            'label' => __('Department', 'ubigeo-peru'),
-            'required' => true,
-            'class' => array('form-row-wide'),
-            'clear' => true,
-            'options' => rt_ubigeo_get_departamentos_for_select(),
-            'priority' => 65
+                'type' => 'select',
+                'label' => __('Department', 'ubigeo-peru'),
+                'required' => true,
+                'class' => array('form-row-wide'),
+                'clear' => true,
+                'options' => rt_ubigeo_get_departamentos_for_select(),
+                'priority' => 65
         ];
 
         $fields['billing']['billing_provincia'] = [
-            'type' => 'select',
-            'label' => __('Province', 'ubigeo-peru'),
-            'required' => true,
-            'class' => array('form-row-wide'),
-            'clear' => true,
-            'options' => $data_prov,
-            'priority' => 66
+                'type' => 'select',
+                'label' => __('Province', 'ubigeo-peru'),
+                'required' => true,
+                'class' => array('form-row-wide'),
+                'clear' => true,
+                'options' => $data_prov,
+                'priority' => 66
         ];
 
         $fields['billing']['billing_distrito'] = [
-            'type' => 'select',
-            'label' => __('District', 'ubigeo-peru'),
-            'required' => true,
-            'class' => array('form-row-wide'),
-            'clear' => true,
-            'options' => $data_dist,
-            'priority' => 67
+                'type' => 'select',
+                'label' => __('District', 'ubigeo-peru'),
+                'required' => true,
+                'class' => array('form-row-wide'),
+                'clear' => true,
+                'options' => $data_dist,
+                'priority' => 67
         ];
 
         $fields['shipping']['shipping_departamento'] = [
-            'type' => 'select',
-            'label' => __('Department', 'ubigeo-peru'),
-            'required' => false,
-            'class' => array('form-row-wide'),
-            'clear' => true,
-            'options' => rt_ubigeo_get_departamentos_for_select(),
-            'priority' => 65
+                'type' => 'select',
+                'label' => __('Department', 'ubigeo-peru'),
+                'required' => false,
+                'class' => array('form-row-wide'),
+                'clear' => true,
+                'options' => rt_ubigeo_get_departamentos_for_select(),
+                'priority' => 65
         ];
 
 
         $fields['shipping']['shipping_provincia'] = [
-            'type' => 'select',
-            'label' => __('Province', 'ubigeo-peru'),
-            'required' => false,
-            'class' => array('form-row-wide'),
-            'clear' => true,
-            'options' => $data_prov_shipping,
-            'priority' => 66
+                'type' => 'select',
+                'label' => __('Province', 'ubigeo-peru'),
+                'required' => false,
+                'class' => array('form-row-wide'),
+                'clear' => true,
+                'options' => $data_prov_shipping,
+                'priority' => 66
         ];
 
         $fields['shipping']['shipping_distrito'] = [
-            'type' => 'select',
-            'label' => __('District', 'ubigeo-peru'),
-            'required' => false,
-            'class' => array('form-row-wide'),
-            'clear' => true,
-            'options' => $data_dist_shipping,
-            'priority' => 67
+                'type' => 'select',
+                'label' => __('District', 'ubigeo-peru'),
+                'required' => false,
+                'class' => array('form-row-wide'),
+                'clear' => true,
+                'options' => $data_dist_shipping,
+                'priority' => 67
         ];
     }
 
@@ -464,112 +464,114 @@ function rt_remove_wc_validation()
     remove_action('woocommerce_checkout_process', 'some_custom_checkout_field_process');
 }
 
-function get_name_ubigeo_billing( $order, $type = 'object' ) {
+function get_name_ubigeo_billing($order, $type = 'object')
+{
     $ubigeo = [];
 
     /* Normaliza el pedido */
-    if ( $order instanceof WC_Order ) {
+    if ($order instanceof WC_Order) {
         $order_obj = $order;
-        $order_id  = $order->get_id();
+        $order_id = $order->get_id();
     } else {
-        $order_obj = wc_get_order( $order );
-        $order_id  = is_numeric( $order ) ? (int) $order : ( $order_obj instanceof WC_Order ? $order_obj->get_id() : 0 );
+        $order_obj = wc_get_order($order);
+        $order_id = is_numeric($order) ? (int)$order : ($order_obj instanceof WC_Order ? $order_obj->get_id() : 0);
     }
 
     /* Lee metadatos de forma segura (HPOS o clásico) */
     $idDep = $prov = $dist = '';
 
-    if ( $order_obj instanceof WC_Order ) {
+    if ($order_obj instanceof WC_Order) {
         // WC_Data::get_meta() – devuelve string|mixed. Usa true si quieres forzar single.
-        $idDep = $order_obj->get_meta( '_billing_departamento', true );
-        $prov  = $order_obj->get_meta( '_billing_provincia', true );
-        $dist  = $order_obj->get_meta( '_billing_distrito', true );
-    } elseif ( $order_id ) {
+        $idDep = $order_obj->get_meta('_billing_departamento', true);
+        $prov = $order_obj->get_meta('_billing_provincia', true);
+        $dist = $order_obj->get_meta('_billing_distrito', true);
+    } elseif ($order_id) {
         // Fallback a post meta clásico
-        $idDep = get_post_meta( $order_id, '_billing_departamento', true );
-        $prov  = get_post_meta( $order_id, '_billing_provincia', true );
-        $dist  = get_post_meta( $order_id, '_billing_distrito', true );
+        $idDep = get_post_meta($order_id, '_billing_departamento', true);
+        $prov = get_post_meta($order_id, '_billing_provincia', true);
+        $dist = get_post_meta($order_id, '_billing_distrito', true);
     } else {
         // No hay pedido válido (p.ej., previsualizador de emails)
         return $ubigeo;
     }
 
     // Si por alguna razón vienen arrays, quédate con el primer valor
-    if ( is_array( $idDep ) ) $idDep = reset( $idDep );
-    if ( is_array( $prov ) )  $prov  = reset( $prov );
-    if ( is_array( $dist ) )  $dist  = reset( $dist );
+    if (is_array($idDep)) $idDep = reset($idDep);
+    if (is_array($prov)) $prov = reset($prov);
+    if (is_array($dist)) $dist = reset($dist);
 
     /* Resuelve nombres solo si hay IDs */
-    if ( ! empty( $idDep ) ) {
-        $dep_arr  = rt_ubigeo_get_departamento_por_id( $idDep );
-        $prov_arr = rt_ubigeo_get_provincia_por_id( $prov );
-        $dist_arr = rt_ubigeo_get_distrito_por_id( $dist );
+    if (!empty($idDep)) {
+        $dep_arr = rt_ubigeo_get_departamento_por_id($idDep);
+        $prov_arr = rt_ubigeo_get_provincia_por_id($prov);
+        $dist_arr = rt_ubigeo_get_distrito_por_id($dist);
 
-        if ( is_array( $dep_arr )  && isset( $dep_arr['departamento'] ) ) $ubigeo['departamento'] = $dep_arr['departamento'];
-        if ( is_array( $prov_arr ) && isset( $prov_arr['provincia'] ) )   $ubigeo['provincia']    = $prov_arr['provincia'];
-        if ( is_array( $dist_arr ) && isset( $dist_arr['distrito'] ) )    $ubigeo['distrito']     = $dist_arr['distrito'];
+        if (is_array($dep_arr) && isset($dep_arr['departamento'])) $ubigeo['departamento'] = $dep_arr['departamento'];
+        if (is_array($prov_arr) && isset($prov_arr['provincia'])) $ubigeo['provincia'] = $prov_arr['provincia'];
+        if (is_array($dist_arr) && isset($dist_arr['distrito'])) $ubigeo['distrito'] = $dist_arr['distrito'];
     }
 
     return $ubigeo;
 }
 
-function get_name_ubigeo_shipping( $order, $type = 'array' ) {
+function get_name_ubigeo_shipping($order, $type = 'array')
+{
     $ubigeo = [];
 
     // Normaliza el pedido
-    if ( $order instanceof WC_Order ) {
+    if ($order instanceof WC_Order) {
         $order_obj = $order;
-        $order_id  = $order->get_id();
+        $order_id = $order->get_id();
     } else {
-        $order_obj = wc_get_order( $order );
-        $order_id  = is_numeric( $order ) ? (int) $order : ( $order_obj instanceof WC_Order ? $order_obj->get_id() : 0 );
+        $order_obj = wc_get_order($order);
+        $order_id = is_numeric($order) ? (int)$order : ($order_obj instanceof WC_Order ? $order_obj->get_id() : 0);
     }
 
     $idDep = $prov = $dist = '';
 
     // Lee metadatos de forma segura (HPOS o clásico)
-    if ( $order_obj instanceof WC_Order ) {
-        $idDep = $order_obj->get_meta( '_shipping_departamento', true );
-        $prov  = $order_obj->get_meta( '_shipping_provincia', true );
-        $dist  = $order_obj->get_meta( '_shipping_distrito', true );
-    } elseif ( $order_id ) {
-        $idDep = get_post_meta( $order_id, '_shipping_departamento', true );
-        $prov  = get_post_meta( $order_id, '_shipping_provincia', true );
-        $dist  = get_post_meta( $order_id, '_shipping_distrito', true );
+    if ($order_obj instanceof WC_Order) {
+        $idDep = $order_obj->get_meta('_shipping_departamento', true);
+        $prov = $order_obj->get_meta('_shipping_provincia', true);
+        $dist = $order_obj->get_meta('_shipping_distrito', true);
+    } elseif ($order_id) {
+        $idDep = get_post_meta($order_id, '_shipping_departamento', true);
+        $prov = get_post_meta($order_id, '_shipping_provincia', true);
+        $dist = get_post_meta($order_id, '_shipping_distrito', true);
     } else {
         // No hay pedido válido (p.ej. email preview sin order real)
-        return ( 'value' === $type ) ? '' : $ubigeo;
+        return ('value' === $type) ? '' : $ubigeo;
     }
 
     // Si llegaron arrays por algún motivo, quédate con el primer valor
-    if ( is_array( $idDep ) ) $idDep = reset( $idDep );
-    if ( is_array( $prov ) )  $prov  = reset( $prov );
-    if ( is_array( $dist ) )  $dist  = reset( $dist );
+    if (is_array($idDep)) $idDep = reset($idDep);
+    if (is_array($prov)) $prov = reset($prov);
+    if (is_array($dist)) $dist = reset($dist);
 
     // Si no hay ubigeo de envío, opcional: intenta con facturación como fallback
-    if ( empty( $idDep ) && $order_obj instanceof WC_Order ) {
-        $idDep = $order_obj->get_meta( '_billing_departamento', true );
-        $prov  = $order_obj->get_meta( '_billing_provincia', true );
-        $dist  = $order_obj->get_meta( '_billing_distrito', true );
+    if (empty($idDep) && $order_obj instanceof WC_Order) {
+        $idDep = $order_obj->get_meta('_billing_departamento', true);
+        $prov = $order_obj->get_meta('_billing_provincia', true);
+        $dist = $order_obj->get_meta('_billing_distrito', true);
     }
 
-    if ( ! empty( $idDep ) ) {
-        $dep_arr  = rt_ubigeo_get_departamento_por_id( $idDep );
-        $prov_arr = rt_ubigeo_get_provincia_por_id( $prov );
-        $dist_arr = rt_ubigeo_get_distrito_por_id( $dist );
+    if (!empty($idDep)) {
+        $dep_arr = rt_ubigeo_get_departamento_por_id($idDep);
+        $prov_arr = rt_ubigeo_get_provincia_por_id($prov);
+        $dist_arr = rt_ubigeo_get_distrito_por_id($dist);
 
-        if ( is_array( $dep_arr )  && isset( $dep_arr['departamento'] ) ) $ubigeo['departamento'] = $dep_arr['departamento'];
-        if ( is_array( $prov_arr ) && isset( $prov_arr['provincia'] ) )   $ubigeo['provincia']    = $prov_arr['provincia'];
-        if ( is_array( $dist_arr ) && isset( $dist_arr['distrito'] ) )    $ubigeo['distrito']     = $dist_arr['distrito'];
+        if (is_array($dep_arr) && isset($dep_arr['departamento'])) $ubigeo['departamento'] = $dep_arr['departamento'];
+        if (is_array($prov_arr) && isset($prov_arr['provincia'])) $ubigeo['provincia'] = $prov_arr['provincia'];
+        if (is_array($dist_arr) && isset($dist_arr['distrito'])) $ubigeo['distrito'] = $dist_arr['distrito'];
     }
 
     // Si piden el valor como string
-    if ( 'value' === $type ) {
-        return trim( implode( ' / ', array_filter( [
+    if ('value' === $type) {
+        return trim(implode(' / ', array_filter([
                 $ubigeo['departamento'] ?? '',
-                $ubigeo['provincia']    ?? '',
-                $ubigeo['distrito']     ?? '',
-        ] ) ) );
+                $ubigeo['provincia'] ?? '',
+                $ubigeo['distrito'] ?? '',
+        ])));
     }
 
     return $ubigeo;
@@ -682,7 +684,7 @@ function rt_show_custom_fields_thankyou($order)
 //        echo '<h2 class="woocommerce-column__title">' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         echo '<h2 class="woocommerce-column__title">';
         if (get_option('ubigeo_title_checkbox') == "on") :
-            echo  __('Shipping Ubigeo Peru', 'ubigeo-peru');
+            echo __('Shipping Ubigeo Peru', 'ubigeo-peru');
         endif;
         echo '</h2>';
         echo '<address>';
@@ -696,55 +698,56 @@ function rt_show_custom_fields_thankyou($order)
     echo '</section>';
 }
 
-function rt_show_custom_fields_emails( $order ) {
+function rt_show_custom_fields_emails($order)
+{
 
-    $ubigeo = get_name_ubigeo_billing( $order );
-    $ubigeo_shipping = get_name_ubigeo_shipping( $order );
+    $ubigeo = get_name_ubigeo_billing($order);
+    $ubigeo_shipping = get_name_ubigeo_shipping($order);
 
     echo '<table id="addresses" cellspacing="0" cellpadding="0" border="0" style="width:100%;vertical-align:top;margin-bottom:40px;padding:0;"><tr>';
 
     // ---- BLOQUE FACTURACIÓN ----
-    if ( array_filter( $ubigeo ) ) { // hay al menos un dato
+    if (array_filter($ubigeo)) { // hay al menos un dato
         echo '<td valign="top" width="50%" style="text-align:left;font-family:Helvetica,Roboto,Arial,sans-serif;border:0;padding:0;">';
-        if ( get_option('ubigeo_title_checkbox') === 'on' ) {
-            echo '<h2 class="woocommerce-order-details__title">' . esc_html__( 'Billing Ubigeo Peru', 'ubigeo-peru' ) . '</h2>';
+        if (get_option('ubigeo_title_checkbox') === 'on') {
+            echo '<h2 class="woocommerce-order-details__title">' . esc_html__('Billing Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         }
 
-        if ( get_option('ubigeo_format_checkbox') === 'vertical' ) {
+        if (get_option('ubigeo_format_checkbox') === 'vertical') {
             echo '<address>';
-            if ( $ubigeo['departamento'] !== '' ) echo '<p><strong>' . esc_html__( 'Department', 'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo['departamento'] ) . '</p>';
-            if ( $ubigeo['provincia']     !== '' ) echo '<p><strong>' . esc_html__( 'Province',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo['provincia'] ) . '</p>';
-            if ( $ubigeo['distrito']      !== '' ) echo '<p><strong>' . esc_html__( 'District',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo['distrito'] ) . '</p>';
+            if ($ubigeo['departamento'] !== '') echo '<p><strong>' . esc_html__('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['departamento']) . '</p>';
+            if ($ubigeo['provincia'] !== '') echo '<p><strong>' . esc_html__('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['provincia']) . '</p>';
+            if ($ubigeo['distrito'] !== '') echo '<p><strong>' . esc_html__('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['distrito']) . '</p>';
             echo '</address>';
         } else { // horizontal
             $parts = [];
-            if ( $ubigeo['departamento'] !== '' ) $parts[] = '<strong>' . esc_html__( 'Department', 'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo['departamento'] );
-            if ( $ubigeo['provincia']     !== '' ) $parts[] = '<strong>' . esc_html__( 'Province',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo['provincia'] );
-            if ( $ubigeo['distrito']      !== '' ) $parts[] = '<strong>' . esc_html__( 'District',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo['distrito'] );
-            if ( $parts ) echo '<address><p>' . implode( '&nbsp;&nbsp;&nbsp;&nbsp;', $parts ) . '</p></address>';
+            if ($ubigeo['departamento'] !== '') $parts[] = '<strong>' . esc_html__('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['departamento']);
+            if ($ubigeo['provincia'] !== '') $parts[] = '<strong>' . esc_html__('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['provincia']);
+            if ($ubigeo['distrito'] !== '') $parts[] = '<strong>' . esc_html__('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['distrito']);
+            if ($parts) echo '<address><p>' . implode('&nbsp;&nbsp;&nbsp;&nbsp;', $parts) . '</p></address>';
         }
         echo '</td>';
     }
 
     // ---- BLOQUE ENVÍO ----
-    if ( array_filter( $ubigeo_shipping ) ) {
+    if (array_filter($ubigeo_shipping)) {
         echo '<td valign="top" width="50%" style="text-align:left;font-family:Helvetica,Roboto,Arial,sans-serif;border:0;padding:0;">';
-        if ( get_option('ubigeo_title_checkbox') === 'on' ) {
-            echo '<h2 class="woocommerce-order-details__title">' . esc_html__( 'Shipping Ubigeo Peru', 'ubigeo-peru' ) . '</h2>';
+        if (get_option('ubigeo_title_checkbox') === 'on') {
+            echo '<h2 class="woocommerce-order-details__title">' . esc_html__('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h2>';
         }
 
-        if ( get_option('ubigeo_format_checkbox') === 'vertical' ) {
+        if (get_option('ubigeo_format_checkbox') === 'vertical') {
             echo '<address>';
-            if ( $ubigeo_shipping['departamento'] !== '' ) echo '<p><strong>' . esc_html__( 'Department', 'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo_shipping['departamento'] ) . '</p>';
-            if ( $ubigeo_shipping['provincia']     !== '' ) echo '<p><strong>' . esc_html__( 'Province',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo_shipping['provincia'] ) . '</p>';
-            if ( $ubigeo_shipping['distrito']      !== '' ) echo '<p><strong>' . esc_html__( 'District',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo_shipping['distrito'] ) . '</p>';
+            if ($ubigeo_shipping['departamento'] !== '') echo '<p><strong>' . esc_html__('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']) . '</p>';
+            if ($ubigeo_shipping['provincia'] !== '') echo '<p><strong>' . esc_html__('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']) . '</p>';
+            if ($ubigeo_shipping['distrito'] !== '') echo '<p><strong>' . esc_html__('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']) . '</p>';
             echo '</address>';
         } else { // horizontal
             $parts = [];
-            if ( $ubigeo_shipping['departamento'] !== '' ) $parts[] = '<strong>' . esc_html__( 'Department', 'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo_shipping['departamento'] );
-            if ( $ubigeo_shipping['provincia']     !== '' ) $parts[] = '<strong>' . esc_html__( 'Province',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo_shipping['provincia'] );
-            if ( $ubigeo_shipping['distrito']      !== '' ) $parts[] = '<strong>' . esc_html__( 'District',   'ubigeo-peru' ) . ':</strong> ' . esc_html( $ubigeo_shipping['distrito'] );
-            if ( $parts ) echo '<address><p>' . implode( '&nbsp;&nbsp;&nbsp;&nbsp;', $parts ) . '</p></address>';
+            if ($ubigeo_shipping['departamento'] !== '') $parts[] = '<strong>' . esc_html__('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']);
+            if ($ubigeo_shipping['provincia'] !== '') $parts[] = '<strong>' . esc_html__('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']);
+            if ($ubigeo_shipping['distrito'] !== '') $parts[] = '<strong>' . esc_html__('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']);
+            if ($parts) echo '<address><p>' . implode('&nbsp;&nbsp;&nbsp;&nbsp;', $parts) . '</p></address>';
         }
 
         echo '</td>';
