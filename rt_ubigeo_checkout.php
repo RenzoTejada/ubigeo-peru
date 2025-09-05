@@ -675,8 +675,8 @@ function rt_show_custom_fields_thankyou($order)
         echo '</div>';
     }
 
-    $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
-
+//    $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
+    $ubigeo_shipping = get_name_ubigeo_shipping($order);
     if ($ubigeo_shipping) {
         echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-2">';
 //        echo '<h2 class="woocommerce-column__title">' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h2>';
@@ -689,8 +689,8 @@ function rt_show_custom_fields_thankyou($order)
         echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']) . '</p>';
         echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']) . '</p>';
         echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']) . '</p>';
-        echo '</div>';
         echo '</address>';
+        echo '</div>';
     }
     echo '</section>';
     echo '</section>';
