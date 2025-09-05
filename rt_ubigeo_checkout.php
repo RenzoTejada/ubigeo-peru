@@ -594,8 +594,8 @@ add_action('woocommerce_admin_order_data_after_billing_address', 'rt_show_custom
 
 function rt_show_custom_fields_order_shipping($order)
 {
-    $ubigeo_shipping = get_name_ubigeo_shipping($order->get_id(), 'value');
-
+//    $ubigeo_shipping = get_name_ubigeo_shipping($order->get_id(), 'value');
+    $ubigeo_shipping = get_name_ubigeo_shipping($order);
     if ($ubigeo_shipping) {
         echo '<div class="ubigeo_data_column">';
         echo '<h3>' . __('Shipping Ubigeo Peru', 'ubigeo-peru') . '</h3>';
@@ -620,11 +620,12 @@ function rt_show_custom_view_order($order)
         echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['departamento']) . '</p>';
         echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['provincia']) . '</p>';
         echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo['distrito']) . '</p>';
-        echo '</div>';
         echo '</address>';
+        echo '</div>';
     }
 
-    $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
+//    $ubigeo_shipping = get_name_ubigeo_shipping($order, 'value');
+    $ubigeo_shipping = get_name_ubigeo_shipping($order);
 
     if ($ubigeo_shipping) {
         echo '<div class="woocommerce-column woocommerce-column--2 woocommerce-column--billing-address col-2">';
@@ -633,8 +634,8 @@ function rt_show_custom_view_order($order)
         echo '<p><strong>' . __('Department', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['departamento']) . '</p>';
         echo '<p><strong>' . __('Province', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['provincia']) . '</p>';
         echo '<p><strong>' . __('District', 'ubigeo-peru') . ':</strong> ' . esc_html($ubigeo_shipping['distrito']) . '</p>';
-        echo '</div>';
         echo '</address>';
+        echo '</div>';
     }
     echo '</section>';
     echo '</section>';
