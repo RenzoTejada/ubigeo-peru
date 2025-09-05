@@ -3,7 +3,7 @@ Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
 Tested up to: 10.1.2
-Stable tag: 4.4
+Stable tag: 4.5
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
