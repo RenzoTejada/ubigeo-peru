@@ -21,90 +21,135 @@ function rt_ubigeo_peru_success_notice()
     <?php
 }
 
-function rt_ubigeo_submenu_settings_callback()
-{
-    if (isset($_REQUEST["settings-updated"]) && sanitize_text_field($_REQUEST["settings-updated"] == true)) {
+function rt_ubigeo_submenu_settings_callback() {
+
+    // Aviso de settings actualizados
+    $settings_updated = isset( $_REQUEST['settings-updated'] )
+            ? sanitize_text_field( $_REQUEST['settings-updated'] )
+            : '';
+
+    if ( $settings_updated === 'true' || $settings_updated === '1' ) {
         rt_ubigeo_peru_success_notice();
-    } ?>
+    }
+
+    // Tab actual (por defecto "docs")
+    $current_tab = isset( $_REQUEST['tab'] )
+            ? sanitize_text_field( $_REQUEST['tab'] )
+            : 'docs';
+    ?>
 
     <div class="wrap woocommerce" id="facto-conf">
-        <div style="background-color:#87b43e;">
-        </div>
-        <h1><?php _e("Ubigeo from Peru for Woocommerce | Integration of Ubigeo from Peru to your Woocommerce", 'ubigeo-peru') ?></h1>
-        <hr>
-        <h2 class="nav-tab-wrapper">
-            <a href="?page=rt_ubigeo_settings&tab=docs" class="nav-tab <?php
-            if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "docs")) {
-                print " nav-tab-active";
-            } ?>"><?php echo _e('Docs', 'ubigeo-peru') ?></a>
-            <?php
-            if (rt_costo_ubigeo_plugin_enabled()) {
-                ?>
-                <a href="?page=rt_ubigeo_settings&tab=cost" class="nav-tab <?php
-                if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "cost") {
-                    print " nav-tab-active";
-                } ?>"><?php _e('Ubigeo', 'ubigeo-peru') ?></a>
-                <a href="?page=rt_ubigeo_settings&tab=import" class="nav-tab <?php
-                if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "import") {
-                    print " nav-tab-active";
-                } ?>"><?php _e('Import', 'ubigeo-peru') ?></a>
-                <a href="?page=rt_ubigeo_settings&tab=license" class="nav-tab <?php
-                if ( isset($_REQUEST['tab']) && $_REQUEST['tab'] == "license") {
-                    print " nav-tab-active";
-                } ?>"><?php _e('License', 'ubigeo-peru') ?></a>
-                <?php
-            } ?>
-            <a href="?page=rt_ubigeo_settings&tab=settings" class="nav-tab <?php
-            if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "settings") {
-                print " nav-tab-active";
-            } ?>"><?php _e('Settings', 'ubigeo-peru') ?></a>
-            <a href="?page=rt_ubigeo_settings&tab=help" class="nav-tab <?php
-            if ( isset($_REQUEST['tab']) && $_REQUEST['tab'] == "help") {
-                print " nav-tab-active";
-            } ?>"><?php _e('Help', 'ubigeo-peru') ?></a>
-            <a href="?page=rt_ubigeo_settings&tab=addons" class="nav-tab <?php
-            if ( isset($_REQUEST['tab']) && $_REQUEST['tab'] == "addons") {
-                print " nav-tab-active";
-            } ?>"><?php _e('Addons', 'ubigeo-peru') ?></a>
+        <div style="background-color:#87b43e;"></div>
 
+        <h1><?php _e( 'Ubigeo from Peru for Woocommerce | Integration of Ubigeo from Peru to your Woocommerce', 'ubigeo-peru' ); ?></h1>
+        <hr>
+
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=rt_ubigeo_settings&tab=docs"
+               class="nav-tab<?php echo ( $current_tab === 'docs' ) ? ' nav-tab-active' : ''; ?>">
+                <?php _e( 'Docs', 'ubigeo-peru' ); ?>
+            </a>
+
+            <?php if ( rt_costo_ubigeo_plugin_enabled() ) : ?>
+
+                <a href="?page=rt_ubigeo_settings&tab=cost"
+                   class="nav-tab<?php echo ( $current_tab === 'cost' ) ? ' nav-tab-active' : ''; ?>">
+                    <?php _e( 'Ubigeo', 'ubigeo-peru' ); ?>
+                </a>
+
+                <a href="?page=rt_ubigeo_settings&tab=import"
+                   class="nav-tab<?php echo ( $current_tab === 'import' ) ? ' nav-tab-active' : ''; ?>">
+                    <?php _e( 'Import', 'ubigeo-peru' ); ?>
+                </a>
+
+                <a href="?page=rt_ubigeo_settings&tab=license"
+                   class="nav-tab<?php echo ( $current_tab === 'license' ) ? ' nav-tab-active' : ''; ?>">
+                    <?php _e( 'License', 'ubigeo-peru' ); ?>
+                </a>
+
+            <?php endif; ?>
+
+            <a href="?page=rt_ubigeo_settings&tab=settings"
+               class="nav-tab<?php echo ( $current_tab === 'settings' ) ? ' nav-tab-active' : ''; ?>">
+                <?php _e( 'Settings', 'ubigeo-peru' ); ?>
+            </a>
+
+            <a href="?page=rt_ubigeo_settings&tab=help"
+               class="nav-tab<?php echo ( $current_tab === 'help' ) ? ' nav-tab-active' : ''; ?>">
+                <?php _e( 'Help', 'ubigeo-peru' ); ?>
+            </a>
+
+            <a href="?page=rt_ubigeo_settings&tab=addons"
+               class="nav-tab<?php echo ( $current_tab === 'addons' ) ? ' nav-tab-active' : ''; ?>">
+                <?php _e( 'Addons', 'ubigeo-peru' ); ?>
+            </a>
         </h2>
+
         <?php
-        if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "docs")) {
+        // Contenido según TAB activo
+        if ( $current_tab === 'docs' ) {
+
             rt_ubigeo_submenu_settings_docs();
-        } elseif ($_REQUEST['tab'] == "cost") {
-            if (rt_costo_ubigeo_plugin_enabled()) {
-                if (isset($_REQUEST['section']) == "ubigeo") {
-                    if (($_REQUEST['list_cost']) == "clear") {
+
+        } elseif ( $current_tab === 'cost' ) {
+
+            if ( rt_costo_ubigeo_plugin_enabled() ) {
+
+                // Sanitizar params relacionados a "cost"
+                $section   = isset( $_REQUEST['section'] )   ? sanitize_text_field( $_REQUEST['section'] )   : '';
+                $list_cost = isset( $_REQUEST['list_cost'] ) ? sanitize_text_field( $_REQUEST['list_cost'] ) : '';
+
+                if ( $section === 'ubigeo' ) {
+
+                    if ( $list_cost === 'clear' ) {
                         rt_ubigeo_submenu_settings_cost_clear();
-                    } elseif (($_REQUEST['list_cost']) == "new") {
+
+                    } elseif ( $list_cost === 'new' ) {
                         rt_ubigeo_submenu_settings_cost_new();
-                    } elseif (isset($_REQUEST['edit'])) {
-                        rt_ubigeo_submenu_settings_cost_edit(sanitize_text_field($_REQUEST['edit']));
+
+                    } elseif ( isset( $_REQUEST['edit'] ) ) {
+                        rt_ubigeo_submenu_settings_cost_edit(
+                                sanitize_text_field( $_REQUEST['edit'] )
+                        );
+
                     } else {
                         rt_ubigeo_submenu_settings_cost_ubigeo();
                     }
+
                 } else {
                     rt_ubigeo_submenu_settings_cost();
                 }
             }
-        } elseif ($_REQUEST['tab'] == "import") {
+
+        } elseif ( $current_tab === 'import' ) {
+
             rt_ubigeo_submenu_settings_import();
-        } elseif ($_REQUEST['tab'] == "license") {
+
+        } elseif ( $current_tab === 'license' ) {
+
             rt_ubigeo_submenu_settings_license();
-        } elseif ($_REQUEST['tab'] == "settings") {
+
+        } elseif ( $current_tab === 'settings' ) {
+
             rt_ubigeo_submenu_settings_settings();
-        } elseif ($_REQUEST['tab'] == "help") {
-            if (rt_costo_ubigeo_plugin_enabled()) {
+
+        } elseif ( $current_tab === 'help' ) {
+
+            if ( rt_costo_ubigeo_plugin_enabled() ) {
                 rt_ubigeo_submenu_settings_help_cost();
             } else {
                 rt_ubigeo_submenu_settings_help();
             }
-        } elseif ($_REQUEST['tab'] == "addons") {
+
+        } elseif ( $current_tab === 'addons' ) {
+
             rt_ubigeo_submenu_settings_addons();
-        } ?>
+        }
+        ?>
     </div>
     <?php
 }
+
 
 function rt_ubigeo_register_settings()
 {

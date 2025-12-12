@@ -2,7 +2,7 @@
 Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
-Tested up to: 6.8.2
+Tested up to: 6.9
 Stable tag: 4.6
 Requires PHP: 8.0
 License: GPLv2 or later
@@ -46,6 +46,9 @@ For additional functionality, check out our companion plugin, such as:
 * [Multi Link in Bio](https://wordpress.org/plugins/multi-link-in-bio/)
 * [Display Price Free](https://wordpress.org/plugins/display-price-free/)
 * [Recojo por otra persona](https://wordpress.org/plugins/recojo-por-otra-persona/)
+* [Método de pago QR de Ligo](https://wordpress.org/plugins/metodo-de-pago-qr-de-ligo/)
+* [Pasarela de pago QR para BBVA](https://wordpress.org/plugins/pasarela-de-pago-qr-para-bbva/)
+* [Precio Transferencia Bancaria](https://wordpress.org/plugins/precio-transferencia-bancaria/)
 
 = View more plugins PREMIUM =
 
@@ -98,6 +101,11 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 4.7 (12/12/2025) =
+Fix: Corrigiendo errores de deprecated y warning de PHP 8.x.
+Fix: validando versión WC 10.4.0
+Fix: validando versión WP 6.9
 
 = 4.6 (05/09/2025) =
 Fix: Corrgiendo error de compatibilidad de version con WP

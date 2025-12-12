@@ -428,34 +428,109 @@ function rt_ubigeo_checkout_update_refresh_shipping_methods($post_data)
 
 add_action('woocommerce_after_checkout_validation', 'rt_ubigeo_custom_wc_checkout_fields_validation', 999, 2);
 
-function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
-{
-    if ('PE' === $fields['billing_country']) {
-        if ('' === $fields['billing_departamento']) {
-            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Departamento') . '</strong>'), 'Billing Departamento'));
+//function rt_ubigeo_custom_wc_checkout_fields_validation($fields, $errors)
+//{
+//    if ('PE' === $fields['billing_country']) {
+//        if ('' === $fields['billing_departamento']) {
+//            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Departamento') . '</strong>'), 'Billing Departamento'));
+//        }
+//        if ('' === $fields['billing_provincia']) {
+//            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Provincia') . '</strong>'), 'Billing Provincia'));
+//        }
+//        if ('' === $fields['billing_distrito']) {
+//            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Distrito') . '</strong>'), 'Billing Distrito'));
+//        }
+//    }
+//
+//    if (1 == $fields['ship_to_different_address']) {
+//        if ('PE' === $fields['shipping_country']) {
+//            if ('' === $fields['shipping_departamento']) {
+//                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Departamento') . '</strong>'), 'Shipping Departamento'));
+//            }
+//            if ('' === $fields['shipping_provincia']) {
+//                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Provincia') . '</strong>'), 'Shipping Provincia'));
+//            }
+//            if ('' === $fields['shipping_distrito']) {
+//                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Distrito') . '</strong>'), 'Shipping Distrito'));
+//            }
+//        }
+//    }
+//}
+
+function rt_ubigeo_custom_wc_checkout_fields_validation( $fields, $errors ) {
+
+    // ------ FACTURACIÓN ------
+    if ( isset( $fields['billing_country'] ) && 'PE' === $fields['billing_country'] ) {
+
+        if ( empty( $fields['billing_departamento'] ) ) {
+            $field_label = '<strong>' . esc_html__( 'Billing Departamento', 'woocommerce' ) . '</strong>';
+            $message     = sprintf( __( '%s is a required field.', 'woocommerce' ), $field_label );
+
+            $errors->add(
+                    'required-field',
+                    apply_filters( 'woocommerce_checkout_required_field_notice', $message, 'billing_departamento' )
+            );
         }
-        if ('' === $fields['billing_provincia']) {
-            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Provincia') . '</strong>'), 'Billing Provincia'));
+
+        if ( empty( $fields['billing_provincia'] ) ) {
+            $field_label = '<strong>' . esc_html__( 'Billing Provincia', 'woocommerce' ) . '</strong>';
+            $message     = sprintf( __( '%s is a required field.', 'woocommerce' ), $field_label );
+
+            $errors->add(
+                    'required-field',
+                    apply_filters( 'woocommerce_checkout_required_field_notice', $message, 'billing_provincia' )
+            );
         }
-        if ('' === $fields['billing_distrito']) {
-            $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Billing Distrito') . '</strong>'), 'Billing Distrito'));
+
+        if ( empty( $fields['billing_distrito'] ) ) {
+            $field_label = '<strong>' . esc_html__( 'Billing Distrito', 'woocommerce' ) . '</strong>';
+            $message     = sprintf( __( '%s is a required field.', 'woocommerce' ), $field_label );
+
+            $errors->add(
+                    'required-field',
+                    apply_filters( 'woocommerce_checkout_required_field_notice', $message, 'billing_distrito' )
+            );
         }
     }
 
-    if (1 == $fields['ship_to_different_address']) {
-        if ('PE' === $fields['shipping_country']) {
-            if ('' === $fields['shipping_departamento']) {
-                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Departamento') . '</strong>'), 'Shipping Departamento'));
+    // ------ ENVÍO A OTRA DIRECCIÓN ------
+    if ( ! empty( $fields['ship_to_different_address'] ) && 1 == $fields['ship_to_different_address'] ) {
+
+        if ( isset( $fields['shipping_country'] ) && 'PE' === $fields['shipping_country'] ) {
+
+            if ( empty( $fields['shipping_departamento'] ) ) {
+                $field_label = '<strong>' . esc_html__( 'Shipping Departamento', 'woocommerce' ) . '</strong>';
+                $message     = sprintf( __( '%s is a required field.', 'woocommerce' ), $field_label );
+
+                $errors->add(
+                        'required-field',
+                        apply_filters( 'woocommerce_checkout_required_field_notice', $message, 'shipping_departamento' )
+                );
             }
-            if ('' === $fields['shipping_provincia']) {
-                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Provincia') . '</strong>'), 'Shipping Provincia'));
+
+            if ( empty( $fields['shipping_provincia'] ) ) {
+                $field_label = '<strong>' . esc_html__( 'Shipping Provincia', 'woocommerce' ) . '</strong>';
+                $message     = sprintf( __( '%s is a required field.', 'woocommerce' ), $field_label );
+
+                $errors->add(
+                        'required-field',
+                        apply_filters( 'woocommerce_checkout_required_field_notice', $message, 'shipping_provincia' )
+                );
             }
-            if ('' === $fields['shipping_distrito']) {
-                $errors->add('required-field', apply_filters('woocommerce_checkout_required_field_notice', sprintf(_e('%s is a required field.', 'woocommerce'), '<strong>' . esc_html('Shipping Distrito') . '</strong>'), 'Shipping Distrito'));
+
+            if ( empty( $fields['shipping_distrito'] ) ) {
+                $field_label = '<strong>' . esc_html__( 'Shipping Distrito', 'woocommerce' ) . '</strong>';
+                $message     = sprintf( __( '%s is a required field.', 'woocommerce' ), $field_label );
+
+                $errors->add(
+                        'required-field',
+                        apply_filters( 'woocommerce_checkout_required_field_notice', $message, 'shipping_distrito' )
+                );
             }
         }
     }
 }
+
 
 add_action('woocommerce_checkout_process', 'rt_remove_wc_validation', 1);
 
