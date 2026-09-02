@@ -1,4 +1,4 @@
-name: Plugin Check + SonarQube + Deploy WordPress
+name: Plugin Check + Deploy WordPress
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*"
 
 jobs:
-  check-sonar-deploy:
+  check-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,18 +24,7 @@ jobs:
           chmod +x wp-cli.phar
           sudo mv wp-cli.phar /usr/local/bin/wp
           wp --info
-          echo "✅ WP-CLI instalado. Plugin listo para el escaneo."
-
-      - name: Run SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@v2.0.2
-        with:
-          projectBaseDir: .
-          args: |
-            -Dsonar.projectKey=ubigeo_peru
-            -Dsonar.projectName=Ubigeo_Peru
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          echo "✅ WP-CLI instalado. Plugin listo para deploy."
 
       - name: Deploy to WordPress.org
         uses: nk-o/action-wordpress-plugin-deploy@master
@@ -45,7 +34,3 @@ jobs:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: ubigeo-peru
-
-
-
-          
