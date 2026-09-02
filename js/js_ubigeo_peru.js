@@ -1,69 +1,89 @@
-jQuery(document).ready(function () {
-    jQuery("#billing_departamento").select2();
-    jQuery("#billing_provincia").select2();
-    jQuery("#billing_distrito").select2();
-    jQuery("#shipping_departamento").select2();
-    jQuery("#shipping_provincia").select2();
-    jQuery("#shipping_distrito").select2();
+jQuery(function ($) {
+    var config = window.rtUbigeoAddress || {};
 
-    jQuery('#billing_departamento').on('change', function () {
-        rt_ubigeo_event_departamento(this, 'billing')
-    });
-
-    jQuery('#billing_provincia').on('change', function () {
-        rt_ubigeo_event_provincia(this, 'billing')
-    });
-
-    jQuery('#shipping_departamento').on('change', function () {
-        rt_ubigeo_event_departamento(this, 'shipping')
-    });
-
-    jQuery('#shipping_provincia').on('change', function () {
-        rt_ubigeo_event_provincia(this, 'shipping')
-    });
-
-    function rt_ubigeo_event_departamento(select, selectType) {
-        var data = {
-            'action': 'rt_ubigeo_load_provincias_address',
-            'idDepa': jQuery(select).val()
+    function initSelect2($field) {
+        if ($field.length && $.fn.select2) {
+            $field.select2();
         }
-        jQuery.ajax({
+    }
+
+    initSelect2($('#billing_departamento'));
+    initSelect2($('#billing_provincia'));
+    initSelect2($('#billing_distrito'));
+    initSelect2($('#shipping_departamento'));
+    initSelect2($('#shipping_provincia'));
+    initSelect2($('#shipping_distrito'));
+
+    function loadProvincias(select, selectType) {
+        var idDepa = $(select).val();
+        var $provincia = $('#' + selectType + '_provincia');
+        var $distrito = $('#' + selectType + '_distrito');
+
+        $provincia.html('<option value="">' + (config.provinceText || 'Seleccionar Provincia') + '</option>');
+        $distrito.html('<option value="">' + (config.districtText || 'Seleccionar Distrito') + '</option>');
+
+        if (!idDepa) {
+            return;
+        }
+
+        $.ajax({
             type: 'POST',
-            url: ajaxurl,
-            data: data,
+            url: config.ajaxurl,
             dataType: 'json',
+            data: {
+                action: 'rt_ubigeo_load_provincias_address',
+                idDepa: idDepa
+            },
             success: function (response) {
-                jQuery('#' + selectType + '_provincia').html('<option value="0">' + name_province + '</option>')
-                jQuery('#' + selectType + '_distrito').html('<option value="0">' + name_distrito + '</option>')
-                if (response.length > 0) {
-                    for (var r in response) {
-                        jQuery('#' + selectType + '_provincia').append('<option value=' + response[r].idProv + '>' + response[r].provincia + '</option>');
-                    }
+                if (response && response.length) {
+                    $.each(response, function (_, row) {
+                        $provincia.append($('<option>', {value: row.idProv, text: row.provincia}));
+                    });
                 }
+                $provincia.trigger('change.select2');
             }
         });
     }
 
-    function rt_ubigeo_event_provincia(select, selectType) {
-        var data = {
-            'action': 'rt_ubigeo_load_distritos_address',
-            'idProv': jQuery(select).val()
+    function loadDistritos(select, selectType) {
+        var idProv = $(select).val();
+        var $distrito = $('#' + selectType + '_distrito');
+
+        $distrito.html('<option value="">' + (config.districtText || 'Seleccionar Distrito') + '</option>');
+
+        if (!idProv) {
+            return;
         }
 
-        jQuery.ajax({
+        $.ajax({
             type: 'POST',
-            url: ajaxurl,
-            data: data,
+            url: config.ajaxurl,
             dataType: 'json',
-
+            data: {
+                action: 'rt_ubigeo_load_distritos_address',
+                idProv: idProv
+            },
             success: function (response) {
-                jQuery('#' + selectType + '_distrito').html('<option value="0">' + name_distrito + '</option>')
-                if (response) {
-                    for (var r in response) {
-                        jQuery('#' + selectType + '_distrito').append('<option value=' + response[r].idDist + '>' + response[r].distrito + '</option>')
-                    }
+                if (response && response.length) {
+                    $.each(response, function (_, row) {
+                        $distrito.append($('<option>', {value: row.idDist, text: row.distrito}));
+                    });
                 }
+                $distrito.trigger('change.select2');
             }
         });
     }
+
+    $('#billing_departamento').on('change', function () {
+        loadProvincias(this, 'billing');
+    });
+    $('#billing_provincia').on('change', function () {
+        loadDistritos(this, 'billing');
+    });
+    $('#shipping_departamento').on('change', function () {
+        loadProvincias(this, 'shipping');
+    });
+    $('#shipping_provincia').on('change', function () {
+        loadDistritos(this, 'shipping');
+    });
 });

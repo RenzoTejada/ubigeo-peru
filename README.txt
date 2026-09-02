@@ -3,7 +3,7 @@ Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
 Tested up to: 6.9
-Stable tag: 4.7
+Stable tag: 4.7.3
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,30 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 4.7.3 =
+* Compatibilidad: integra el bridge de dirección estándar directamente en Ubigeo Perú; ya no depende de Culqi.
+* Compatibilidad: mantiene billing/shipping_provincia y billing/shipping_distrito como IDs y sincroniza los nombres legibles en WooCommerce.
+* Compatibilidad: billing_state/shipping_state reciben el nombre de Provincia; billing_city/shipping_city reciben el nombre de Distrito.
+* Compatibilidad: sincronización para checkout, pedido HPOS/clásico, cliente recurrente y Mi Cuenta > Direcciones.
+* Mejora: backfill automático y seguro de state/city para clientes antiguos con Ubigeo guardado.
+* Mejora: soporte frontend para pasarelas que leen los campos estándar antes de enviar el checkout.
+
+= 4.7.2 =
+* Mejora: restaura Departamento, Provincia y Distrito en Mi Cuenta > Direcciones.
+* Mejora: clientes recurrentes reutilizan su Ubigeo guardado cuando no existe una selección nueva en la sesión.
+* Mejora: una ubicación elegida en carrito tiene prioridad temporal sobre la dirección guardada para esa compra.
+* Fix: se evita recargar por AJAX el Ubigeo inicial y perder Provincia/Distrito preseleccionados.
+* Fix: al cambiar país solo se limpia el Ubigeo cuando el país deja de ser Perú.
+* Seguridad: AJAX de edición de direcciones usa absint/wp_unslash/wp_send_json.
+
+= 4.7.1 (01/09/2026) =
+Fix: Eliminado session_start()/$_SESSION y unificada la persistencia con la sesión nativa de WooCommerce.
+Fix: Compatibilidad del checkout con el calculador de carrito de Costo Ubigeo 1.1.x.
+Fix: El checkout conserva Departamento, Provincia y Distrito seleccionados por invitados.
+Fix: Corregido el valor booleano en clear_checkout_fields y la detección del tipo de costo por provincia.
+Fix: Sanitización y respuesta JSON de los AJAX principales de provincias y distritos.
+Fix: Eliminado el reseteo automático de ubigeo a los 500ms en checkout.
 
 = 4.7 (12/12/2025) =
 Fix: Corrigiendo errores de deprecated y warning de PHP 8.x.

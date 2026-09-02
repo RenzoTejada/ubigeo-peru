@@ -1,5 +1,183 @@
 <?php
 
+/**
+ * Acceso unificado a la sesión de WooCommerce para Ubigeo.
+ *
+ * Evita session_start()/$_SESSION, que puede bloquear peticiones AJAX y
+ * generar conflictos con caché, headers y configuraciones de sesión PHP.
+ */
+function rt_ubigeo_session_get($key, $default = '')
+{
+    if (function_exists('WC') && WC()->session) {
+        $value = WC()->session->get($key, $default);
+        return ($value === null) ? $default : $value;
+    }
+
+    return $default;
+}
+
+function rt_ubigeo_session_set($key, $value)
+{
+    if (function_exists('WC') && WC()->session) {
+        WC()->session->set($key, $value);
+        return true;
+    }
+
+    return false;
+}
+
+
+/**
+ * Devuelve una estructura normalizada de Ubigeo.
+ */
+function rt_ubigeo_empty_location()
+{
+    return array(
+        'country'      => 'PE',
+        'departamento' => 0,
+        'provincia'    => 0,
+        'distrito'     => 0,
+    );
+}
+
+/**
+ * Comprueba que provincia pertenezca al departamento y distrito a provincia.
+ */
+function rt_ubigeo_is_valid_location($departamento, $provincia, $distrito)
+{
+    global $wpdb;
+
+    $departamento = absint($departamento);
+    $provincia    = absint($provincia);
+    $distrito     = absint($distrito);
+
+    if (!$departamento || !$provincia || !$distrito) {
+        return false;
+    }
+
+    $table_provincia = $wpdb->prefix . 'ubigeo_provincia';
+    $table_distrito  = $wpdb->prefix . 'ubigeo_distrito';
+
+    $provincia_ok = (int) $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*) FROM {$table_provincia} WHERE idDepa = %d AND idProv = %d",
+            $departamento,
+            $provincia
+        )
+    );
+
+    if ($provincia_ok < 1) {
+        return false;
+    }
+
+    $distrito_ok = (int) $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*) FROM {$table_distrito} WHERE idProv = %d AND idDist = %d",
+            $provincia,
+            $distrito
+        )
+    );
+
+    return $distrito_ok > 0;
+}
+
+/**
+ * Lee una ubicación completa desde la sesión de WooCommerce.
+ */
+function rt_ubigeo_get_session_location($type = 'billing')
+{
+    $type = ('shipping' === $type) ? 'shipping' : 'billing';
+
+    $location = array(
+        'country'      => (string) rt_ubigeo_session_get($type . '_country', 'PE'),
+        'departamento' => absint(rt_ubigeo_session_get($type . '_departamento', 0)),
+        'provincia'    => absint(rt_ubigeo_session_get($type . '_provincia', 0)),
+        'distrito'     => absint(rt_ubigeo_session_get($type . '_distrito', 0)),
+    );
+
+    if ('PE' !== $location['country'] || !rt_ubigeo_is_valid_location($location['departamento'], $location['provincia'], $location['distrito'])) {
+        return rt_ubigeo_empty_location();
+    }
+
+    return $location;
+}
+
+/**
+ * Lee el Ubigeo previamente guardado en la dirección del cliente.
+ */
+function rt_ubigeo_get_customer_saved_location($type = 'billing', $user_id = 0)
+{
+    $type    = ('shipping' === $type) ? 'shipping' : 'billing';
+    $user_id = $user_id ? absint($user_id) : get_current_user_id();
+
+    if (!$user_id) {
+        return rt_ubigeo_empty_location();
+    }
+
+    $country = (string) get_user_meta($user_id, $type . '_country', true);
+    if ($country !== '' && 'PE' !== $country) {
+        return rt_ubigeo_empty_location();
+    }
+
+    $location = array(
+        'country'      => 'PE',
+        'departamento' => absint(get_user_meta($user_id, $type . '_departamento', true)),
+        'provincia'    => absint(get_user_meta($user_id, $type . '_provincia', true)),
+        'distrito'     => absint(get_user_meta($user_id, $type . '_distrito', true)),
+    );
+
+    if (!rt_ubigeo_is_valid_location($location['departamento'], $location['provincia'], $location['distrito'])) {
+        return rt_ubigeo_empty_location();
+    }
+
+    return $location;
+}
+
+function rt_ubigeo_set_session_location($type, $location)
+{
+    $type = ('shipping' === $type) ? 'shipping' : 'billing';
+
+    if (!is_array($location)) {
+        return false;
+    }
+
+    rt_ubigeo_session_set($type . '_country', 'PE');
+    rt_ubigeo_session_set($type . '_departamento', absint($location['departamento'] ?? 0));
+    rt_ubigeo_session_set($type . '_provincia', absint($location['provincia'] ?? 0));
+    rt_ubigeo_session_set($type . '_distrito', absint($location['distrito'] ?? 0));
+
+    return true;
+}
+
+/**
+ * Prioridad de ubicación:
+ * 1) selección válida de la sesión actual (por ejemplo, calculador del carrito),
+ * 2) dirección guardada del cliente recurrente,
+ * 3) vacío para que un cliente nuevo la complete.
+ */
+function rt_ubigeo_get_effective_location($type = 'billing', $seed_session = true)
+{
+    $type = ('shipping' === $type) ? 'shipping' : 'billing';
+
+    $session_location = rt_ubigeo_get_session_location($type);
+    if (!empty($session_location['departamento'])) {
+        return $session_location;
+    }
+
+    if (is_user_logged_in()) {
+        $saved_location = rt_ubigeo_get_customer_saved_location($type);
+
+        if (!empty($saved_location['departamento'])) {
+            if ($seed_session) {
+                rt_ubigeo_set_session_location($type, $saved_location);
+            }
+            return $saved_location;
+        }
+    }
+
+    return rt_ubigeo_empty_location();
+}
+
 function rt_ubigeo_get_departamentos_for_select()
 {
     $dptos = [
@@ -38,7 +216,7 @@ function rt_ubigeo_get_departamento_display()
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
     $table_display = $wpdb->prefix . "ubigeo_display";
-    $request = $wpdb->prepare("SELECT * FROM $table_name as dep inner join $table_display as dis on dis.idDepa=dep.idDepa order by dep.departamento asc");
+    $request = "SELECT * FROM $table_name as dep inner join $table_display as dis on dis.idDepa=dep.idDepa order by dep.departamento asc";
     return $wpdb->get_results($request, ARRAY_A);
 }
 
@@ -46,7 +224,7 @@ function rt_ubigeo_get_departamento()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $request = $wpdb->prepare("SELECT * FROM $table_name");
+    $request = "SELECT * FROM $table_name";
 
     return $wpdb->get_results($request, ARRAY_A);
 }
@@ -56,20 +234,18 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_front', 'rt_ubigeo_load_pro
 
 function rt_ubigeo_load_provincias_front()
 {
-    session_start();
-    $idDepa = sanitize_text_field($_POST['idDepa']) !== null ? sanitize_text_field($_POST['idDepa']) : null;
-    $_SESSION["idDepa"] = $idDepa;
-    $response = $provincias = [];
+    $idDepa = isset($_POST['idDepa']) ? absint(wp_unslash($_POST['idDepa'])) : 0;
+    $provincias = array();
 
-    if (is_numeric($idDepa)) {
+    if ($idDepa > 0) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
             $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
         } else {
             $provincias = rt_ubigeo_get_provincia_by_idDepa_display($idDepa);
         }
     }
-    echo json_encode($provincias);
-    wp_die();
+
+    wp_send_json($provincias);
 }
 
 function rt_ubigeo_get_provincia_by_idDepa($idDepa = 0)
@@ -90,7 +266,7 @@ function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
     if($idDepa > 0){
         $tipo = get_tipo_costo_ubigeo_by_idDepa($idDepa);
 
-        if (isset($tipo['tipo']) == 1) {
+        if (is_array($tipo) && isset($tipo['tipo']) && (int) $tipo['tipo'] === 1) {
             $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
         } else {
             $request = $wpdb->prepare("SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
@@ -116,19 +292,18 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_front', 'rt_ubigeo_load_dist
 
 function rt_ubigeo_load_distritos_front()
 {
-//    session_start();
-    $idProv = sanitize_text_field($_POST['idProv']) !== null ? sanitize_text_field($_POST['idProv']) : null;
-//    $_SESSION["idProv"] = $idProv;
-    $distritos = [];
-    if (is_numeric($idProv)) {
+    $idProv = isset($_POST['idProv']) ? absint(wp_unslash($_POST['idProv'])) : 0;
+    $distritos = array();
+
+    if ($idProv > 0) {
         if (!rt_plugin_ubigeo_costo_enabled()) {
             $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
         } else {
             $distritos = rt_ubigeo_get_distrito_by_idProv_display($idProv);
         }
     }
-    echo json_encode($distritos);
-    wp_die();
+
+    wp_send_json($distritos);
 }
 
 function rt_ubigeo_get_distrito_by_idProv($idProv = 0)
@@ -294,10 +469,9 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_address', 'rt_ubigeo_load_p
 
 function rt_ubigeo_load_provincias_address()
 {
-    $idDepa = sanitize_text_field($_POST['idDepa']) !== null ? sanitize_text_field($_POST['idDepa']) : null;
-    $provincias = rt_ubigeo_get_provincia_by_idDepa($idDepa);
-    echo json_encode($provincias);
-    wp_die();
+    $idDepa = isset($_POST['idDepa']) ? absint(wp_unslash($_POST['idDepa'])) : 0;
+    $provincias = $idDepa ? rt_ubigeo_get_provincia_by_idDepa($idDepa) : array();
+    wp_send_json($provincias);
 }
 
 add_action('wp_ajax_rt_ubigeo_load_distritos_address', 'rt_ubigeo_load_distritos_address');
@@ -305,17 +479,16 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_address', 'rt_ubigeo_load_di
 
 function rt_ubigeo_load_distritos_address()
 {
-    $idProv = sanitize_text_field($_POST['idProv']) !== null ? sanitize_text_field($_POST['idProv']) : null;
-    $distritos = rt_ubigeo_get_distrito_by_idProv($idProv);
-    echo json_encode($distritos);
-    wp_die();
+    $idProv = isset($_POST['idProv']) ? absint(wp_unslash($_POST['idProv'])) : 0;
+    $distritos = $idProv ? rt_ubigeo_get_distrito_by_idProv($idProv) : array();
+    wp_send_json($distritos);
 }
 
 function rt_libro_lrq_get_departamento_front()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "ubigeo_departamento";
-    $request = $wpdb->prepare("SELECT * FROM $table_name");
+    $request = "SELECT * FROM $table_name";
 
     return $wpdb->get_results($request, ARRAY_A);
 }
