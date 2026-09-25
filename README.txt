@@ -3,7 +3,7 @@ Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
 Tested up to: 6.9
-Stable tag: 4.7.3
+Stable tag: 4.7.4
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,11 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 4.7.4 =
+* Fix: añade compatibilidad con YITH Proteo Toolkit 1.3.1 durante solicitudes AJAX de WordPress.
+* Fix: evita que el asistente de configuración de YITH interrumpa callbacks AJAX públicos de Ubigeo Perú.
+* Compatibilidad: el ajuste queda encapsulado dentro de Ubigeo Perú y no modifica archivos ni funcionalidades de YITH.
 
 = 4.7.3 =
 * Compatibilidad: integra el bridge de dirección estándar directamente en Ubigeo Perú; ya no depende de Culqi.
