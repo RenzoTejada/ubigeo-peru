@@ -3,7 +3,7 @@ Contributors: renzotejada, huakotech, alexistejada
 Tags: ubigeo, peru, departamento, provincia, distrito
 Requires at least: 5.2
 Tested up to: 6.9
-Stable tag: 4.7.4
+Stable tag: 4.7.6
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,17 @@ The information was obtained from the following urls:
 3. Ubigeo Peru Menu
 
 == Changelog ==
+
+= 4.7.6 =
+* Fix: corrige la carga AJAX de distritos para resolver la provincia real de cada regla y evitar respuestas vacías cuando existen distritos válidos.
+* Rendimiento: optimiza las consultas usadas por Departamento, Provincia y Distrito para reducir bloqueos y timeouts en `admin-ajax.php`.
+* Diagnóstico: agrega registro seguro de errores SQL y tiempo de ejecución cuando `WP_DEBUG_LOG` está habilitado.
+* Compatibilidad: mantiene el action AJAX existente `rt_ubigeo_load_distritos_front`, sus parámetros y los IDs de los campos actuales.
+* Base de datos: incorpora actualización segura de esquema e índices para instalaciones existentes, sin eliminar ni recrear datos.
+
+= 4.7.5 =
+* Fix: vuelve a mostrar la pestaña Exportar cuando el plugin Costo de envío de Ubigeo Perú está activo y dispone del exportador CSV.
+* Compatibilidad: la pestaña Exportar se integra sin alterar Importar, Licencia, Ajustes ni el resto de funcionalidades de Ubigeo Perú.
 
 = 4.7.4 =
 * Fix: añade compatibilidad con YITH Proteo Toolkit 1.3.1 durante solicitudes AJAX de WordPress.

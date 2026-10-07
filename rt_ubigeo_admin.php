@@ -62,6 +62,13 @@ function rt_ubigeo_submenu_settings_callback() {
                     <?php _e( 'Import', 'ubigeo-peru' ); ?>
                 </a>
 
+                <?php if ( function_exists( 'rt_ubigeo_submenu_settings_export' ) ) : ?>
+                    <a href="?page=rt_ubigeo_settings&tab=export"
+                       class="nav-tab<?php echo ( $current_tab === 'export' ) ? ' nav-tab-active' : ''; ?>">
+                        <?php _e( 'Export', 'ubigeo-peru' ); ?>
+                    </a>
+                <?php endif; ?>
+
                 <a href="?page=rt_ubigeo_settings&tab=license"
                    class="nav-tab<?php echo ( $current_tab === 'license' ) ? ' nav-tab-active' : ''; ?>">
                     <?php _e( 'License', 'ubigeo-peru' ); ?>
@@ -124,6 +131,14 @@ function rt_ubigeo_submenu_settings_callback() {
         } elseif ( $current_tab === 'import' ) {
 
             rt_ubigeo_submenu_settings_import();
+
+        } elseif ( $current_tab === 'export' ) {
+
+            if ( rt_costo_ubigeo_plugin_enabled() && function_exists( 'rt_ubigeo_submenu_settings_export' ) ) {
+                rt_ubigeo_submenu_settings_export();
+            } else {
+                rt_ubigeo_submenu_settings_docs();
+            }
 
         } elseif ( $current_tab === 'license' ) {
 

@@ -26,6 +26,72 @@ function rt_ubigeo_session_set($key, $value)
     return false;
 }
 
+function rt_ubigeo_debug_log($context)
+{
+    if (!defined('WP_DEBUG_LOG') || !WP_DEBUG_LOG) {
+        return;
+    }
+
+    if (!is_array($context)) {
+        $context = array('message' => (string) $context);
+    }
+
+    $message = function_exists('wp_json_encode')
+        ? wp_json_encode($context)
+        : json_encode($context);
+
+    error_log('[ubigeo-peru] ' . $message);
+}
+
+function rt_ubigeo_log_query_failure($action, $params, $sql, $started_at)
+{
+    global $wpdb;
+
+    if (empty($wpdb->last_error)) {
+        return false;
+    }
+
+    rt_ubigeo_debug_log(array(
+        'action'     => $action,
+        'params'     => $params,
+        'sql'        => $sql,
+        'last_error' => $wpdb->last_error,
+        'elapsed_ms' => round((microtime(true) - $started_at) * 1000, 2),
+    ));
+
+    return true;
+}
+
+function rt_ubigeo_front_ajax_db_error($action, $params, $started_at)
+{
+    rt_ubigeo_debug_log(array(
+        'action'     => $action,
+        'params'     => $params,
+        'last_error' => 'db_error',
+        'elapsed_ms' => round((microtime(true) - $started_at) * 1000, 2),
+    ));
+
+    wp_send_json_error(
+        array('message' => __('No se pudieron cargar los datos de Ubigeo.', 'ubigeo-peru')),
+        500
+    );
+}
+
+function rt_ubigeo_costo_tipo_departamento()
+{
+    return defined('COSTO_UBIGEO_TIPO_DEPA') ? (int) COSTO_UBIGEO_TIPO_DEPA : 1;
+}
+
+function rt_ubigeo_costo_tipo_distrito()
+{
+    return defined('COSTO_UBIGEO_TIPO_DIST') ? (int) COSTO_UBIGEO_TIPO_DIST : 2;
+}
+
+function rt_ubigeo_costo_tipo_provincia()
+{
+    return function_exists('rt_costo_ubigeo_tipo_provincia') ? (int) rt_costo_ubigeo_tipo_provincia() : 3;
+}
+
 
 /**
  * Devuelve una estructura normalizada de Ubigeo.
@@ -234,6 +300,7 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_provincias_front', 'rt_ubigeo_load_pro
 
 function rt_ubigeo_load_provincias_front()
 {
+    $started_at = microtime(true);
     $idDepa = isset($_POST['idDepa']) ? absint(wp_unslash($_POST['idDepa'])) : 0;
     $provincias = array();
 
@@ -243,6 +310,14 @@ function rt_ubigeo_load_provincias_front()
         } else {
             $provincias = rt_ubigeo_get_provincia_by_idDepa_display($idDepa);
         }
+    }
+
+    if (is_wp_error($provincias)) {
+        rt_ubigeo_front_ajax_db_error(
+            'rt_ubigeo_load_provincias_front',
+            array('idDepa' => $idDepa),
+            $started_at
+        );
     }
 
     wp_send_json($provincias);
@@ -261,22 +336,85 @@ function rt_ubigeo_get_provincia_by_idDepa_display($idDepa = 0)
 {
     global $wpdb;
     $table_costo_ubigeo = $wpdb->prefix . "ubigeo_costo_ubigeo";
+    $table_tipo_costo = $wpdb->prefix . "ubigeo_tipo_costo";
     $table_ubigeo_provincia = $wpdb->prefix . "ubigeo_provincia";
     $result = array();
-    if($idDepa > 0){
-        $tipo = get_tipo_costo_ubigeo_by_idDepa($idDepa);
 
-        if (is_array($tipo) && isset($tipo['tipo']) && (int) $tipo['tipo'] === 1) {
-            $result = rt_ubigeo_get_provincia_by_idDepa($idDepa);
-        } else {
-            $request = $wpdb->prepare("SELECT up.idProv, up.provincia FROM $table_costo_ubigeo  as ucu  
-                    inner join $table_ubigeo_provincia as up on up.idProv=ucu.idProv
-                    where ucu.idDepa=%d group by up.idProv order by up.provincia",$idDepa);
-            $result = $wpdb->get_results($request, ARRAY_A);
-        }
+    $idDepa = absint($idDepa);
+    if ($idDepa <= 0) {
+        return $result;
     }
 
-    return $result;
+    $tipo_departamento = rt_ubigeo_costo_tipo_departamento();
+    $tipo_distrito     = rt_ubigeo_costo_tipo_distrito();
+    $tipo_provincia    = rt_ubigeo_costo_tipo_provincia();
+
+    $broad_sql = $wpdb->prepare(
+        "SELECT 1
+         FROM {$table_costo_ubigeo} AS ucu
+         INNER JOIN {$table_tipo_costo} AS tc ON tc.costo_id = ucu.costo_id
+         WHERE ucu.idDepa = %d
+           AND ucu.idProv = 0
+           AND ucu.idDist = 0
+           AND tc.tipo = %d
+           AND (ucu.estado = 1 OR ucu.estado IS NULL)
+           AND (tc.estado = 1 OR tc.estado IS NULL)
+         LIMIT 1",
+        $idDepa,
+        $tipo_departamento
+    );
+
+    $started_at = microtime(true);
+    $has_department_rule = (bool) $wpdb->get_var($broad_sql);
+    if (rt_ubigeo_log_query_failure(
+        'rt_ubigeo_get_provincia_by_idDepa_display',
+        array('idDepa' => $idDepa, 'scope' => 'department_rule'),
+        $broad_sql,
+        $started_at
+    )) {
+        return new WP_Error('rt_ubigeo_db_error', 'Error consultando provincias.');
+    }
+
+    if ($has_department_rule) {
+        $request = $wpdb->prepare(
+            "SELECT idProv, provincia
+             FROM {$table_ubigeo_provincia}
+             WHERE idDepa = %d
+             ORDER BY provincia ASC",
+            $idDepa
+        );
+    } else {
+        $request = $wpdb->prepare(
+            "SELECT DISTINCT up.idProv, up.provincia
+             FROM {$table_costo_ubigeo} AS ucu
+             INNER JOIN {$table_tipo_costo} AS tc ON tc.costo_id = ucu.costo_id
+             INNER JOIN {$table_ubigeo_provincia} AS up ON up.idProv = ucu.idProv
+             WHERE ucu.idDepa = %d
+               AND up.idDepa = %d
+               AND ucu.idProv > 0
+               AND tc.tipo IN (%d, %d)
+               AND (ucu.estado = 1 OR ucu.estado IS NULL)
+               AND (tc.estado = 1 OR tc.estado IS NULL)
+             ORDER BY up.provincia ASC",
+            $idDepa,
+            $idDepa,
+            $tipo_distrito,
+            $tipo_provincia
+        );
+    }
+
+    $started_at = microtime(true);
+    $result = $wpdb->get_results($request, ARRAY_A);
+    if (rt_ubigeo_log_query_failure(
+        'rt_ubigeo_get_provincia_by_idDepa_display',
+        array('idDepa' => $idDepa, 'scope' => $has_department_rule ? 'all' : 'configured'),
+        $request,
+        $started_at
+    )) {
+        return new WP_Error('rt_ubigeo_db_error', 'Error consultando provincias.');
+    }
+
+    return is_array($result) ? $result : array();
 }
 
 function rt_plugin_ubigeo_costo_enabled()
@@ -292,6 +430,7 @@ add_action('wp_ajax_nopriv_rt_ubigeo_load_distritos_front', 'rt_ubigeo_load_dist
 
 function rt_ubigeo_load_distritos_front()
 {
+    $started_at = microtime(true);
     $idProv = isset($_POST['idProv']) ? absint(wp_unslash($_POST['idProv'])) : 0;
     $distritos = array();
 
@@ -301,6 +440,14 @@ function rt_ubigeo_load_distritos_front()
         } else {
             $distritos = rt_ubigeo_get_distrito_by_idProv_display($idProv);
         }
+    }
+
+    if (is_wp_error($distritos)) {
+        rt_ubigeo_front_ajax_db_error(
+            'rt_ubigeo_load_distritos_front',
+            array('idProv' => $idProv),
+            $started_at
+        );
     }
 
     wp_send_json($distritos);
@@ -327,38 +474,111 @@ function rt_ubigeo_validate_prov_of_depa($idDepa, $idProv)
 function rt_ubigeo_get_distrito_by_idProv_display( $idProv = 0 ) {
     global $wpdb;
 
-    // Sanitiza/valida
     $idProv = absint( $idProv );
     if ( $idProv <= 0 ) {
-        return array(); // o devolver WP_Error si prefieres
+        return array();
     }
 
-    // Tablas
-    $table_costo_ubigeo   = $wpdb->prefix . 'ubigeo_costo_ubigeo';
+    $table_costo_ubigeo    = $wpdb->prefix . 'ubigeo_costo_ubigeo';
+    $table_tipo_costo      = $wpdb->prefix . 'ubigeo_tipo_costo';
+    $table_ubigeo_provincia = $wpdb->prefix . 'ubigeo_provincia';
     $table_ubigeo_distrito = $wpdb->prefix . 'ubigeo_distrito';
 
-    // Evita warning al leer índice si $tipo es null/false
-    $tipo_info = get_tipo_costo_ubigeo_by_idProv( $idProv );
-    $tipo_val  = ( is_array( $tipo_info ) && isset( $tipo_info['tipo'] ) ) ? (int) $tipo_info['tipo'] : 0;
-
-    if ( $tipo_val === 1 ) {
-        // Si tienes una versión “corta/alternativa”
-        return rt_ubigeo_get_distrito_by_idProv( $idProv );
+    $provincia_sql = $wpdb->prepare(
+        "SELECT idDepa
+         FROM {$table_ubigeo_provincia}
+         WHERE idProv = %d
+         LIMIT 1",
+        $idProv
+    );
+    $started_at = microtime(true);
+    $idDepa = absint($wpdb->get_var($provincia_sql));
+    if (rt_ubigeo_log_query_failure(
+        'rt_ubigeo_get_distrito_by_idProv_display',
+        array('idProv' => $idProv, 'scope' => 'province_lookup'),
+        $provincia_sql,
+        $started_at
+    )) {
+        return new WP_Error('rt_ubigeo_db_error', 'Error consultando provincia.');
     }
 
-    // Consulta con prepare POSICIONAL (sin argumentos con nombre)
-    $sql = "
-        SELECT  dist.idDist, dist.distrito
-        FROM    {$table_costo_ubigeo} AS ucu
-        INNER JOIN {$table_ubigeo_distrito} AS dist ON dist.idDist = ucu.idDist
-        WHERE   ucu.idProv = %d
-        GROUP BY dist.idDist, dist.distrito
-        ORDER BY dist.distrito ASC
-    ";
+    if ($idDepa <= 0) {
+        return array();
+    }
 
-    // Preparar y ejecutar
-    $prepared = $wpdb->prepare( $sql, $idProv );
-    $result   = $wpdb->get_results( $prepared, ARRAY_A );
+    $tipo_departamento = rt_ubigeo_costo_tipo_departamento();
+    $tipo_distrito     = rt_ubigeo_costo_tipo_distrito();
+    $tipo_provincia    = rt_ubigeo_costo_tipo_provincia();
+
+    $broad_sql = $wpdb->prepare(
+        "SELECT 1
+         FROM {$table_costo_ubigeo} AS ucu
+         INNER JOIN {$table_tipo_costo} AS tc ON tc.costo_id = ucu.costo_id
+         WHERE (
+                (ucu.idDepa = %d AND ucu.idProv = 0 AND ucu.idDist = 0 AND tc.tipo = %d)
+             OR (ucu.idDepa = %d AND ucu.idProv = %d AND ucu.idDist = 0 AND tc.tipo = %d)
+         )
+           AND (ucu.estado = 1 OR ucu.estado IS NULL)
+           AND (tc.estado = 1 OR tc.estado IS NULL)
+         LIMIT 1",
+        $idDepa,
+        $tipo_departamento,
+        $idDepa,
+        $idProv,
+        $tipo_provincia
+    );
+
+    $started_at = microtime(true);
+    $has_broad_rule = (bool) $wpdb->get_var($broad_sql);
+    if (rt_ubigeo_log_query_failure(
+        'rt_ubigeo_get_distrito_by_idProv_display',
+        array('idProv' => $idProv, 'idDepa' => $idDepa, 'scope' => 'broad_rule'),
+        $broad_sql,
+        $started_at
+    )) {
+        return new WP_Error('rt_ubigeo_db_error', 'Error consultando configuracion de distritos.');
+    }
+
+    if ($has_broad_rule) {
+        $prepared = $wpdb->prepare(
+            "SELECT idDist, distrito
+             FROM {$table_ubigeo_distrito}
+             WHERE idProv = %d
+             ORDER BY distrito ASC",
+            $idProv
+        );
+    } else {
+        $prepared = $wpdb->prepare(
+            "SELECT DISTINCT dist.idDist, dist.distrito
+             FROM {$table_costo_ubigeo} AS ucu
+             INNER JOIN {$table_tipo_costo} AS tc ON tc.costo_id = ucu.costo_id
+             INNER JOIN {$table_ubigeo_distrito} AS dist
+                ON dist.idDist = ucu.idDist
+               AND dist.idProv = %d
+             WHERE ucu.idDepa = %d
+               AND ucu.idProv = %d
+               AND ucu.idDist > 0
+               AND tc.tipo = %d
+               AND (ucu.estado = 1 OR ucu.estado IS NULL)
+               AND (tc.estado = 1 OR tc.estado IS NULL)
+             ORDER BY dist.distrito ASC",
+            $idProv,
+            $idDepa,
+            $idProv,
+            $tipo_distrito
+        );
+    }
+
+    $started_at = microtime(true);
+    $result = $wpdb->get_results( $prepared, ARRAY_A );
+    if (rt_ubigeo_log_query_failure(
+        'rt_ubigeo_get_distrito_by_idProv_display',
+        array('idProv' => $idProv, 'idDepa' => $idDepa, 'scope' => $has_broad_rule ? 'all' : 'configured'),
+        $prepared,
+        $started_at
+    )) {
+        return new WP_Error('rt_ubigeo_db_error', 'Error consultando distritos.');
+    }
 
     return is_array( $result ) ? $result : array();
 }

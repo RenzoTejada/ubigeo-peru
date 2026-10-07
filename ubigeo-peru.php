@@ -10,7 +10,7 @@
  * Plugin Name:       Ubigeo de Perú para WooCommerce y WordPress
  * Plugin URI:        https://renzotejada.com/ubigeo-de-peru-para-woocommerce/
  * Description:       Peru's Ubigeo for WordPress and WooCommerce - Plugin contains the departments - provinces and districts of Peru
- * Version:           4.7.4
+ * Version:           4.7.6
  * Author:            Renzo Tejada
  * Author URI:        https://renzotejada.com/
  * License:           GPL-2.0-or-later
@@ -96,6 +96,7 @@ require dirname(__FILE__) . "/rt_ubigeo_standard_address.php";
 require dirname(__FILE__) . "/rt_ubigeo_setup.php";
 
 register_activation_hook(__FILE__, 'rt_ubigeo_setup');
+add_action('admin_init', 'rt_ubigeo_maybe_run_schema_updates');
 
 /*
  * ADMIN

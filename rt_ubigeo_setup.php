@@ -27,6 +27,112 @@ function rt_ubigeo_errortabledist()
     <?php
 }
 
+function rt_ubigeo_table_exists($table_name)
+{
+    global $wpdb;
+
+    $table_name = esc_sql($table_name);
+
+    return (bool) $wpdb->get_var(
+        $wpdb->prepare('SHOW TABLES LIKE %s', $table_name)
+    );
+}
+
+function rt_ubigeo_column_exists($table_name, $column_name)
+{
+    global $wpdb;
+
+    $table_name  = esc_sql($table_name);
+    $column_name = sanitize_key($column_name);
+
+    if (!rt_ubigeo_table_exists($table_name)) {
+        return false;
+    }
+
+    return (bool) $wpdb->get_var(
+        $wpdb->prepare("SHOW COLUMNS FROM `{$table_name}` LIKE %s", $column_name)
+    );
+}
+
+function rt_ubigeo_index_exists($table_name, $index_name)
+{
+    global $wpdb;
+
+    $table_name = esc_sql($table_name);
+    $index_name = sanitize_key($index_name);
+
+    if (!rt_ubigeo_table_exists($table_name)) {
+        return false;
+    }
+
+    return (bool) $wpdb->get_var(
+        $wpdb->prepare("SHOW INDEX FROM `{$table_name}` WHERE Key_name = %s", $index_name)
+    );
+}
+
+function rt_ubigeo_add_index_if_missing($table_name, $index_name, $columns)
+{
+    global $wpdb;
+
+    $table_name = esc_sql($table_name);
+    $index_name = sanitize_key($index_name);
+    $columns    = array_filter(array_map('sanitize_key', (array) $columns));
+
+    if (empty($columns) || rt_ubigeo_index_exists($table_name, $index_name)) {
+        return true;
+    }
+
+    foreach ($columns as $column) {
+        if (!rt_ubigeo_column_exists($table_name, $column)) {
+            return false;
+        }
+    }
+
+    $column_sql = '`' . implode('`, `', $columns) . '`';
+    $previous_suppress = $wpdb->suppress_errors(true);
+    $result = $wpdb->query("ALTER TABLE `{$table_name}` ADD INDEX `{$index_name}` ({$column_sql})");
+    $wpdb->suppress_errors($previous_suppress);
+
+    return $result !== false;
+}
+
+function rt_ubigeo_run_schema_updates()
+{
+    global $wpdb;
+
+    rt_ubigeo_add_index_if_missing(
+        $wpdb->prefix . 'ubigeo_provincia',
+        'idx_ubigeo_provincia_depa',
+        array('idDepa')
+    );
+
+    rt_ubigeo_add_index_if_missing(
+        $wpdb->prefix . 'ubigeo_distrito',
+        'idx_ubigeo_distrito_prov',
+        array('idProv')
+    );
+
+    return true;
+}
+
+function rt_ubigeo_maybe_run_schema_updates()
+{
+    $marker = defined('Version_RT_Ubigeo_Peru')
+        ? Version_RT_Ubigeo_Peru . ':indexes-20261007'
+        : 'indexes-20261007';
+
+    if (get_option('rt_ubigeo_schema_updates_marker') === $marker) {
+        return true;
+    }
+
+    $updated = rt_ubigeo_run_schema_updates();
+    if ($updated) {
+        update_option('rt_ubigeo_schema_updates_marker', $marker);
+    }
+
+    return $updated;
+}
+
 //crear tablas
 
 function rt_ubigeo_setup()
@@ -37,10 +143,13 @@ function rt_ubigeo_setup()
     rt_ubigeo_crearProvincia();
     //crear distrito
     rt_ubigeo_crearDistrito();
+    rt_ubigeo_run_schema_updates();
 }
 
 function rt_plugin_update_change()
 {
+    rt_ubigeo_maybe_run_schema_updates();
+
     $rt_ubigeo_peru_db_version = get_option('rt_ubigeo_peru_db_version');
     if (version_compare(Version_RT_Ubigeo_Peru, $rt_ubigeo_peru_db_version) > 0) {
         rt_ubigeo_enable_ubigeo_woo();
