@@ -18,16 +18,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare WordPress.org readme
+      - name: Prepare WordPress.org README
         run: |
-          if [ ! -f readme.txt ]; then
-            curl -fLsS \
-              https://plugins.svn.wordpress.org/ubigeo-peru/trunk/readme.txt \
-              -o readme.txt
+          if [ ! -f README.txt ]; then
+            svn cat \
+              https://plugins.svn.wordpress.org/ubigeo-peru/trunk/README.txt \
+              > README.txt
           fi
 
-          test -s readme.txt
-          echo "Readme disponible"
+          test -s README.txt
+          echo "README preparado correctamente"
 
       - name: Update WordPress.org assets
         uses: 10up/action-wordpress-plugin-asset-update@stable
@@ -36,4 +36,5 @@ jobs:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: ubigeo-peru
           ASSETS_DIR: .wordpress-org
+          README_NAME: README.txt
           IGNORE_OTHER_FILES: true
