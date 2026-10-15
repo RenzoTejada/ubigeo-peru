@@ -18,6 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare WordPress.org readme
+        run: |
+          if [ ! -f readme.txt ]; then
+            curl -fLsS \
+              https://plugins.svn.wordpress.org/ubigeo-peru/trunk/readme.txt \
+              -o readme.txt
+          fi
+
+          test -s readme.txt
+          echo "Readme disponible"
+
       - name: Update WordPress.org assets
         uses: 10up/action-wordpress-plugin-asset-update@stable
         env:
